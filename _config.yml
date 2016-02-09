@@ -1,0 +1,29 @@
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+#relative_permalinks: true
+
+#MY OWN DETAILS
+gems: [jekyll-paginate, jekyll-gist]
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+#END
+
+# Setup
+title:               Indeseables
+tagline:             'A Jekyll theme'
+description:         'A reserved <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that places the utmost gravity on content with a hidden drawer. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
+url:                 http://indeseables.github.io
+baseurl:             ''
+paginate:            5
+
+# About/contact
+author:
+  name:              Indeseables Team
+  url:               https://twitter.com/indeseables
+  email:             indeseables@gmail.com
+
+# Custom vars
+version:             1.0.0
