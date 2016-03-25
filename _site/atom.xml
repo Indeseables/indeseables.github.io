@@ -4,7 +4,7 @@
  <title>Indeseabλes</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-03-25T18:21:05+01:00</updated>
+ <updated>2016-03-25T18:39:56+01:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
    <name>Indeseables</name>
@@ -251,7 +251,7 @@ Clase de [1,0,5]: -1
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;Se puede observar que el vector &lt;em&gt;θ&lt;/em&gt; difiere del obtenido en Perceptron ya que se resuelve un problema diferente (éste, se podría haber resuelto utilizando la función &lt;a href=&quot;http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq&quot;&gt;&lt;em&gt;leastsq&lt;/em&gt;&lt;/a&gt; del módulo &lt;em&gt;optimize&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;El conjunto de muestras es el mismo que en el caso anterior, sin embargo, se puede observar que el vector &lt;em&gt;θ&lt;/em&gt; difiere del obtenido en Perceptron ya que al modificar la función objetivo se resuelve un problema diferente (éste, se podría haber resuelto utilizando la función &lt;a href=&quot;http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq&quot;&gt;&lt;em&gt;leastsq&lt;/em&gt;&lt;/a&gt; del módulo &lt;em&gt;optimize&lt;/em&gt;).&lt;/p&gt;
 
 &lt;hr /&gt;
 
