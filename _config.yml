@@ -13,7 +13,7 @@ kramdown:
 
 # Setup
 title:               Indeseables
-tagline:             ' estás deseándolo'
+tagline:             ''
 description:         ''
 url:                 http://indeseables.github.io
 baseurl:             ''

@@ -4,7 +4,7 @@
  <title>Indeseables</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-03-25T05:33:19+01:00</updated>
+ <updated>2016-03-25T05:43:13+01:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
    <name>Indeseables</name>
@@ -97,12 +97,38 @@ Este proceso se suele hacer de forma iterativa, calculando cada vez la suma de l
 
 &lt;p&gt;Una vez se han definido las funciones necesarias, solo queda ver cómo se comporta el sistema entrenándolo y probándolo. Para ello, se ha hecho uso de un conjunto de muestras de juguete (en notación homogénea) junto con sus salidas, diseñado a mano:&lt;/p&gt;
 
-&lt;p&gt;Muestras de entrenamiento: 3 muestras de 3 dimensiones dispuestas por columnas.
-| nº | x1 | x2 | x3 | 
-|—-|—-|—-|—-|
-| d1 | 1  | 1  | 1  |
-| d2 | 0  | 2  | 4  |
-| d3 | 5  | 1  | 2  |&lt;/p&gt;
+&lt;p&gt;Muestras de entrenamiento: 3 muestras de 3 dimensiones dispuestas por columnas.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;nº&lt;/th&gt;
+      &lt;th&gt;x1&lt;/th&gt;
+      &lt;th&gt;x2&lt;/th&gt;
+      &lt;th&gt;x3&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;d1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;d2&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;d3&lt;/td&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;p&gt;Salidas: salidas (clases) esperadas para cada una de las 3 muestras (+1 o -1):&lt;/p&gt;
 
@@ -152,26 +178,18 @@ Clase de [1,0,5]: -1
 
 &lt;p&gt;Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de &lt;em&gt;Adaline&lt;/em&gt; y los algoritmos que se vayan implementando p.e. SVM,PCA,LDA etc o modificaciones que se hagan de los ya mostrados.&lt;/p&gt;
 
-&lt;p&gt;Dejo el &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/_codigos/Entrada_1&quot;&gt;código disponible hasta el momento&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Dejo el &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1&quot;&gt;código disponible hasta el momento&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Saludos .&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
-   <title>What's Jekyll?</title>
-   <link href="http://indeseables.github.io/2016/03/24/Inicios/"/>
+   <title>What's Indeseables?</title>
+   <link href="http://indeseables.github.io/2016/03/24/WhatsIndeseables/"/>
    <updated>2016-03-24T00:00:00+01:00</updated>
-   <id>http://indeseables.github.io/2016/03/24/Inicios</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From &lt;a href=&quot;https://github.com/mojombo/jekyll/blob/master/README.markdown&quot;&gt;the project’s readme&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Jekyll is a simple, blog aware, static site generator. It takes a template directory […] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;It’s an immensely useful tool and one we encourage you to use here with Lanyon.&lt;/p&gt;
-
-&lt;p&gt;Find out more by &lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;visiting the project on GitHub&lt;/a&gt;.&lt;/p&gt;
+   <id>http://indeseables.github.io/2016/03/24/WhatsIndeseables</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;http://indeseables.github.io/&quot;&gt;Indeseables&lt;/a&gt; es un grupo de …&lt;/p&gt;
 </content>
  </entry>
  

@@ -69,6 +69,7 @@ Para la implementación, se han desarrollado únicamente 4 funciones:
 Una vez se han definido las funciones necesarias, solo queda ver cómo se comporta el sistema entrenándolo y probándolo. Para ello, se ha hecho uso de un conjunto de muestras de juguete (en notación homogénea) junto con sus salidas, diseñado a mano:
 
 Muestras de entrenamiento: 3 muestras de 3 dimensiones dispuestas por columnas.
+
 | nº | x1 | x2 | x3 | 
 |----|----|----|----|
 | d1 | 1  | 1  | 1  |
@@ -106,6 +107,6 @@ Que coincide con lo que esperábamos, observando que el método ha convergido en
 
 Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de *Adaline* y los algoritmos que se vayan implementando p.e. SVM,PCA,LDA etc o modificaciones que se hagan de los ya mostrados.
 
-Dejo el [código disponible hasta el momento](https://github.com/Indeseables/indeseables.github.io/_codigos/Entrada_1)
+Dejo el [código disponible hasta el momento](https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1)
 
 Saludos .

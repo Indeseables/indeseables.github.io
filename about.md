@@ -4,7 +4,7 @@ title: About
 ---
 
 <p class="message">
-  Blog de un grupo aburrido.
+  Descripción del blog
 </p>
 
 ## J. González
