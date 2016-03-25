@@ -105,8 +105,14 @@ Clase de [1,0,5]: -1
 
 Que coincide con lo que esperábamos, observando que el método ha convergido en 2 iteraciones a la solución *θ* = [ 1.9997,  4.46  , -0.78  ], además ha clasificado la muestra [1,0,5] que efectivamente pertenece a la clase -1.
 
-Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de *Adaline* y los algoritmos que se vayan implementando p.e. SVM,PCA,LDA etc o modificaciones que se hagan de los ya mostrados.
+Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de *Adaline* y los algoritmos que se vayan implementando p.e. SVM,EM etc o modificaciones que se hagan de los ya mostrados.
 
 Dejo el [código disponible hasta el momento](https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1)
 
-Saludos .
+Cualquier comentario:
+
+* Email: indeseables [at] gmail [dot] com
+* Twitter: [@indeseables](http://twitter.com/)
+* Issues: [#Issues](https://github.com/Indeseables/indeseables.github.io/issues)
+
+Saludos.

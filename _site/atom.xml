@@ -4,7 +4,7 @@
  <title>Indeseables</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-03-25T05:46:01+01:00</updated>
+ <updated>2016-03-25T06:00:44+01:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
    <name>Indeseables</name>
@@ -176,11 +176,19 @@ Clase de [1,0,5]: -1
 
 &lt;p&gt;Que coincide con lo que esperábamos, observando que el método ha convergido en 2 iteraciones a la solución &lt;em&gt;θ&lt;/em&gt; = [ 1.9997,  4.46  , -0.78  ], además ha clasificado la muestra [1,0,5] que efectivamente pertenece a la clase -1.&lt;/p&gt;
 
-&lt;p&gt;Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de &lt;em&gt;Adaline&lt;/em&gt; y los algoritmos que se vayan implementando p.e. SVM,PCA,LDA etc o modificaciones que se hagan de los ya mostrados.&lt;/p&gt;
+&lt;p&gt;Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de &lt;em&gt;Adaline&lt;/em&gt; y los algoritmos que se vayan implementando p.e. SVM,EM etc o modificaciones que se hagan de los ya mostrados.&lt;/p&gt;
 
 &lt;p&gt;Dejo el &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1&quot;&gt;código disponible hasta el momento&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Saludos .&lt;/p&gt;
+&lt;p&gt;Cualquier comentario:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Email: indeseables [at] gmail [dot] com&lt;/li&gt;
+  &lt;li&gt;Twitter: &lt;a href=&quot;http://twitter.com/&quot;&gt;@indeseables&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Issues: &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/issues&quot;&gt;#Issues&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Saludos.&lt;/p&gt;
 </content>
  </entry>
  
