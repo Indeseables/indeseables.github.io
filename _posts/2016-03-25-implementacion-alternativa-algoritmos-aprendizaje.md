@@ -181,7 +181,7 @@ Clase de [1,0,5]: -1
 
 ```
 
-Se puede observar que el vector *θ* difiere del obtenido en Perceptron ya que se resuelve un problema diferente (éste, se podría haber resuelto utilizando la función [*leastsq*](http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq) del módulo *optimize*).
+El conjunto de muestras es el mismo que en el caso anterior, sin embargo, se puede observar que el vector *θ* difiere del obtenido en Perceptron ya que al modificar la función objetivo se resuelve un problema diferente (éste, se podría haber resuelto utilizando la función [*leastsq*](http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq) del módulo *optimize*).
 
 ___
 
