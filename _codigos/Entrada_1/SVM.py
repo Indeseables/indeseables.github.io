@@ -1,26 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  svm.py
+#  SVM.py
 
 from scipy.optimize import minimize
-from numpy import dot,array,zeros,ones,tile,transpose
+from numpy import dot,array,zeros,ones,tile,transpose,multiply
 from Utils import MatLoad
 
 def f(theta): return (1.0/2.0)*dot(theta,theta)
-def r(theta,c,x): 
-    aux = tile(theta,(x.shape[1],1))
-    print c*(dot(aux,x))
-    return c*(dot(aux,x))
+def r(theta,X,Y): return (multiply(Y,theta*X)>=1).all()
 
-def fit(X,Y,theta):
+def fit(theta,X,Y):
     XROWS,XCOLS,YROWS = X.shape[0],X.shape[1],Y.shape[0]
-    const = [{"type":"ineq","fun":r,"args":[Y,X]} for i in xrange(XROWS)]
+    const = [{"type":"ineq","fun":r,"args":[X,Y]} for i in xrange(XCOLS)]
     return minimize(fun=f,x0=theta,constraints=const,bounds=[(1,99999) for i in xrange(XROWS)])
+
+def classify(theta,X): pass
+def predict(theta,X): pass
 
 X = MatLoad("X.np"); 
 Y = MatLoad("Y.np"); 
 XROWS,XCOLS,YROWS = X.shape[0],X.shape[1],Y.shape[0]
-theta = zeros(XROWS)
-print fit(X,Y,theta)
+theta = array([0.,0.1,-0.9])
+print fit(theta,X,Y)
 
