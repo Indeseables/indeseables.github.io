@@ -4,56 +4,155 @@
  <title>Indeseables</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-02-09T03:05:38+01:00</updated>
+ <updated>2016-03-25T05:25:25+01:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
-   <name>Indeseables Team</name>
+   <name>Indeseables</name>
    <email>indeseables@gmail.com</email>
  </author>
 
  
  <entry>
-   <title>Introducing Lanyon</title>
+   <title>Implementación alternativa de algoritmos de aprendizaje (parte I).</title>
    <link href="http://indeseables.github.io/2014/01/02/introducing-lanyon/"/>
    <updated>2014-01-02T00:00:00+01:00</updated>
    <id>http://indeseables.github.io/2014/01/02/introducing-lanyon</id>
-   <content type="html">&lt;p&gt;Lanyon is an unassuming &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; theme that places content first by tucking away navigation in a hidden drawer. It’s based on &lt;a href=&quot;http://getpoole.com&quot;&gt;Poole&lt;/a&gt;, the Jekyll butler.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería &lt;em&gt;Scipy&lt;/em&gt; y más concretamente, su módulo &lt;em&gt;optimize&lt;/em&gt; (tenía pensado usar &lt;a href=&quot;https://www.mcs.anl.gov/petsc/&quot;&gt;Petsc&lt;/a&gt;, pero no he conseguido convertir matrices a su formato y me ha complicado las cosas).&lt;/p&gt;
 
-&lt;h3 id=&quot;built-on-poole&quot;&gt;Built on Poole&lt;/h3&gt;
-
-&lt;p&gt;Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by &lt;a href=&quot;https://twitter.com/mdo&quot;&gt;@mdo&lt;/a&gt;. Poole, and every theme built on it (like Lanyon here) includes the following:&lt;/p&gt;
+&lt;p&gt;Dicho módulo nos permite realizar varios métodos de optimización y búsqueda de raices de funciones (nos centraremos en la parte de optimización de momento, la búsqueda de raices tal vez sea interesante en entradas posteriores, ya que los &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo&quot;&gt;métodos iterativos&lt;/a&gt; de &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo#M.C3.A9todos_del_subespacio_de_Krylov&quot;&gt;Krylov&lt;/a&gt; pueden sernos de utilidad a la hora de resolver sistemas muy grandes de forma eficiente) como pueden ser (no comentaré todos los &lt;a href=&quot;http://docs.scipy.org/doc/scipy/reference/optimize.html&quot;&gt;métodos&lt;/a&gt; de cada tipo de optimización):&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Complete Jekyll setup included (layouts, config, &lt;a href=&quot;/404&quot;&gt;404&lt;/a&gt;, &lt;a href=&quot;/atom.xml&quot;&gt;RSS feed&lt;/a&gt;, posts, and &lt;a href=&quot;/about&quot;&gt;example page&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Mobile friendly design and development&lt;/li&gt;
-  &lt;li&gt;Easily scalable text and component sizing with &lt;code class=&quot;highlighter-rouge&quot;&gt;rem&lt;/code&gt; units in the CSS&lt;/li&gt;
-  &lt;li&gt;Support for a wide gamut of HTML elements&lt;/li&gt;
-  &lt;li&gt;Related posts (time-based, because Jekyll) below each post&lt;/li&gt;
-  &lt;li&gt;Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Optimización local: permite minimizar (y si cambiamos de signo maximizar) &lt;a href=&quot;https://es.wikipedia.org/wiki/Optimizaci%C3%B3n_%28matem%C3%A1tica%29&quot;&gt;funciones&lt;/a&gt;, variando una serie de parámetros del optimizador como el método de optimización local empleado (Gradiente conjugado, BFGS, Método de Powell …). Al ser un &lt;a href=&quot;(https://en.wikipedia.org/wiki/Local_search_%28optimization%29)&quot;&gt;método local&lt;/a&gt; , puede quedar atascado en mínimos locales por lo que, si la solución obtenida no es suficientemente buena, se pueden obtener nuevas soluciones de varias formas p e. reinicialización aleatoria, son computacionalmente baratos.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Optimización de ecuaciones: entre los que se puede encontrar el método de &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados&quot;&gt;mínimos cuadrados&lt;/a&gt; ampliamente conocidos en &lt;a href=&quot;https://es.wikipedia.org/wiki/Regresi%C3%B3n_%28estad%C3%ADstica%29&quot;&gt;regresión&lt;/a&gt; y optimización&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Optimizaciones globales: al contrario que los métodos locales, éstos nos proporcionan soluciones óptimas pero son más costosos ya que requieren comprobar el espacio de soluciones completo (a no ser que se requiera de información que lo acote).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ajustes de funciones (&lt;em&gt;fitting&lt;/em&gt;): dada una función &lt;em&gt;f&lt;/em&gt;, encontrar una función &lt;em&gt;g&lt;/em&gt; que la &lt;a href=&quot;https://www.google.es/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=6&amp;amp;cad=rja&amp;amp;uact=8&amp;amp;ved=0ahUKEwjL37eA69rLAhVCXBoKHUkFBCkQFghDMAU&amp;amp;url=http%3A%2F%2Fwww.ugr.es%2F~lorente%2FAPUNTESMNM%2Fcapitulo5.pdf&amp;amp;usg=AFQjCNEXrijmpFscjHqL7WAoFqF_IXMoJA&quot;&gt;aproxime&lt;/a&gt;, solo está disponible el método &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados&quot;&gt;mínimos cuadrados&lt;/a&gt; para aproximación discreta.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;lanyon-features&quot;&gt;Lanyon features&lt;/h3&gt;
+&lt;p&gt;En esta primera entrada comentaré la idea general e implementación de 2 algoritmos de aprendizaje básicos: &lt;a href=&quot;https://es.wikipedia.org/wiki/Perceptr%C3%B3n&quot;&gt;&lt;em&gt;Perceptron&lt;/em&gt;&lt;/a&gt; y &lt;a href=&quot;https://es.wikipedia.org/wiki/Adaline&quot;&gt;&lt;em&gt;Adaline&lt;/em&gt;&lt;/a&gt; se verán sus versiones &lt;a href=&quot;https://es.wikipedia.org/wiki/Clasificador_lineal&quot;&gt;lineales&lt;/a&gt; aunque es fácilmente generalizable a funciones no lineales usando &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte#Funci.C3.B3n_Kernel&quot;&gt;&lt;em&gt;kernels&lt;/em&gt;&lt;/a&gt; en cierta parte del código que comentaré). Por ello, para comprobar los resultados del entrenamiento y del test se utilizará un conjunto de muestras que variará dependiendo del algoritmo que esté comentando.
+___
+## Perceptron
+Es un clasificador (en 2 clases {+1,-1} es el que trataremos) basado en funciones discriminantes lineales, el objetivo es encontrar un vector &lt;em&gt;θ&lt;/em&gt; que defina un &lt;a href=&quot;https://es.wikipedia.org/wiki/Hiperplano&quot;&gt;hiperplano&lt;/a&gt; separador p.e. una recta en 2D, que separe &lt;a href=&quot;http://photos1.blogger.com/blogger/1013/1515/320/SVMSeparacion.jpg&quot;&gt;correctamente&lt;/a&gt; el conjunto de muestras en 2 clases. Esto equivale a resolver un sistema de &lt;em&gt;N&lt;/em&gt; inecuaciones &lt;strong&gt;c&lt;/strong&gt;·&lt;strong&gt;θ&lt;/strong&gt;·&lt;strong&gt;x&lt;/strong&gt;≥&lt;strong&gt;0&lt;/strong&gt; (nótese la notación matricial, si se hace vector a vector, equivaldría a resolver &lt;a href=&quot;https://i.gyazo.com/e769171d48212f1ccd7d820184b9684d.png&quot;&gt;ésto&lt;/a&gt;)&lt;/p&gt;
 
-&lt;p&gt;In addition to the features of Poole, Lanyon adds the following:&lt;/p&gt;
+&lt;p&gt;Ese sistema de &lt;em&gt;N&lt;/em&gt; inecuaciones con |θ| incógnitas es demasiado costoso de resolver mediante métodos directos (aunque podríamos haber empleado otros &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo&quot;&gt;métodos iterativos&lt;/a&gt; como los que iba a utilizar en &lt;a href=&quot;https://www.mcs.anl.gov/petsc/&quot;&gt;Petsc&lt;/a&gt;) y por ello, se opta por minimizar ésta &lt;a href=&quot;https://i.gyazo.com/5cccecf3f307437adb63609a97f0ed40.png&quot;&gt;ecuación&lt;/a&gt; ( suma de las &lt;a href=&quot;https://i.gyazo.com/2a4626fe88c672270a4f180f6943aa9b.png&quot;&gt;distancias&lt;/a&gt; de cada muestra mal clasificada al hiperplano separador) equivalente a resolver el sistema original.
+Este proceso se suele hacer de forma iterativa, calculando cada vez la suma de las distancias mencionada antes, modificando de acuerdo a esas distancias el valor de &lt;em&gt;θ&lt;/em&gt; y repitiendo el proceso hasta que &lt;em&gt;θ&lt;/em&gt; converge,varía muy poco, se acaban las iteraciones … .Sin embargo, podemos ahorrarnos la implementación del método iterativo haciendo uso del &lt;a href=&quot;http://docs.scipy.org/doc/scipy/reference/optimize.html&quot;&gt;módulo&lt;/a&gt; comentado antes, configurando correctamente la función objetivo a optimizar, las cotas, las restricciones (en entradas posteriores se verán, cuando se implementen máquinas de vectores de soporte &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte&quot;&gt;SVM&lt;/a&gt;), la tolerancia etc. El código es el siguiente:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#  Perceptron.py&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scipy.optimize&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;minimize&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Utils&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MatLoad&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;multiply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array_equal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;=+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;=+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9999999&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;XROWS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XCOLS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YROWS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;minimize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;CG&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;classify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;=+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MatLoad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;X.np&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MatLoad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Y.np&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;XROWS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XCOLS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YROWS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0003&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.54&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;3.78&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; Detalles de convergencia &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Clase de [1,0,5]:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]))&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Para la implementación, se han desarrollado únicamente 4 funciones:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Toggleable sliding sidebar (built with only CSS) via &lt;strong&gt;☰&lt;/strong&gt; link in top corner&lt;/li&gt;
-  &lt;li&gt;Sidebar includes support for textual modules and a dynamically generated navigation with active link support&lt;/li&gt;
-  &lt;li&gt;Two orientations for content and sidebar, default (left sidebar) and &lt;a href=&quot;https://github.com/poole/lanyon#reverse-layout&quot;&gt;reverse&lt;/a&gt; (right sidebar), available via &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;body&amp;gt;&lt;/code&gt; classes&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/poole/lanyon#themes&quot;&gt;Eight optional color schemes&lt;/a&gt;, available via &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;body&amp;gt;&lt;/code&gt; classes&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;f&lt;/em&gt;: es la función objetivo que he mencionado &lt;a href=&quot;https://gyazo.com/5cccecf3f307437adb63609a97f0ed40&quot;&gt;antes&lt;/a&gt;, se pasará como parámetro al solver de scipy para minimizar. Se hace un producto vector-matriz para calcular la parte &lt;strong&gt;c&lt;/strong&gt;·&lt;strong&gt;θ&lt;/strong&gt;·&lt;strong&gt;x&lt;/strong&gt; y se comprueba si todas las muestras están bien clasificadas, si lo están queremos que el proceso finalice luego devolvemos una distancia muy pequeña, si no lo están devolvemos la suma de las distancias de las muestras mal clasificadas al hiperplano separador.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;fit&lt;/em&gt;: se encarga de llamar al optimizador de &lt;em&gt;Scipy&lt;/em&gt; &lt;em&gt;minimize&lt;/em&gt;, utilizando el método del &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A9todo_del_gradiente_conjugado&quot;&gt;gradiente conjugado&lt;/a&gt; para entrenar el sistema. Podemos hacer uso de todos los demás &lt;a href=&quot;http://docs.scipy.org/doc/scipy/reference/optimize.html&quot;&gt;métodos&lt;/a&gt; implementados en la librería para el optimizador local &lt;em&gt;minimize&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;classify&lt;/em&gt;: una vez entrenado el sistema (obtenido el vector &lt;em&gt;θ&lt;/em&gt; adecuado), dada una nueva muestra &lt;em&gt;x&lt;/em&gt; permite clasificarla en la clase correcta según &lt;em&gt;θ&lt;/em&gt;. Para ello se calcula el producto escalar &lt;em&gt;θ&lt;/em&gt;·&lt;em&gt;x&lt;/em&gt; y se comprueba si está a un lado del espacio definido por el hiperplano separador o al otro ( &lt;em&gt;θ&lt;/em&gt;·&lt;em&gt;x&lt;/em&gt;≥0 , &lt;em&gt;θ&lt;/em&gt;·&lt;em&gt;x&lt;/em&gt;≤0 ).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;em&gt;predict&lt;/em&gt;: dada una muestra &lt;em&gt;x&lt;/em&gt; permite hacer regresión una vez el sistema ha sido entrenado. Con ello, se predice el valor de &lt;em&gt;x&lt;/em&gt; dado el vector de parámetros &lt;em&gt;θ&lt;/em&gt;, en función del resultado del producto escalar &lt;em&gt;θ&lt;/em&gt;·&lt;em&gt;x&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/poole/lanyon#readme&quot;&gt;Head to the readme&lt;/a&gt; to learn more.&lt;/p&gt;
+&lt;p&gt;Una vez se han definido las funciones necesarias, solo queda ver cómo se comporta el sistema entrenándolo y probándolo. Para ello, se ha hecho uso de un conjunto de muestras de juguete (en notación homogénea) junto con sus salidas, diseñado a mano:&lt;/p&gt;
 
-&lt;h3 id=&quot;browser-support&quot;&gt;Browser support&lt;/h3&gt;
+&lt;p&gt;Muestras de entrenamiento: 3 muestras de 3 dimensiones dispuestas por columnas.
+| nº | x1 | x2 | x3 | 
+|—-|—-|—-|—-|
+| d1 | 1  | 1  | 1  |
+| d2 | 0  | 2  | 4  |
+| d3 | 5  | 1  | 2  |&lt;/p&gt;
 
-&lt;p&gt;Lanyon is by preference a forward-thinking project. In addition to the latest versions of Chrome, Safari (mobile and desktop), and Firefox, it is only compatible with Internet Explorer 9 and above.&lt;/p&gt;
+&lt;p&gt;Salidas: salidas (clases) esperadas para cada una de las 3 muestras (+1 o -1):&lt;/p&gt;
 
-&lt;h3 id=&quot;download&quot;&gt;Download&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;nº&lt;/th&gt;
+      &lt;th&gt;clase&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;x1&lt;/td&gt;
+      &lt;td&gt;-1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;x2&lt;/td&gt;
+      &lt;td&gt;+1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;x3&lt;/td&gt;
+      &lt;td&gt;+1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-&lt;p&gt;Lanyon is developed on and hosted with GitHub. Head to the &lt;a href=&quot;https://github.com/poole/lanyon&quot;&gt;GitHub repository&lt;/a&gt; for downloads, bug reports, and features requests.&lt;/p&gt;
+&lt;p&gt;Dibujad las 2 últimas dimensiones de las muestras -d1 y d3 de la primera tabla- en un eje de coordenadas y veréis como encontráis rápidamente infinitas soluciones que separen las muestras en función de la salida (+1 o -1). Eso mismo hará el sistema, dar una posible solución de todas los hiperplanos (rectas en este caso) que sirven para separar las clases (en entradas posteriores, cuando se traten SVM, se podrá elegir entre el mejor de todos aquellos hiperplanos separadores según un criterio de distancia entre clases e hiperplano).&lt;/p&gt;
 
-&lt;p&gt;Thanks!&lt;/p&gt;
+&lt;p&gt;Con ello (en el &lt;em&gt;main&lt;/em&gt; del &lt;em&gt;script&lt;/em&gt;) partimos de un vector &lt;em&gt;θ&lt;/em&gt; aleatorio (se suele inicializar a 0) y lo ajustamos mediante la función &lt;em&gt;fit&lt;/em&gt; para que clasifique correctamente las muestras, minimizando la función objetivo mencionada antes. Una vez finalice, obtenemos detalles sobre la finalización del proceso del &lt;em&gt;solver&lt;/em&gt; (valor de &lt;em&gt;f&lt;/em&gt; final, nº iteraciones realizadas, vector &lt;em&gt;θ&lt;/em&gt;, etc) y la salida de una muestra a clasificar [1,0,5], que corresponde al conjunto de muestras de entrenamiento y conocemos su clase (si hemos dibujado las coordenadas como dije) : -1. La salida del script ejemplo es:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Detalles de convergencia
+ fun: 0.0
+ jac: array([ 0.,  0.,  0.])
+ message: &#39;Optimization terminated successfully.&#39;
+    nfev: 10
+     nit: 1
+    njev: 2
+  status: 0
+ success: True
+       x: array([ 1.9997,  4.46  , -0.78  ])
+
+Clase de [1,0,5]: -1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Que coincide con lo que esperábamos, observando que el método ha convergido en 2 iteraciones a la solución &lt;em&gt;θ&lt;/em&gt; = [ 1.9997,  4.46  , -0.78  ], además ha clasificado la muestra [1,0,5] que efectivamente pertenece a la clase -1.&lt;/p&gt;
+
+&lt;p&gt;Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de &lt;em&gt;Adaline&lt;/em&gt; y los algoritmos que se vayan implementando p.e. SVM,PCA,LDA etc o modificaciones que se hagan de los ya mostrados.&lt;/p&gt;
+
+&lt;p&gt;Adjunto el código disponible hasta el momento .&lt;/p&gt;
 </content>
  </entry>
  
@@ -97,15 +196,12 @@
 
 &lt;p&gt;Cum sociis natoque penatibus et magnis dis &lt;code class=&quot;highlighter-rouge&quot;&gt;code element&lt;/code&gt; montes, nascetur ridiculus mus.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Example can be run directly in your JavaScript console
-&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// Example can be run directly in your JavaScript console&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// Create a function that takes two arguments and returns the sum of those arguments
-&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Create a function that takes two arguments and returns the sum of those arguments&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;return a + b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// Call the function
-&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Call the function&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;adder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;// &amp;gt; 8&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 

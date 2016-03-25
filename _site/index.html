@@ -11,7 +11,7 @@
 
   <title>
     
-      Indeseables &middot; A Jekyll theme
+      Indeseables &middot;  estás deseándolo
     
   </title>
 
@@ -39,11 +39,12 @@
 <!-- Toggleable sidebar -->
 <div class="sidebar" id="sidebar">
   <div class="sidebar-item">
-    <p>A reserved <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that places the utmost gravity on content with a hidden drawer. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.</p>
+    <p></p>
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home</a>
+    
+    <a class="sidebar-nav-item" href="/">Entradas</a>
 
     
 
@@ -65,15 +66,12 @@
     
       
     
-
-    <a class="sidebar-nav-item" href="/archive/v1.0.0.zip">Download</a>
-    <a class="sidebar-nav-item" href="">GitHub project</a>
-    <span class="sidebar-nav-item">Currently v1.0.0</span>
+    <a class="sidebar-nav-item" href="">GitHub projects</a>
   </nav>
 
   <div class="sidebar-item">
     <p>
-      &copy; 2016. All rights reserved.
+      &copy; 2016. Indeseables.
     </p>
   </div>
 </div>
@@ -86,7 +84,7 @@
         <div class="container">
           <h3 class="masthead-title">
             <a href="/" title="Home">Indeseables</a>
-            <small>A Jekyll theme</small>
+            <small> estás deseándolo</small>
           </h3>
         </div>
       </div>
@@ -97,49 +95,148 @@
   <div class="post">
     <h1 class="post-title">
       <a href="//2014/01/02/introducing-lanyon/">
-        Introducing Lanyon
+        Implementación alternativa de algoritmos de aprendizaje (parte I).
       </a>
     </h1>
 
     <span class="post-date">02 Jan 2014</span>
 
-    <p>Lanyon is an unassuming <a href="http://jekyllrb.com">Jekyll</a> theme that places content first by tucking away navigation in a hidden drawer. It’s based on <a href="http://getpoole.com">Poole</a>, the Jekyll butler.</p>
+    <p>Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería <em>Scipy</em> y más concretamente, su módulo <em>optimize</em> (tenía pensado usar <a href="https://www.mcs.anl.gov/petsc/">Petsc</a>, pero no he conseguido convertir matrices a su formato y me ha complicado las cosas).</p>
 
-<h3 id="built-on-poole">Built on Poole</h3>
-
-<p>Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by <a href="https://twitter.com/mdo">@mdo</a>. Poole, and every theme built on it (like Lanyon here) includes the following:</p>
+<p>Dicho módulo nos permite realizar varios métodos de optimización y búsqueda de raices de funciones (nos centraremos en la parte de optimización de momento, la búsqueda de raices tal vez sea interesante en entradas posteriores, ya que los <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo">métodos iterativos</a> de <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo#M.C3.A9todos_del_subespacio_de_Krylov">Krylov</a> pueden sernos de utilidad a la hora de resolver sistemas muy grandes de forma eficiente) como pueden ser (no comentaré todos los <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">métodos</a> de cada tipo de optimización):</p>
 
 <ul>
-  <li>Complete Jekyll setup included (layouts, config, <a href="/404">404</a>, <a href="/atom.xml">RSS feed</a>, posts, and <a href="/about">example page</a>)</li>
-  <li>Mobile friendly design and development</li>
-  <li>Easily scalable text and component sizing with <code class="highlighter-rouge">rem</code> units in the CSS</li>
-  <li>Support for a wide gamut of HTML elements</li>
-  <li>Related posts (time-based, because Jekyll) below each post</li>
-  <li>Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)</li>
+  <li>
+    <p>Optimización local: permite minimizar (y si cambiamos de signo maximizar) <a href="https://es.wikipedia.org/wiki/Optimizaci%C3%B3n_%28matem%C3%A1tica%29">funciones</a>, variando una serie de parámetros del optimizador como el método de optimización local empleado (Gradiente conjugado, BFGS, Método de Powell …). Al ser un <a href="(https://en.wikipedia.org/wiki/Local_search_%28optimization%29)">método local</a> , puede quedar atascado en mínimos locales por lo que, si la solución obtenida no es suficientemente buena, se pueden obtener nuevas soluciones de varias formas p e. reinicialización aleatoria, son computacionalmente baratos.</p>
+  </li>
+  <li>
+    <p>Optimización de ecuaciones: entre los que se puede encontrar el método de <a href="https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados">mínimos cuadrados</a> ampliamente conocidos en <a href="https://es.wikipedia.org/wiki/Regresi%C3%B3n_%28estad%C3%ADstica%29">regresión</a> y optimización</p>
+  </li>
+  <li>
+    <p>Optimizaciones globales: al contrario que los métodos locales, éstos nos proporcionan soluciones óptimas pero son más costosos ya que requieren comprobar el espacio de soluciones completo (a no ser que se requiera de información que lo acote).</p>
+  </li>
+  <li>
+    <p>Ajustes de funciones (<em>fitting</em>): dada una función <em>f</em>, encontrar una función <em>g</em> que la <a href="https://www.google.es/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=6&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjL37eA69rLAhVCXBoKHUkFBCkQFghDMAU&amp;url=http%3A%2F%2Fwww.ugr.es%2F~lorente%2FAPUNTESMNM%2Fcapitulo5.pdf&amp;usg=AFQjCNEXrijmpFscjHqL7WAoFqF_IXMoJA">aproxime</a>, solo está disponible el método <a href="https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados">mínimos cuadrados</a> para aproximación discreta.</p>
+  </li>
 </ul>
 
-<h3 id="lanyon-features">Lanyon features</h3>
+<p>En esta primera entrada comentaré la idea general e implementación de 2 algoritmos de aprendizaje básicos: <a href="https://es.wikipedia.org/wiki/Perceptr%C3%B3n"><em>Perceptron</em></a> y <a href="https://es.wikipedia.org/wiki/Adaline"><em>Adaline</em></a> se verán sus versiones <a href="https://es.wikipedia.org/wiki/Clasificador_lineal">lineales</a> aunque es fácilmente generalizable a funciones no lineales usando <a href="https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte#Funci.C3.B3n_Kernel"><em>kernels</em></a> en cierta parte del código que comentaré). Por ello, para comprobar los resultados del entrenamiento y del test se utilizará un conjunto de muestras que variará dependiendo del algoritmo que esté comentando.
+___
+## Perceptron
+Es un clasificador (en 2 clases {+1,-1} es el que trataremos) basado en funciones discriminantes lineales, el objetivo es encontrar un vector <em>θ</em> que defina un <a href="https://es.wikipedia.org/wiki/Hiperplano">hiperplano</a> separador p.e. una recta en 2D, que separe <a href="http://photos1.blogger.com/blogger/1013/1515/320/SVMSeparacion.jpg">correctamente</a> el conjunto de muestras en 2 clases. Esto equivale a resolver un sistema de <em>N</em> inecuaciones <strong>c</strong>·<strong>θ</strong>·<strong>x</strong>≥<strong>0</strong> (nótese la notación matricial, si se hace vector a vector, equivaldría a resolver <a href="https://i.gyazo.com/e769171d48212f1ccd7d820184b9684d.png">ésto</a>)</p>
 
-<p>In addition to the features of Poole, Lanyon adds the following:</p>
+<p>Ese sistema de <em>N</em> inecuaciones con |θ| incógnitas es demasiado costoso de resolver mediante métodos directos (aunque podríamos haber empleado otros <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo">métodos iterativos</a> como los que iba a utilizar en <a href="https://www.mcs.anl.gov/petsc/">Petsc</a>) y por ello, se opta por minimizar ésta <a href="https://i.gyazo.com/5cccecf3f307437adb63609a97f0ed40.png">ecuación</a> ( suma de las <a href="https://i.gyazo.com/2a4626fe88c672270a4f180f6943aa9b.png">distancias</a> de cada muestra mal clasificada al hiperplano separador) equivalente a resolver el sistema original.
+Este proceso se suele hacer de forma iterativa, calculando cada vez la suma de las distancias mencionada antes, modificando de acuerdo a esas distancias el valor de <em>θ</em> y repitiendo el proceso hasta que <em>θ</em> converge,varía muy poco, se acaban las iteraciones … .Sin embargo, podemos ahorrarnos la implementación del método iterativo haciendo uso del <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">módulo</a> comentado antes, configurando correctamente la función objetivo a optimizar, las cotas, las restricciones (en entradas posteriores se verán, cuando se implementen máquinas de vectores de soporte <a href="https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte">SVM</a>), la tolerancia etc. El código es el siguiente:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#</span>
+<span class="c">#  Perceptron.py</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">Utils</span> <span class="kn">import</span> <span class="n">MatLoad</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span> 
+    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">theta</span><span class="o">*</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">res</span><span class="o">&gt;=+</span><span class="mi">0</span><span class="p">,</span><span class="n">Y</span><span class="o">&gt;=+</span><span class="mi">0</span><span class="p">):</span> <span class="k">return</span> <span class="o">-</span><span class="mi">9999999</span>
+    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">res</span><span class="p">[</span><span class="n">res</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span>
+    <span class="n">XROWS</span><span class="p">,</span><span class="n">XCOLS</span><span class="p">,</span><span class="n">YROWS</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">),</span><span class="n">method</span><span class="o">=</span><span class="s">"CG"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">)</span><span class="o">&gt;=+</span><span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">MatLoad</span><span class="p">(</span><span class="s">"X.np"</span><span class="p">);</span> 
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">MatLoad</span><span class="p">(</span><span class="s">"Y.np"</span><span class="p">);</span> 
+    <span class="n">XROWS</span><span class="p">,</span><span class="n">XCOLS</span><span class="p">,</span><span class="n">YROWS</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.0003</span><span class="p">,</span><span class="o">-</span><span class="mf">1.54</span><span class="p">,</span><span class="o">-</span><span class="mf">3.78</span><span class="p">])</span>
+    <span class="n">res</span>  <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s"> Detalles de convergencia </span><span class="se">\n</span><span class="s">"</span>
+    <span class="k">print</span> <span class="n">res</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s">Clase de [1,0,5]:"</span><span class="p">,</span><span class="n">classify</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span>
+
+</code></pre>
+</div>
+
+<p>Para la implementación, se han desarrollado únicamente 4 funciones:</p>
 
 <ul>
-  <li>Toggleable sliding sidebar (built with only CSS) via <strong>☰</strong> link in top corner</li>
-  <li>Sidebar includes support for textual modules and a dynamically generated navigation with active link support</li>
-  <li>Two orientations for content and sidebar, default (left sidebar) and <a href="https://github.com/poole/lanyon#reverse-layout">reverse</a> (right sidebar), available via <code class="highlighter-rouge">&lt;body&gt;</code> classes</li>
-  <li><a href="https://github.com/poole/lanyon#themes">Eight optional color schemes</a>, available via <code class="highlighter-rouge">&lt;body&gt;</code> classes</li>
+  <li>
+    <p><em>f</em>: es la función objetivo que he mencionado <a href="https://gyazo.com/5cccecf3f307437adb63609a97f0ed40">antes</a>, se pasará como parámetro al solver de scipy para minimizar. Se hace un producto vector-matriz para calcular la parte <strong>c</strong>·<strong>θ</strong>·<strong>x</strong> y se comprueba si todas las muestras están bien clasificadas, si lo están queremos que el proceso finalice luego devolvemos una distancia muy pequeña, si no lo están devolvemos la suma de las distancias de las muestras mal clasificadas al hiperplano separador.</p>
+  </li>
+  <li>
+    <p><em>fit</em>: se encarga de llamar al optimizador de <em>Scipy</em> <em>minimize</em>, utilizando el método del <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_del_gradiente_conjugado">gradiente conjugado</a> para entrenar el sistema. Podemos hacer uso de todos los demás <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">métodos</a> implementados en la librería para el optimizador local <em>minimize</em>.</p>
+  </li>
+  <li>
+    <p><em>classify</em>: una vez entrenado el sistema (obtenido el vector <em>θ</em> adecuado), dada una nueva muestra <em>x</em> permite clasificarla en la clase correcta según <em>θ</em>. Para ello se calcula el producto escalar <em>θ</em>·<em>x</em> y se comprueba si está a un lado del espacio definido por el hiperplano separador o al otro ( <em>θ</em>·<em>x</em>≥0 , <em>θ</em>·<em>x</em>≤0 ).</p>
+  </li>
+  <li>
+    <p><em>predict</em>: dada una muestra <em>x</em> permite hacer regresión una vez el sistema ha sido entrenado. Con ello, se predice el valor de <em>x</em> dado el vector de parámetros <em>θ</em>, en función del resultado del producto escalar <em>θ</em>·<em>x</em>.</p>
+  </li>
 </ul>
 
-<p><a href="https://github.com/poole/lanyon#readme">Head to the readme</a> to learn more.</p>
+<p>Una vez se han definido las funciones necesarias, solo queda ver cómo se comporta el sistema entrenándolo y probándolo. Para ello, se ha hecho uso de un conjunto de muestras de juguete (en notación homogénea) junto con sus salidas, diseñado a mano:</p>
 
-<h3 id="browser-support">Browser support</h3>
+<p>Muestras de entrenamiento: 3 muestras de 3 dimensiones dispuestas por columnas.
+| nº | x1 | x2 | x3 | 
+|—-|—-|—-|—-|
+| d1 | 1  | 1  | 1  |
+| d2 | 0  | 2  | 4  |
+| d3 | 5  | 1  | 2  |</p>
 
-<p>Lanyon is by preference a forward-thinking project. In addition to the latest versions of Chrome, Safari (mobile and desktop), and Firefox, it is only compatible with Internet Explorer 9 and above.</p>
+<p>Salidas: salidas (clases) esperadas para cada una de las 3 muestras (+1 o -1):</p>
 
-<h3 id="download">Download</h3>
+<table>
+  <thead>
+    <tr>
+      <th>nº</th>
+      <th>clase</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>x1</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <td>x2</td>
+      <td>+1</td>
+    </tr>
+    <tr>
+      <td>x3</td>
+      <td>+1</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Lanyon is developed on and hosted with GitHub. Head to the <a href="https://github.com/poole/lanyon">GitHub repository</a> for downloads, bug reports, and features requests.</p>
+<p>Dibujad las 2 últimas dimensiones de las muestras -d1 y d3 de la primera tabla- en un eje de coordenadas y veréis como encontráis rápidamente infinitas soluciones que separen las muestras en función de la salida (+1 o -1). Eso mismo hará el sistema, dar una posible solución de todas los hiperplanos (rectas en este caso) que sirven para separar las clases (en entradas posteriores, cuando se traten SVM, se podrá elegir entre el mejor de todos aquellos hiperplanos separadores según un criterio de distancia entre clases e hiperplano).</p>
 
-<p>Thanks!</p>
+<p>Con ello (en el <em>main</em> del <em>script</em>) partimos de un vector <em>θ</em> aleatorio (se suele inicializar a 0) y lo ajustamos mediante la función <em>fit</em> para que clasifique correctamente las muestras, minimizando la función objetivo mencionada antes. Una vez finalice, obtenemos detalles sobre la finalización del proceso del <em>solver</em> (valor de <em>f</em> final, nº iteraciones realizadas, vector <em>θ</em>, etc) y la salida de una muestra a clasificar [1,0,5], que corresponde al conjunto de muestras de entrenamiento y conocemos su clase (si hemos dibujado las coordenadas como dije) : -1. La salida del script ejemplo es:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Detalles de convergencia
+ fun: 0.0
+ jac: array([ 0.,  0.,  0.])
+ message: 'Optimization terminated successfully.'
+    nfev: 10
+     nit: 1
+    njev: 2
+  status: 0
+ success: True
+       x: array([ 1.9997,  4.46  , -0.78  ])
+
+Clase de [1,0,5]: -1
+</code></pre>
+</div>
+
+<p>Que coincide con lo que esperábamos, observando que el método ha convergido en 2 iteraciones a la solución <em>θ</em> = [ 1.9997,  4.46  , -0.78  ], además ha clasificado la muestra [1,0,5] que efectivamente pertenece a la clase -1.</p>
+
+<p>Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de <em>Adaline</em> y los algoritmos que se vayan implementando p.e. SVM,PCA,LDA etc o modificaciones que se hagan de los ya mostrados.</p>
+
+<p>Adjunto el código disponible hasta el momento .</p>
 
   </div>
   
@@ -187,15 +284,12 @@
 
 <p>Cum sociis natoque penatibus et magnis dis <code class="highlighter-rouge">code element</code> montes, nascetur ridiculus mus.</p>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Example can be run directly in your JavaScript console
-</span>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Example can be run directly in your JavaScript console</span>
 
-<span class="c1">// Create a function that takes two arguments and returns the sum of those arguments
-</span>
+<span class="c1">// Create a function that takes two arguments and returns the sum of those arguments</span>
 <span class="kd">var</span> <span class="nx">adder</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"return a + b"</span><span class="p">);</span>
 
-<span class="c1">// Call the function
-</span>
+<span class="c1">// Call the function</span>
 <span class="nx">adder</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
 <span class="c1">// &gt; 8</span></code></pre></figure>
 
