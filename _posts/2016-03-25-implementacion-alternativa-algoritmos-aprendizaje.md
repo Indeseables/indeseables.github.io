@@ -15,7 +15,9 @@ Dicho módulo nos permite realizar varios métodos de optimización y búsqueda 
 * Ajustes de funciones (*fitting*): dada una función *f*, encontrar una función *g* que la [aproxime](https://www.google.es/url?sa=t&rct=j&q=&esrc=s&source=web&cd=6&cad=rja&uact=8&ved=0ahUKEwjL37eA69rLAhVCXBoKHUkFBCkQFghDMAU&url=http%3A%2F%2Fwww.ugr.es%2F~lorente%2FAPUNTESMNM%2Fcapitulo5.pdf&usg=AFQjCNEXrijmpFscjHqL7WAoFqF_IXMoJA), solo está disponible el método [mínimos cuadrados](https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados) para aproximación discreta.
 
 En esta primera entrada comentaré la idea general e implementación de 2 algoritmos de aprendizaje básicos: [*Perceptron*](https://es.wikipedia.org/wiki/Perceptr%C3%B3n) y [*Adaline*](https://es.wikipedia.org/wiki/Adaline) se verán sus versiones [lineales](https://es.wikipedia.org/wiki/Clasificador_lineal) aunque es fácilmente generalizable a funciones no lineales usando [*kernels*](https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte#Funci.C3.B3n_Kernel) en cierta parte del código que comentaré). Por ello, para comprobar los resultados del entrenamiento y del test se utilizará un conjunto de muestras que variará dependiendo del algoritmo que esté comentando.
+
 ___
+
 ## Perceptron
 Es un clasificador (en 2 clases {+1,-1} es el que trataremos) basado en funciones discriminantes lineales, el objetivo es encontrar un vector *θ* que defina un [hiperplano](https://es.wikipedia.org/wiki/Hiperplano) separador p.e. una recta en 2D, que separe [correctamente](http://photos1.blogger.com/blogger/1013/1515/320/SVMSeparacion.jpg) el conjunto de muestras en 2 clases. Esto equivale a resolver un sistema de *N* inecuaciones **c**·**θ**·**x**≥**0** (nótese la notación matricial, si se hace vector a vector, equivaldría a resolver [ésto](https://i.gyazo.com/e769171d48212f1ccd7d820184b9684d.png))
 
@@ -104,6 +106,8 @@ Clase de [1,0,5]: -1
 ```
 
 Que coincide con lo que esperábamos, observando que el método ha convergido en 2 iteraciones a la solución *θ* = [ 1.9997,  4.46  , -0.78  ], además ha clasificado la muestra [1,0,5] que efectivamente pertenece a la clase -1.
+
+___
 
 Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de *Adaline* y los algoritmos que se vayan implementando p.e. SVM,EM etc o modificaciones que se hagan de los ya mostrados.
 

@@ -4,7 +4,7 @@
  <title>Indeseabλes</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-03-25T07:17:21+01:00</updated>
+ <updated>2016-03-25T07:22:14+01:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
    <name>Indeseables</name>
@@ -36,10 +36,12 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;En esta primera entrada comentaré la idea general e implementación de 2 algoritmos de aprendizaje básicos: &lt;a href=&quot;https://es.wikipedia.org/wiki/Perceptr%C3%B3n&quot;&gt;&lt;em&gt;Perceptron&lt;/em&gt;&lt;/a&gt; y &lt;a href=&quot;https://es.wikipedia.org/wiki/Adaline&quot;&gt;&lt;em&gt;Adaline&lt;/em&gt;&lt;/a&gt; se verán sus versiones &lt;a href=&quot;https://es.wikipedia.org/wiki/Clasificador_lineal&quot;&gt;lineales&lt;/a&gt; aunque es fácilmente generalizable a funciones no lineales usando &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte#Funci.C3.B3n_Kernel&quot;&gt;&lt;em&gt;kernels&lt;/em&gt;&lt;/a&gt; en cierta parte del código que comentaré). Por ello, para comprobar los resultados del entrenamiento y del test se utilizará un conjunto de muestras que variará dependiendo del algoritmo que esté comentando.
-___
-## Perceptron
-Es un clasificador (en 2 clases {+1,-1} es el que trataremos) basado en funciones discriminantes lineales, el objetivo es encontrar un vector &lt;em&gt;θ&lt;/em&gt; que defina un &lt;a href=&quot;https://es.wikipedia.org/wiki/Hiperplano&quot;&gt;hiperplano&lt;/a&gt; separador p.e. una recta en 2D, que separe &lt;a href=&quot;http://photos1.blogger.com/blogger/1013/1515/320/SVMSeparacion.jpg&quot;&gt;correctamente&lt;/a&gt; el conjunto de muestras en 2 clases. Esto equivale a resolver un sistema de &lt;em&gt;N&lt;/em&gt; inecuaciones &lt;strong&gt;c&lt;/strong&gt;·&lt;strong&gt;θ&lt;/strong&gt;·&lt;strong&gt;x&lt;/strong&gt;≥&lt;strong&gt;0&lt;/strong&gt; (nótese la notación matricial, si se hace vector a vector, equivaldría a resolver &lt;a href=&quot;https://i.gyazo.com/e769171d48212f1ccd7d820184b9684d.png&quot;&gt;ésto&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;En esta primera entrada comentaré la idea general e implementación de 2 algoritmos de aprendizaje básicos: &lt;a href=&quot;https://es.wikipedia.org/wiki/Perceptr%C3%B3n&quot;&gt;&lt;em&gt;Perceptron&lt;/em&gt;&lt;/a&gt; y &lt;a href=&quot;https://es.wikipedia.org/wiki/Adaline&quot;&gt;&lt;em&gt;Adaline&lt;/em&gt;&lt;/a&gt; se verán sus versiones &lt;a href=&quot;https://es.wikipedia.org/wiki/Clasificador_lineal&quot;&gt;lineales&lt;/a&gt; aunque es fácilmente generalizable a funciones no lineales usando &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte#Funci.C3.B3n_Kernel&quot;&gt;&lt;em&gt;kernels&lt;/em&gt;&lt;/a&gt; en cierta parte del código que comentaré). Por ello, para comprobar los resultados del entrenamiento y del test se utilizará un conjunto de muestras que variará dependiendo del algoritmo que esté comentando.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;perceptron&quot;&gt;Perceptron&lt;/h2&gt;
+&lt;p&gt;Es un clasificador (en 2 clases {+1,-1} es el que trataremos) basado en funciones discriminantes lineales, el objetivo es encontrar un vector &lt;em&gt;θ&lt;/em&gt; que defina un &lt;a href=&quot;https://es.wikipedia.org/wiki/Hiperplano&quot;&gt;hiperplano&lt;/a&gt; separador p.e. una recta en 2D, que separe &lt;a href=&quot;http://photos1.blogger.com/blogger/1013/1515/320/SVMSeparacion.jpg&quot;&gt;correctamente&lt;/a&gt; el conjunto de muestras en 2 clases. Esto equivale a resolver un sistema de &lt;em&gt;N&lt;/em&gt; inecuaciones &lt;strong&gt;c&lt;/strong&gt;·&lt;strong&gt;θ&lt;/strong&gt;·&lt;strong&gt;x&lt;/strong&gt;≥&lt;strong&gt;0&lt;/strong&gt; (nótese la notación matricial, si se hace vector a vector, equivaldría a resolver &lt;a href=&quot;https://i.gyazo.com/e769171d48212f1ccd7d820184b9684d.png&quot;&gt;ésto&lt;/a&gt;)&lt;/p&gt;
 
 &lt;p&gt;Ese sistema de &lt;em&gt;N&lt;/em&gt; inecuaciones con |θ| incógnitas es demasiado costoso de resolver mediante métodos directos (aunque podríamos haber empleado otros &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo&quot;&gt;métodos iterativos&lt;/a&gt; como los que iba a utilizar en &lt;a href=&quot;https://www.mcs.anl.gov/petsc/&quot;&gt;Petsc&lt;/a&gt;) y por ello, se opta por minimizar ésta &lt;a href=&quot;https://i.gyazo.com/5cccecf3f307437adb63609a97f0ed40.png&quot;&gt;ecuación&lt;/a&gt; ( suma de las &lt;a href=&quot;https://i.gyazo.com/2a4626fe88c672270a4f180f6943aa9b.png&quot;&gt;distancias&lt;/a&gt; de cada muestra mal clasificada al hiperplano separador) equivalente a resolver el sistema original.
 Este proceso se suele hacer de forma iterativa, calculando cada vez la suma de las distancias mencionada antes, modificando de acuerdo a esas distancias el valor de &lt;em&gt;θ&lt;/em&gt; y repitiendo el proceso hasta que &lt;em&gt;θ&lt;/em&gt; converge,varía muy poco, se acaban las iteraciones … .Sin embargo, podemos ahorrarnos la implementación del método iterativo haciendo uso del &lt;a href=&quot;http://docs.scipy.org/doc/scipy/reference/optimize.html&quot;&gt;módulo&lt;/a&gt; comentado antes, configurando correctamente la función objetivo a optimizar, las cotas, las restricciones (en entradas posteriores se verán, cuando se implementen máquinas de vectores de soporte &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte&quot;&gt;SVM&lt;/a&gt;), la tolerancia etc. El código es el siguiente:&lt;/p&gt;
@@ -175,6 +177,8 @@ Clase de [1,0,5]: -1
 &lt;/div&gt;
 
 &lt;p&gt;Que coincide con lo que esperábamos, observando que el método ha convergido en 2 iteraciones a la solución &lt;em&gt;θ&lt;/em&gt; = [ 1.9997,  4.46  , -0.78  ], además ha clasificado la muestra [1,0,5] que efectivamente pertenece a la clase -1.&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;p&gt;Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de &lt;em&gt;Adaline&lt;/em&gt; y los algoritmos que se vayan implementando p.e. SVM,EM etc o modificaciones que se hagan de los ya mostrados.&lt;/p&gt;
 
