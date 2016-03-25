@@ -2,6 +2,7 @@
 layout: post
 title: Implementación alternativa de algoritmos de aprendizaje (parte I).
 ---
+
 Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería *Scipy* y más concretamente, su módulo *optimize* (tenía pensado usar [Petsc](https://www.mcs.anl.gov/petsc/), pero no he conseguido convertir matrices a su formato y me ha complicado las cosas). 
 
 Dicho módulo nos permite realizar varios métodos de optimización y búsqueda de raices de funciones (nos centraremos en la parte de optimización de momento, la búsqueda de raices tal vez sea interesante en entradas posteriores, ya que los [métodos iterativos](https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo) de [Krylov](https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo#M.C3.A9todos_del_subespacio_de_Krylov) pueden sernos de utilidad a la hora de resolver sistemas muy grandes de forma eficiente) como pueden ser (no comentaré todos los [métodos](http://docs.scipy.org/doc/scipy/reference/optimize.html) de cada tipo de optimización): 
@@ -14,15 +15,17 @@ Dicho módulo nos permite realizar varios métodos de optimización y búsqueda 
 
 * Ajustes de funciones (*fitting*): dada una función *f*, encontrar una función *g* que la [aproxime](https://www.google.es/url?sa=t&rct=j&q=&esrc=s&source=web&cd=6&cad=rja&uact=8&ved=0ahUKEwjL37eA69rLAhVCXBoKHUkFBCkQFghDMAU&url=http%3A%2F%2Fwww.ugr.es%2F~lorente%2FAPUNTESMNM%2Fcapitulo5.pdf&usg=AFQjCNEXrijmpFscjHqL7WAoFqF_IXMoJA), solo está disponible el método [mínimos cuadrados](https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados) para aproximación discreta.
 
-En esta primera entrada comentaré la idea general e implementación de 2 algoritmos de aprendizaje básicos: [*Perceptron*](https://es.wikipedia.org/wiki/Perceptr%C3%B3n) y [*Adaline*](https://es.wikipedia.org/wiki/Adaline) se verán sus versiones [lineales](https://es.wikipedia.org/wiki/Clasificador_lineal) aunque es fácilmente generalizable a funciones no lineales usando [*kernels*](https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte#Funci.C3.B3n_Kernel) en cierta parte del código que comentaré). Por ello, para comprobar los resultados del entrenamiento y del test se utilizará un conjunto de muestras que variará dependiendo del algoritmo que esté comentando.
+En esta primera entrada comentaré la idea general e implementación de 2 algoritmos de aprendizaje básicos (ambos redes neuronales de una única capa): [*Perceptron*](https://es.wikipedia.org/wiki/Perceptr%C3%B3n) y [*Adaline*](https://es.wikipedia.org/wiki/Adaline) se verán sus versiones [lineales](https://es.wikipedia.org/wiki/Clasificador_lineal) (aunque es fácilmente generalizable a funciones no lineales usando [*kernels*](https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte#Funci.C3.B3n_Kernel) en cierta parte del código que comentaré) haciendo uso de técnicas de optimización sin restricciones (en la siguiente entrada se verá como añadir restricciones y cotas). Por ello, para comprobar los resultados del entrenamiento y del test se utilizará un conjunto de muestras que variará dependiendo del algoritmo que esté comentando.
 
 ___
 
 ## Perceptron
 Es un clasificador (en 2 clases {+1,-1} es el que trataremos) basado en funciones discriminantes lineales, el objetivo es encontrar un vector *θ* que defina un [hiperplano](https://es.wikipedia.org/wiki/Hiperplano) separador p.e. una recta en 2D, que separe [correctamente](http://photos1.blogger.com/blogger/1013/1515/320/SVMSeparacion.jpg) el conjunto de muestras en 2 clases. Esto equivale a resolver un sistema de *N* inecuaciones **c**·**θ**·**x**≥**0** (nótese la notación matricial, si se hace vector a vector, equivaldría a resolver [ésto](https://i.gyazo.com/e769171d48212f1ccd7d820184b9684d.png))
 
-Ese sistema de *N* inecuaciones con |θ| incógnitas es demasiado costoso de resolver mediante métodos directos (aunque podríamos haber empleado otros [métodos iterativos](https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo) como los que iba a utilizar en [Petsc](https://www.mcs.anl.gov/petsc/)) y por ello, se opta por minimizar ésta [ecuación](https://i.gyazo.com/5cccecf3f307437adb63609a97f0ed40.png) ( suma de las [distancias](https://i.gyazo.com/2a4626fe88c672270a4f180f6943aa9b.png) de cada muestra mal clasificada al hiperplano separador) equivalente a resolver el sistema original.
-Este proceso se suele hacer de forma iterativa, calculando cada vez la suma de las distancias mencionada antes, modificando de acuerdo a esas distancias el valor de *θ* y repitiendo el proceso hasta que *θ* converge,varía muy poco, se acaban las iteraciones ... .Sin embargo, podemos ahorrarnos la implementación del método iterativo haciendo uso del [módulo](http://docs.scipy.org/doc/scipy/reference/optimize.html) comentado antes, configurando correctamente la función objetivo a optimizar, las cotas, las restricciones (en entradas posteriores se verán, cuando se implementen máquinas de vectores de soporte [SVM](https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte)), la tolerancia etc. El código es el siguiente:
+Ese sistema de *N* inecuaciones con |θ| incógnitas es demasiado costoso de resolver mediante métodos directos (aunque podríamos haber empleado otros [métodos iterativos](https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo) como los que iba a utilizar en [Petsc](https://www.mcs.anl.gov/petsc/)) y por ello, se opta por minimizar ésta [función](https://i.gyazo.com/5cccecf3f307437adb63609a97f0ed40.png) ( suma de las [distancias](https://i.gyazo.com/2a4626fe88c672270a4f180f6943aa9b.png) de cada muestra mal clasificada al hiperplano separador) equivalente a resolver el sistema original.
+Este proceso se suele hacer de forma iterativa, calculando cada vez la suma de las distancias mencionada antes, modificando de acuerdo a esas distancias el valor de *θ* y repitiendo el proceso hasta que *θ* converge,varía muy poco, se acaban las iteraciones ... .Sin embargo, podemos ahorrarnos la implementación del método iterativo haciendo uso del [módulo](http://docs.scipy.org/doc/scipy/reference/optimize.html) comentado antes, configurando correctamente la función objetivo a optimizar, las cotas, las restricciones (en entradas posteriores se verán, cuando se implementen máquinas de vectores de soporte [SVM](https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte)), la tolerancia etc. Otra cosa a tener en cuenta es que Perceptron siempre converge si las muestras son linealmente separables.
+
+El código es el siguiente:
 
 ```
 #!/usr/bin/env python
@@ -109,9 +112,82 @@ Que coincide con lo que esperábamos, observando que el método ha convergido en
 
 ___
 
-Se me ha ido el tiempo solo contando la implementación del perceptrón, por lo que dejaré para entradas posteriores entradas el trato de *Adaline* y los algoritmos que se vayan implementando p.e. SVM,EM etc o modificaciones que se hagan de los ya mostrados.
+## Adaline
 
-Dejo el [código disponible hasta el momento](https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1)
+Adaline es una red neuronal de una capa utilizada en principalmente en regresión lineal. En este caso, el objetivo del aprendizaje es encontrar un vector *θ* con el que se [minimice la diferencia entre *θ*·*x* y la salida esperada *y* para toda muestra de entrenamiento](https://i.gyazo.com/1b7efc98d8add5937953e722f18a57af.png). Del mismo modo que en Perceptron, se minimizará esta [función](https://i.gyazo.com/27cfe2a3959b5475029968f5fcc21b12.png) equivalente a resolver el sistema planteado (ahora no se tienen en cuenta solo las mal clasificadas, si no que se quiere minimizar las diferencias entre la RHS y la LHS del todo el conjunto de ecuaciones).En este caso no he encontrado ningún teorema sobre la convergencia excepto [éste](https://i.gyazo.com/8abc9636f7f210ee276d53e4c043b794.png).
+
+El código es el siguiente:
+
+```
+
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+#  Adaline.py
+
+from scipy.optimize import minimize
+import numpy as np
+from Utils import MatLoad
+
+def f(theta,X,Y): 
+    res = ((theta*X)+(-Y))
+    return (1.0/2.0)*(np.multiply(res,res).sum(axis=1)[0].item((0,0)))
+    
+
+def fit(theta,X,Y):
+    XROWS,XCOLS,YROWS = X.shape[0],X.shape[1],Y.shape[0]
+    return minimize(fun=f,x0=theta,args=(X,Y))
+    
+def predict(theta,X): return np.inner(theta,X)
+
+def classify(theta,X): return 1 if np.inner(theta,X)>=0 else -1
+
+
+if __name__ == "__main__":
+    X = MatLoad("X.np"); 
+    Y = MatLoad("Y.np"); 
+    XROWS,XCOLS,YROWS = X.shape[0],X.shape[1],Y.shape[0]
+    theta = np.zeros(XROWS)
+    res  = fit(theta,X,Y)
+    print "\n Detalles de convergencia \n"
+    print res
+    theta = res.x
+    print "\nClase de [1,0,5]:",classify(theta,np.array([1,0,5]))
+    
+```
+
+Es idéntico al del Perceptron, cambiando la función objetivo de [*f*](https://i.gyazo.com/5cccecf3f307437adb63609a97f0ed40.png) a [*f'*](https://i.gyazo.com/27cfe2a3959b5475029968f5fcc21b12.png). Nótese que la minimización de las diferencias entre la LHS y RHS no garantiza resultados correctos en clasificación donde normalmente el conjunto de salidas posibles *Y* es discreto.
+
+La salida del script es muy similar a la del caso anterior:
+
+```
+
+ Detalles de convergencia
+
+      fun: 7.76245804938178e-15
+ hess_inv: array([[ 4.99999999, -1.        , -1.        ],
+       [-1.        ,  0.26      ,  0.18      ],
+       [-1.        ,  0.18      ,  0.24      ]])
+      jac: array([ -1.30741529e-10,   3.51008111e-11,   1.42319490e-11])
+  message: 'Optimization terminated successfully.'
+     nfev: 40
+      nit: 5
+     njev: 8
+   status: 0
+  success: True
+        x: array([ 1.00000026,  0.19999994, -0.40000006])
+
+Clase de [1,0,5]: -1
+
+```
+
+Se puede observar que el vector *θ* difiere del obtenido en Perceptron ya que se resuelve un problema diferente (éste, se podría haber resuelto utilizando la función [*leastsq*](http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq) del módulo *optimize*).
+
+___
+
+Hasta aquí lo que quería comentar, hay muchísima documentación sobre todo lo que he ido contando y he intentado enlazarlo y simplificarlo en la medida de lo posible para que sea comprensible. En próximas partes comentaré la implementación de máquinas de vectores de soporte [SVM](https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte), [con](https://en.wikipedia.org/wiki/Support_vector_machine#Soft-margin) y sin márgenes blandos (para ver una introducción la clasificación no lineal) y la aplicación de funciones [kernel](https://en.wikipedia.org/wiki/Positive-definite_kernel) para que los clasificadores implementados sepan discriminar de formas más compleja.
+
+Dejo el [código disponible hasta el momento](https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1) en el [repositorio](https://github.com/Indeseables/indeseables.github.io).
 
 Cualquier comentario:
 
@@ -119,4 +195,4 @@ Cualquier comentario:
 * Twitter: [@indeseables](http://twitter.com/)
 * Issues: [#Issues](https://github.com/Indeseables/indeseables.github.io/issues)
 
-Saludos.
+**Autor:** [*J.G*](https://github.com/overxfl0w)

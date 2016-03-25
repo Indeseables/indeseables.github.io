@@ -9,6 +9,7 @@ title: About
 
 ## J. González
 >Apasionado de la inteligencia artificial y el reconocimiento de formas. Futuro graduado en ing informática por la UPV (2016), esperando máster y doctorado...
+>[#Github](https://github.com/overxfl0w)
 
 ---
 
