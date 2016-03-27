@@ -4,7 +4,9 @@ title: Redes neuronales y autoencoders.
 ---
 
 Si se ha visto el [post](http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/) anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de [Perceptron dispuestos en cascada](https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png). 
+
 ___
+
 ### Redes neuronales
 También llamadas redes neuronales artificiales o procesado distribuido y paralelo, se basan en el mismo principio que Perceptron, funciones discriminantes lineales ([FDL](https://i.gyazo.com/f895cd0241ad3206721e1444907b4b02.png)) que se determinan mediante el aprendizaje de un vector de parámetros *θ* resolviendo un problema de optimización en el que se pretende obtener el vector *θ* que minimice el error cuadrático entre la salida esperada de las muestras de entrenamiento y la salida obtenida por la red neuronal.Este vector de parámetros *θ*, hace referencia al peso de las conexiones entre las neuronas de la red neuronal (los pesos asociados a cada una de las aristas de la red de la [imagen](https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png)) y es una medida de la complejidad de la red. 
 

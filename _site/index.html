@@ -101,10 +101,12 @@
 
     <span class="post-date">27 Mar 2016</span>
 
-    <p>Si se ha visto el <a href="http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">post</a> anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">Perceptron dispuestos en cascada</a>. 
-___
-### Redes neuronales
-También llamadas redes neuronales artificiales o procesado distribuido y paralelo, se basan en el mismo principio que Perceptron, funciones discriminantes lineales (<a href="https://i.gyazo.com/f895cd0241ad3206721e1444907b4b02.png">FDL</a>) que se determinan mediante el aprendizaje de un vector de parámetros <em>θ</em> resolviendo un problema de optimización en el que se pretende obtener el vector <em>θ</em> que minimice el error cuadrático entre la salida esperada de las muestras de entrenamiento y la salida obtenida por la red neuronal.Este vector de parámetros <em>θ</em>, hace referencia al peso de las conexiones entre las neuronas de la red neuronal (los pesos asociados a cada una de las aristas de la red de la <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">imagen</a>) y es una medida de la complejidad de la red.</p>
+    <p>Si se ha visto el <a href="http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">post</a> anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">Perceptron dispuestos en cascada</a>.</p>
+
+<hr />
+
+<h3 id="redes-neuronales">Redes neuronales</h3>
+<p>También llamadas redes neuronales artificiales o procesado distribuido y paralelo, se basan en el mismo principio que Perceptron, funciones discriminantes lineales (<a href="https://i.gyazo.com/f895cd0241ad3206721e1444907b4b02.png">FDL</a>) que se determinan mediante el aprendizaje de un vector de parámetros <em>θ</em> resolviendo un problema de optimización en el que se pretende obtener el vector <em>θ</em> que minimice el error cuadrático entre la salida esperada de las muestras de entrenamiento y la salida obtenida por la red neuronal.Este vector de parámetros <em>θ</em>, hace referencia al peso de las conexiones entre las neuronas de la red neuronal (los pesos asociados a cada una de las aristas de la red de la <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">imagen</a>) y es una medida de la complejidad de la red.</p>
 
 <p>Podemos distinguir 2 aspectos de dichas redes:</p>
 
