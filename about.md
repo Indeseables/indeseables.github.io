@@ -16,6 +16,7 @@ title: About
 ## E. Montes Morales
 >Apasionado de todo y especialista en poco, estudiante de ing informática en la EII, Uniovi. Futuro experto en algo
 >[#Github](http://github.com/sankosk)
+
 ---
 
 ## Blau
