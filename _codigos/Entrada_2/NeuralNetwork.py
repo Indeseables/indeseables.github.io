@@ -53,7 +53,10 @@ def f(theta,X,Y,units_by_layer,factivation):
     mean_squared_error  = (1.0/(2.0*X.shape[1]))*np.multiply(mean_squared_error,mean_squared_error).sum(axis=0).sum(axis=1)
     return mean_squared_error.item(0,0)
 
-def fit(theta,X,Y,units_by_layer,factivation,method="CG",max_iter=1000,verbose_convergence=True): return minimize(fun=f,x0=theta,args=(X,Y,units_by_layer,factivation),method=method,options={"maxiter":max_iter,"disp":verbose_convergence})
+
+def f_regularized(theta,X,Y,units_by_layer,factivation,l=1): return f(theta,X,Y,units_by_layer,factivation)+(l*((theta*theta).sum(axis=0)))
+    
+def fit(theta,X,Y,units_by_layer,factivation,params_f_solver,method="CG",max_iter=1000,verbose_convergence=True,f_solver=f): return minimize(fun=f_solver,x0=theta,args=params_f_solver,method=method,options={"maxiter":max_iter,"disp":verbose_convergence})
 
 def classify(theta,X,units_by_layer,factivation): return forward_propagation(theta,np.matrix(X),units_by_layer,factivation).argmax(axis=0).item((0,0))
     
@@ -69,7 +72,8 @@ if __name__ == "__main__":
     #### Test NN aleatoria ####
     units_by_layer = [XROWS,5,4,2] # Se cuenta la unidad BIAS en la capa oculta (la entrada se asume homogénea) en la de salida NO hay #
     theta =  generate_theta(units_by_layer)
-    res  = fit(theta,X,Y,units_by_layer,lineal,method="SLSQP")
+    # res  = fit(theta,X,Y,units_by_layer,lineal,(X,Y,units_by_layer,lineal),f_solver=f,method="SLSQP") # Mean squared error
+    res  = fit(theta,X,Y,units_by_layer,lineal,(X,Y,units_by_layer,lineal,0.01),f_solver=f_regularized,method="SLSQP") # Mean squared error with theta regularization #
     print "\n Detalles de convergencia \n"
     print res
     theta = res.x

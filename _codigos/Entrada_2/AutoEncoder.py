@@ -13,7 +13,7 @@ if __name__ == "__main__":
     units_by_layer = [XROWS,M1,XROWS-1] 
     theta = nn.generate_theta(units_by_layer)
     Y     = X[1:]
-    res   = nn.fit(theta,X,Y,units_by_layer,nn.lineal,max_iter=1000000,method="SLSQP")
+    res  = nn.fit(theta,X,Y,units_by_layer,nn.lineal,(X,Y,units_by_layer,nn.lineal),f_solver=nn.f,method="SLSQP",max_iter=1000000)
     print "\n Detalles de convergencia \n"
     print res
     theta = res.x
