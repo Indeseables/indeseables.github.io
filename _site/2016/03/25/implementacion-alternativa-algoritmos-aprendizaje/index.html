@@ -95,7 +95,7 @@
   <span class="post-date">25 Mar 2016</span>
   <p>Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería <em>Scipy</em> y más concretamente, su módulo <em>optimize</em> (tenía pensado usar <a href="https://www.mcs.anl.gov/petsc/">Petsc</a>, pero no he conseguido convertir matrices a su formato y me ha complicado las cosas).</p>
 
-<p>Dicho módulo nos permite realizar varios métodos de optimización y búsqueda de raices de funciones (nos centraremos en la parte de optimización de momento, la búsqueda de raices tal vez sea interesante en entradas posteriores, ya que los <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo">métodos iterativos</a> de <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo#M.C3.A9todos_del_subespacio_de_Krylov">Krylov</a> pueden sernos de utilidad a la hora de resolver sistemas muy grandes de forma eficiente) como pueden ser (no comentaré todos los <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">métodos</a> de cada tipo de optimización):</p>
+<p>Dicho módulo nos permite realizar varios métodos de optimización y búsqueda de raices de funciones (nos centraremos en la parte de optimización de momento y tal vez vea optimizaciones alternativas p.e. usando <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo">métodos iterativos</a> de <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo#M.C3.A9todos_del_subespacio_de_Krylov">Krylov</a>, que son de mucha utilidad a la hora de resolver sistemas muy grandes de forma eficiente) como pueden ser (no comentaré todos los <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">métodos</a> de cada tipo de optimización):</p>
 
 <ul>
   <li>
@@ -105,7 +105,7 @@
     <p>Optimización de ecuaciones: entre los que se puede encontrar el método de <a href="https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados">mínimos cuadrados</a> ampliamente conocidos en <a href="https://es.wikipedia.org/wiki/Regresi%C3%B3n_%28estad%C3%ADstica%29">regresión</a> y optimización</p>
   </li>
   <li>
-    <p>Optimizaciones globales: al contrario que los métodos locales, éstos nos proporcionan soluciones óptimas pero son más costosos ya que requieren comprobar el espacio de soluciones completo (a no ser que se requiera de información que lo acote).</p>
+    <p>Optimizaciones globales: al contrario que los métodos locales, éstos nos proporcionan soluciones óptimas pero son más costosos ya que requieren comprobar el espacio de soluciones completo (a no ser que se disponga de información que lo acote).</p>
   </li>
   <li>
     <p>Ajustes de funciones (<em>fitting</em>): dada una función <em>f</em>, encontrar una función <em>g</em> que la <a href="https://www.google.es/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=6&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjL37eA69rLAhVCXBoKHUkFBCkQFghDMAU&amp;url=http%3A%2F%2Fwww.ugr.es%2F~lorente%2FAPUNTESMNM%2Fcapitulo5.pdf&amp;usg=AFQjCNEXrijmpFscjHqL7WAoFqF_IXMoJA">aproxime</a>, solo está disponible el método <a href="https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados">mínimos cuadrados</a> para aproximación discreta.</p>
@@ -331,7 +331,7 @@ Clase de [1,0,5]: -1
 
 <hr />
 
-<p>Hasta aquí lo que quería comentar, hay muchísima documentación sobre todo lo que he ido contando y he intentado enlazarlo y simplificarlo en la medida de lo posible para que sea comprensible. En próximas partes comentaré la implementación de máquinas de vectores de soporte <a href="https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte">SVM</a>, <a href="https://en.wikipedia.org/wiki/Support_vector_machine#Soft-margin">con</a> y sin márgenes blandos (para ver una introducción la clasificación no lineal) y la aplicación de funciones <a href="https://en.wikipedia.org/wiki/Positive-definite_kernel">kernel</a> para que los clasificadores implementados sepan discriminar de formas más compleja.</p>
+<p>Hasta aquí lo que quería comentar, hay muchísima documentación sobre todo lo que he ido contando y he intentado enlazarlo y simplificarlo en la medida de lo posible para que sea comprensible. En próximas partes comentaré la implementación de máquinas de vectores de soporte <a href="https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte">SVM</a>, <a href="https://en.wikipedia.org/wiki/Support_vector_machine#Soft-margin">con</a> y sin márgenes blandos (para ver una introducción la clasificación no lineal) y la aplicación de funciones <a href="https://en.wikipedia.org/wiki/Positive-definite_kernel">kernel</a> para que los clasificadores implementados sepan discriminar de formas más complejas.</p>
 
 <p>Dejo el <a href="https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1">código disponible hasta el momento</a> en el <a href="https://github.com/Indeseables/indeseables.github.io">repositorio</a>.</p>
 
@@ -350,6 +350,15 @@ Clase de [1,0,5]: -1
 <div class="related">
   <h2>Related Posts</h2>
   <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2016/03/27/Redes-neuronales-y-Autoencoders/">
+            Redes neuronales y autoencoders.
+            <small>27 Mar 2016</small>
+          </a>
+        </h3>
+      </li>
     
       <li>
         <h3>

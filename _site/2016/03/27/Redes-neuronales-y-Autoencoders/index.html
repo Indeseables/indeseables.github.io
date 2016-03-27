@@ -11,7 +11,7 @@
 
   <title>
     
-      Indeseabλes &middot; 
+      Redes neuronales y autoencoders. &middot; Indeseabλes
     
   </title>
 
@@ -90,18 +90,10 @@
       </div>
 
       <div class="container content">
-        <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//2016/03/27/Redes-neuronales-y-Autoencoders/">
-        Redes neuronales y autoencoders.
-      </a>
-    </h1>
-
-    <span class="post-date">27 Mar 2016</span>
-
-    <p>Si se ha visto el <a href="http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">post</a> anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">Perceptron dispuestos en cascada</a>. 
+        <div class="post">
+  <h1 class="post-title">Redes neuronales y autoencoders.</h1>
+  <span class="post-date">27 Mar 2016</span>
+  <p>Si se ha visto el <a href="http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">post</a> anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">Perceptron dispuestos en cascada</a>. 
 ___
 ### Redes neuronales
 También llamadas redes neuronales artificiales o procesado distribuido y paralelo, se basan en el mismo principio que Perceptron, funciones discriminantes lineales (<a href="https://i.gyazo.com/f895cd0241ad3206721e1444907b4b02.png">FDL</a>) que se determinan mediante el aprendizaje de un vector de parámetros <em>θ</em> resolviendo un problema de optimización en el que se pretende obtener el vector <em>θ</em> que minimice el error cuadrático entre la salida esperada de las muestras de entrenamiento y la salida obtenida por la red neuronal.Este vector de parámetros <em>θ</em>, hace referencia al peso de las conexiones entre las neuronas de la red neuronal (los pesos asociados a cada una de las aristas de la red de la <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">imagen</a>) y es una medida de la complejidad de la red.</p>
@@ -411,295 +403,32 @@ Optimization terminated successfully.
 
 <p><em>Autor: <a href="https://github.com/overxfl0w">J.G</a></em></p>
 
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">
-        Implementación alternativa de algoritmos de aprendizaje (parte I).
-      </a>
-    </h1>
-
-    <span class="post-date">25 Mar 2016</span>
-
-    <p>Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería <em>Scipy</em> y más concretamente, su módulo <em>optimize</em> (tenía pensado usar <a href="https://www.mcs.anl.gov/petsc/">Petsc</a>, pero no he conseguido convertir matrices a su formato y me ha complicado las cosas).</p>
-
-<p>Dicho módulo nos permite realizar varios métodos de optimización y búsqueda de raices de funciones (nos centraremos en la parte de optimización de momento y tal vez vea optimizaciones alternativas p.e. usando <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo">métodos iterativos</a> de <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo#M.C3.A9todos_del_subespacio_de_Krylov">Krylov</a>, que son de mucha utilidad a la hora de resolver sistemas muy grandes de forma eficiente) como pueden ser (no comentaré todos los <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">métodos</a> de cada tipo de optimización):</p>
-
-<ul>
-  <li>
-    <p>Optimización local: permite minimizar (y si cambiamos de signo maximizar) <a href="https://es.wikipedia.org/wiki/Optimizaci%C3%B3n_%28matem%C3%A1tica%29">funciones</a>, variando una serie de parámetros del optimizador como el método de optimización local empleado (Gradiente conjugado, BFGS, Método de Powell …). Al ser un <a href="(https://en.wikipedia.org/wiki/Local_search_%28optimization%29)">método local</a> , puede quedar atascado en mínimos locales por lo que, si la solución obtenida no es suficientemente buena, se pueden obtener nuevas soluciones de varias formas p e. reinicialización aleatoria, son computacionalmente baratos.</p>
-  </li>
-  <li>
-    <p>Optimización de ecuaciones: entre los que se puede encontrar el método de <a href="https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados">mínimos cuadrados</a> ampliamente conocidos en <a href="https://es.wikipedia.org/wiki/Regresi%C3%B3n_%28estad%C3%ADstica%29">regresión</a> y optimización</p>
-  </li>
-  <li>
-    <p>Optimizaciones globales: al contrario que los métodos locales, éstos nos proporcionan soluciones óptimas pero son más costosos ya que requieren comprobar el espacio de soluciones completo (a no ser que se disponga de información que lo acote).</p>
-  </li>
-  <li>
-    <p>Ajustes de funciones (<em>fitting</em>): dada una función <em>f</em>, encontrar una función <em>g</em> que la <a href="https://www.google.es/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=6&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjL37eA69rLAhVCXBoKHUkFBCkQFghDMAU&amp;url=http%3A%2F%2Fwww.ugr.es%2F~lorente%2FAPUNTESMNM%2Fcapitulo5.pdf&amp;usg=AFQjCNEXrijmpFscjHqL7WAoFqF_IXMoJA">aproxime</a>, solo está disponible el método <a href="https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados">mínimos cuadrados</a> para aproximación discreta.</p>
-  </li>
-</ul>
-
-<p>En esta primera entrada comentaré la idea general e implementación de 2 algoritmos de aprendizaje básicos (ambos redes neuronales de una única capa): <a href="https://es.wikipedia.org/wiki/Perceptr%C3%B3n"><em>Perceptron</em></a> y <a href="https://es.wikipedia.org/wiki/Adaline"><em>Adaline</em></a> se verán sus versiones <a href="https://es.wikipedia.org/wiki/Clasificador_lineal">lineales</a> (aunque es fácilmente generalizable a funciones no lineales usando <a href="https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte#Funci.C3.B3n_Kernel"><em>kernels</em></a> en cierta parte del código que comentaré) haciendo uso de técnicas de optimización sin restricciones (en la siguiente entrada se verá como añadir restricciones y cotas). Por ello, para comprobar los resultados del entrenamiento y del test se utilizará un conjunto de muestras que variará dependiendo del algoritmo que esté comentando.</p>
-
-<hr />
-
-<h2 id="perceptron">Perceptron</h2>
-<p>Es un clasificador (en 2 clases {+1,-1} es el que trataremos) basado en funciones discriminantes lineales, el objetivo es encontrar un vector <em>θ</em> que defina un <a href="https://es.wikipedia.org/wiki/Hiperplano">hiperplano</a> separador p.e. una recta en 2D, que separe <a href="http://photos1.blogger.com/blogger/1013/1515/320/SVMSeparacion.jpg">correctamente</a> el conjunto de muestras en 2 clases. Esto equivale a resolver un sistema de <em>N</em> inecuaciones <strong>c</strong>·<strong>θ</strong>·<strong>x</strong>≥<strong>0</strong> (nótese la notación matricial, si se hace vector a vector, equivaldría a resolver <a href="https://i.gyazo.com/e769171d48212f1ccd7d820184b9684d.png">ésto</a>)</p>
-
-<p>Ese sistema de <em>N</em> inecuaciones con |θ| incógnitas es demasiado costoso de resolver mediante métodos directos (aunque podríamos haber empleado otros <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo">métodos iterativos</a> como los que iba a utilizar en <a href="https://www.mcs.anl.gov/petsc/">Petsc</a>) y por ello, se opta por minimizar ésta <a href="https://i.gyazo.com/5cccecf3f307437adb63609a97f0ed40.png">función</a> ( suma de las <a href="https://i.gyazo.com/2a4626fe88c672270a4f180f6943aa9b.png">distancias</a> de cada muestra mal clasificada al hiperplano separador) equivalente a resolver el sistema original.
-Este proceso se suele hacer de forma iterativa, calculando cada vez la suma de las distancias mencionada antes, modificando de acuerdo a esas distancias el valor de <em>θ</em> y repitiendo el proceso hasta que <em>θ</em> converge,varía muy poco, se acaban las iteraciones … .Sin embargo, podemos ahorrarnos la implementación del método iterativo haciendo uso del <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">módulo</a> comentado antes, configurando correctamente la función objetivo a optimizar, las cotas, las restricciones (en entradas posteriores se verán, cuando se implementen máquinas de vectores de soporte <a href="https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte">SVM</a>), la tolerancia etc. Otra cosa a tener en cuenta es que Perceptron siempre converge si las muestras son linealmente separables.</p>
-
-<p>El código es el siguiente:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c">#</span>
-<span class="c">#  Perceptron.py</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">Utils</span> <span class="kn">import</span> <span class="n">MatLoad</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span> 
-    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">theta</span><span class="o">*</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">res</span><span class="o">&gt;=+</span><span class="mi">0</span><span class="p">,</span><span class="n">Y</span><span class="o">&gt;=+</span><span class="mi">0</span><span class="p">):</span> <span class="k">return</span> <span class="o">-</span><span class="mi">9999999</span>
-    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">res</span><span class="p">[</span><span class="n">res</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-
-<span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span>
-    <span class="n">XROWS</span><span class="p">,</span><span class="n">XCOLS</span><span class="p">,</span><span class="n">YROWS</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">),</span><span class="n">method</span><span class="o">=</span><span class="s">"CG"</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">)</span><span class="o">&gt;=+</span><span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
-<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">MatLoad</span><span class="p">(</span><span class="s">"X.np"</span><span class="p">);</span> 
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">MatLoad</span><span class="p">(</span><span class="s">"Y.np"</span><span class="p">);</span> 
-    <span class="n">XROWS</span><span class="p">,</span><span class="n">XCOLS</span><span class="p">,</span><span class="n">YROWS</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.0003</span><span class="p">,</span><span class="o">-</span><span class="mf">1.54</span><span class="p">,</span><span class="o">-</span><span class="mf">3.78</span><span class="p">])</span>
-    <span class="n">res</span>  <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
-    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s"> Detalles de convergencia </span><span class="se">\n</span><span class="s">"</span>
-    <span class="k">print</span> <span class="n">res</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
-    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s">Clase de [1,0,5]:"</span><span class="p">,</span><span class="n">classify</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span>
-
-</code></pre>
 </div>
 
-<p>Para la implementación, se han desarrollado únicamente 4 funciones:</p>
-
-<ul>
-  <li>
-    <p><em>f</em>: es la función objetivo que he mencionado <a href="https://gyazo.com/5cccecf3f307437adb63609a97f0ed40">antes</a>, se pasará como parámetro al solver de scipy para minimizar. Se hace un producto vector-matriz para calcular la parte <strong>c</strong>·<strong>θ</strong>·<strong>x</strong> y se comprueba si todas las muestras están bien clasificadas, si lo están queremos que el proceso finalice luego devolvemos una distancia muy pequeña, si no lo están devolvemos la suma de las distancias de las muestras mal clasificadas al hiperplano separador.</p>
-  </li>
-  <li>
-    <p><em>fit</em>: se encarga de llamar al optimizador de <em>Scipy</em> <em>minimize</em>, utilizando el método del <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_del_gradiente_conjugado">gradiente conjugado</a> para entrenar el sistema. Podemos hacer uso de todos los demás <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">métodos</a> implementados en la librería para el optimizador local <em>minimize</em>.</p>
-  </li>
-  <li>
-    <p><em>classify</em>: una vez entrenado el sistema (obtenido el vector <em>θ</em> adecuado), dada una nueva muestra <em>x</em> permite clasificarla en la clase correcta según <em>θ</em>. Para ello se calcula el producto escalar <em>θ</em>·<em>x</em> y se comprueba si está a un lado del espacio definido por el hiperplano separador o al otro ( <em>θ</em>·<em>x</em>≥0 , <em>θ</em>·<em>x</em>≤0 ).</p>
-  </li>
-  <li>
-    <p><em>predict</em>: dada una muestra <em>x</em> permite hacer regresión una vez el sistema ha sido entrenado. Con ello, se predice el valor de <em>x</em> dado el vector de parámetros <em>θ</em>, en función del resultado del producto escalar <em>θ</em>·<em>x</em>.</p>
-  </li>
-</ul>
-
-<p>Una vez se han definido las funciones necesarias, solo queda ver cómo se comporta el sistema entrenándolo y probándolo. Para ello, se ha hecho uso de un conjunto de muestras de juguete (en notación homogénea) junto con sus salidas, diseñado a mano:</p>
-
-<p>Muestras de entrenamiento: 3 muestras de 3 dimensiones dispuestas por columnas.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>nº</th>
-      <th>x1</th>
-      <th>x2</th>
-      <th>x3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>d1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>d2</td>
-      <td>0</td>
-      <td>2</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <td>d3</td>
-      <td>5</td>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Salidas: salidas (clases) esperadas para cada una de las 3 muestras (+1 o -1):</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>nº</th>
-      <th>clase</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>x1</td>
-      <td>-1</td>
-    </tr>
-    <tr>
-      <td>x2</td>
-      <td>+1</td>
-    </tr>
-    <tr>
-      <td>x3</td>
-      <td>+1</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Dibujad las 2 últimas dimensiones de las muestras -d1 y d3 de la primera tabla- en un eje de coordenadas y veréis como encontráis rápidamente infinitas soluciones que separen las muestras en función de la salida (+1 o -1). Eso mismo hará el sistema, dar una posible solución de todas los hiperplanos (rectas en este caso) que sirven para separar las clases (en entradas posteriores, cuando se traten SVM, se podrá elegir entre el mejor de todos aquellos hiperplanos separadores según un criterio de distancia entre clases e hiperplano).</p>
-
-<p>Con ello (en el <em>main</em> del <em>script</em>) partimos de un vector <em>θ</em> aleatorio (se suele inicializar a 0) y lo ajustamos mediante la función <em>fit</em> para que clasifique correctamente las muestras, minimizando la función objetivo mencionada antes. Una vez finalice, obtenemos detalles sobre la finalización del proceso del <em>solver</em> (valor de <em>f</em> final, nº iteraciones realizadas, vector <em>θ</em>, etc) y la salida de una muestra a clasificar [1,0,5], que corresponde al conjunto de muestras de entrenamiento y conocemos su clase (si hemos dibujado las coordenadas como dije) : -1. La salida del script ejemplo es:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>Detalles de convergencia
- fun: 0.0
- jac: array([ 0.,  0.,  0.])
- message: 'Optimization terminated successfully.'
-    nfev: 10
-     nit: 1
-    njev: 2
-  status: 0
- success: True
-       x: array([ 1.9997,  4.46  , -0.78  ])
-
-Clase de [1,0,5]: -1
-</code></pre>
-</div>
-
-<p>Que coincide con lo que esperábamos, observando que el método ha convergido en 2 iteraciones a la solución <em>θ</em> = [ 1.9997,  4.46  , -0.78  ], además ha clasificado la muestra [1,0,5] que efectivamente pertenece a la clase -1.</p>
-
-<hr />
-
-<h2 id="adaline">Adaline</h2>
-
-<p>Adaline es una red neuronal de una capa utilizada en principalmente en regresión lineal. En este caso, el objetivo del aprendizaje es encontrar un vector <em>θ</em> con el que se <a href="https://i.gyazo.com/1b7efc98d8add5937953e722f18a57af.png">minimice la diferencia entre <em>θ</em>·<em>x</em> y la salida esperada <em>y</em> para toda muestra de entrenamiento</a>. Del mismo modo que en Perceptron, se minimizará esta <a href="https://i.gyazo.com/27cfe2a3959b5475029968f5fcc21b12.png">función</a> equivalente a resolver el sistema planteado (ahora no se tienen en cuenta solo las mal clasificadas, si no que se quiere minimizar las diferencias entre la RHS y la LHS del todo el conjunto de ecuaciones).En este caso no he encontrado ningún teorema sobre la convergencia excepto <a href="https://i.gyazo.com/8abc9636f7f210ee276d53e4c043b794.png">éste</a>.</p>
-
-<p>El código es el siguiente:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-<span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c">#</span>
-<span class="c">#  Adaline.py</span>
-
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">Utils</span> <span class="kn">import</span> <span class="n">MatLoad</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span> 
-    <span class="n">res</span> <span class="o">=</span> <span class="p">((</span><span class="n">theta</span><span class="o">*</span><span class="n">X</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="o">-</span><span class="n">Y</span><span class="p">))</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">res</span><span class="p">)</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)))</span>
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
     
-
-<span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span>
-    <span class="n">XROWS</span><span class="p">,</span><span class="n">XCOLS</span><span class="p">,</span><span class="n">YROWS</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">))</span>
+      <li>
+        <h3>
+          <a href="/2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">
+            Implementación alternativa de algoritmos de aprendizaje (parte I).
+            <small>25 Mar 2016</small>
+          </a>
+        </h3>
+      </li>
     
-<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
-
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">MatLoad</span><span class="p">(</span><span class="s">"X.np"</span><span class="p">);</span> 
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">MatLoad</span><span class="p">(</span><span class="s">"Y.np"</span><span class="p">);</span> 
-    <span class="n">XROWS</span><span class="p">,</span><span class="n">XCOLS</span><span class="p">,</span><span class="n">YROWS</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">XROWS</span><span class="p">)</span>
-    <span class="n">res</span>  <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
-    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s"> Detalles de convergencia </span><span class="se">\n</span><span class="s">"</span>
-    <span class="k">print</span> <span class="n">res</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
-    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s">Clase de [1,0,5]:"</span><span class="p">,</span><span class="n">classify</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span>
+      <li>
+        <h3>
+          <a href="/2016/03/24/WhatsIndeseables/">
+            What's Indeseables?
+            <small>24 Mar 2016</small>
+          </a>
+        </h3>
+      </li>
     
-</code></pre>
+  </ul>
 </div>
-
-<p>Es idéntico al del Perceptron, cambiando la función objetivo de <a href="https://i.gyazo.com/5cccecf3f307437adb63609a97f0ed40.png"><em>f</em></a> a <a href="https://i.gyazo.com/27cfe2a3959b5475029968f5fcc21b12.png"><em>f’</em></a>. Nótese que la minimización de las diferencias entre la LHS y RHS no garantiza resultados correctos en clasificación donde normalmente el conjunto de salidas posibles <em>Y</em> es discreto.</p>
-
-<p>La salida del script es muy similar a la del caso anterior:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
- Detalles de convergencia
-
-      fun: 7.76245804938178e-15
- hess_inv: array([[ 4.99999999, -1.        , -1.        ],
-       [-1.        ,  0.26      ,  0.18      ],
-       [-1.        ,  0.18      ,  0.24      ]])
-      jac: array([ -1.30741529e-10,   3.51008111e-11,   1.42319490e-11])
-  message: 'Optimization terminated successfully.'
-     nfev: 40
-      nit: 5
-     njev: 8
-   status: 0
-  success: True
-        x: array([ 1.00000026,  0.19999994, -0.40000006])
-
-Clase de [1,0,5]: -1
-
-</code></pre>
-</div>
-
-<p>El conjunto de muestras es el mismo que en el caso anterior, sin embargo, se puede observar que el vector <em>θ</em> difiere del obtenido en Perceptron ya que al modificar la función objetivo se resuelve un problema diferente (éste, se podría haber resuelto utilizando la función <a href="http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq"><em>leastsq</em></a> del módulo <em>optimize</em>).</p>
-
-<hr />
-
-<p>Hasta aquí lo que quería comentar, hay muchísima documentación sobre todo lo que he ido contando y he intentado enlazarlo y simplificarlo en la medida de lo posible para que sea comprensible. En próximas partes comentaré la implementación de máquinas de vectores de soporte <a href="https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte">SVM</a>, <a href="https://en.wikipedia.org/wiki/Support_vector_machine#Soft-margin">con</a> y sin márgenes blandos (para ver una introducción la clasificación no lineal) y la aplicación de funciones <a href="https://en.wikipedia.org/wiki/Positive-definite_kernel">kernel</a> para que los clasificadores implementados sepan discriminar de formas más complejas.</p>
-
-<p>Dejo el <a href="https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1">código disponible hasta el momento</a> en el <a href="https://github.com/Indeseables/indeseables.github.io">repositorio</a>.</p>
-
-<p>Cualquier comentario:</p>
-
-<ul>
-  <li>Email: indeseables [at] gmail [dot] com</li>
-  <li>Twitter: <a href="http://twitter.com/">@indeseables</a></li>
-  <li>Issues: <a href="https://github.com/Indeseables/indeseables.github.io/issues">#Issues</a></li>
-</ul>
-
-<p><strong>Autor:</strong> <a href="https://github.com/overxfl0w"><em>J.G</em></a></p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//2016/03/24/WhatsIndeseables/">
-        What's Indeseables?
-      </a>
-    </h1>
-
-    <span class="post-date">24 Mar 2016</span>
-
-    <p><a href="http://indeseables.github.io/">Indeseables</a> es un grupo de …</p>
-
-  </div>
-  
-</div>
-
-<div class="pagination">
-  
-    <span class="pagination-item older">Older</span>
-  
-  
-    <span class="pagination-item newer">Newer</span>
-  
-</div>
-
 
       </div>
     </div>
