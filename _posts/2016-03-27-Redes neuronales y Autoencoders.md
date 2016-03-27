@@ -306,6 +306,7 @@ Con esto ha quedado una entrada que recoge una pequeña parte de la teoría de r
 
 En la siguiente entrada continuaré las entregas de implementaciones alternativas explicando SVM y funciones kernel. 
 
+He dejado todo el código nuevo en el [repositorio](https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_2).
 
 Cualquier comentario:
 
