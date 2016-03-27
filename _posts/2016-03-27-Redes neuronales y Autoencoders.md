@@ -219,7 +219,7 @@ if __name__ == "__main__":
 ```
 
 
-En el script se ha entrenado primero el *autoencoder* con el conjunto de muestras que he mencionado antes y después se ha procedido a cifrar el bloque de 2B "ho" (```0110100001101111```, y en notación homogénea ```10110100001101111```), los resultados que se obtienen en tras la ejecución del script son:
+En el script se ha entrenado primero el *autoencoder* con el conjunto de muestras que he mencionado antes y después se ha procedido a cifrar el bloque de 2B "ho" (```0110100001101111```, y en notación homogénea ```10110100001101111```), los resultados que se obtienen tras la ejecución del script son:
 
 
 ```
@@ -292,7 +292,7 @@ Podemos transmitir ese cifrado a través de un canal inseguro, habiendo comunica
  
 Si son valores absolutos p.e. 0 y 1, posiblemente no se lleguen a alcanzar nunca debido a que la máxima precisión en coma flotante son 16 dígitos correctos, sin embargo se obtienen valores que prácticamente se corresponden con los valores extremos. En este caso: ``` [0,1,1,0,1,0,0,0,0,1,1,0,1,1,1,1] ``` que se corresponde con el bloque de 2B original: ```0110100001101111```
 
-De éste modo, podríamos cifrar mensajes completos segmentándolos en bloques de 2B consecutivos e ir cifrando bloque a bloque mediante modos de operación encadenados o no). Pero si nos fijamos, no solo hemos cifrado, si no que también hemos reducido la información a transmitir (aunque no del todo porque en este ejemplo, al ser la representación discreta y binaria se podría enviar como bloques de bits concatenados y al cifrar de esta manera obtenemos un conjunto de reales que ocupan un mayor número de bytes) pasando de 16 elementos (2B por bloque) a 9 elementos. ¿por qué ha pasado ésto?-
+De éste modo, podríamos cifrar mensajes completos segmentándolos en bloques de 2B consecutivos e ir cifrando bloque a bloque mediante modos de operación (encadenados o no). Pero si nos fijamos, no solo hemos cifrado, si no que también hemos reducido la información a transmitir (aunque no del todo porque en este ejemplo, al ser la representación discreta y binaria se podría enviar como bloques de bits concatenados y al cifrar de esta manera obtenemos un conjunto de reales que ocupan un mayor número de bytes) pasando de 16 elementos (2B por bloque) a 9 elementos. ¿por qué ha pasado ésto?-
 
 ___
 
