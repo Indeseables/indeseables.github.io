@@ -227,7 +227,9 @@ Hay una función de orden superior muy conocida en haskell: `fix` ó **combinado
 * Aplica reducción y conversión a: `(λf.λx.f(fx))(λx.x+x)n`
 * Usando funciones de orden superior, preferiblemente, usando lambda expresiones, construye tu propia "Calculadora funcional" con las operaciones básicas de : ``suma``, ``resta``, ``multiplicación`` y ``divisiòn``
 
-(Las soluciones las podeís encontrar en el github: ), no las mireis sin haberlo intentado antes solos...
+## Soluciones
+* Lambda cálculo - solución: [Github: Imágen](https://github.com/Indeseables/indeseables.github.io/blob/master/_codigos/entrada_funcional1/555df00550955abc13e4cec1400672c7.png)
+* Calculadora funcional: [Github: Haskell](https://github.com/Indeseables/indeseables.github.io/blob/master/_codigos/entrada_funcional1/calculator.hs) [Github: C#](https://github.com/Indeseables/indeseables.github.io/blob/master/_codigos/entrada_funcional1/calculator.cs)
 
 ## Siguiente post
 * **Cláusulas, Currificación y Aplicación Parcial**
