@@ -189,7 +189,7 @@ C# lanzó una buena solución al problema pero la sintaxis seguia siendo dificil
 //El ejemplo de función de orden superior que veiamos antes
 Func<Func<int, int>, int, int> dobleAplicacion = (f, n) => f(f(n));
 Console.WriteLine(dobleAplicacion(n => n+n, 3));
-
+```
 //Convertimos el ejemplo de los delegados anónimos
 Persona[] personas = ListadoPersonas.CrearPersonasAleatorias();
 Persona[] mayoresEdad = Array.FindAll(personas, persona => persona.Edad >= 18);
@@ -202,7 +202,7 @@ Prelude> (\f n -> f (f n)) (\x -> x+x) 3
 12
 ```
 Haskell tiene inferencia de tipos, pero tiene la característica de poder definir una cabecera con los tipos
-```
+```Haskell
 factorial :: Integer -> Integer
 factorial n = product [1..n]
 ```
