@@ -4,7 +4,7 @@
  <title>Indeseabλes</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-03-27T08:34:00+02:00</updated>
+ <updated>2016-03-27T22:53:02+02:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
    <name>Indeseables</name>
@@ -27,8 +27,12 @@
 &lt;p&gt;Podemos distinguir 2 aspectos de dichas redes:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Topología: hace referencia a la &lt;a href=&quot;https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png&quot;&gt;estructura de la red&lt;/a&gt;. Definimos una capa como un conjunto de neuronas en un mismo nivel (no hay conexiones entre ellas) y llamaremos a la primera capa (la de las muestras &lt;em&gt;{x1,x2,…,xn}&lt;/em&gt;, capa de salida a la última capa y capas ocultas a todas las capas intermedias.&lt;/li&gt;
-  &lt;li&gt;Dinámica: describe como fluye la información a través de la red neuronal p.e. &lt;a href=&quot;https://i.gyazo.com/3a8b0706c7ce5dfb25cebda4edf6ad11.png&quot;&gt;para el caso de la topología anterior&lt;/a&gt;. Se puede observar como, para cada neurona &lt;em&gt;i&lt;/em&gt; de cada capa (oculta y de salida), se calcula su salida en función de los pesos de las aristas que alcanzan a &lt;em&gt;i&lt;/em&gt; y del valor de las neuronas &lt;em&gt;j&lt;/em&gt; de la capa anterior que alcanzan a &lt;em&gt;i&lt;/em&gt; a través de &lt;em&gt;θij&lt;/em&gt; aplicando una función &lt;em&gt;g&lt;/em&gt; al resultado obtenido (este tipo de redes neuronales se llaman feed-forward, en las solo hay conexiones hacia delante, en concreto, el tipo de perceptron multicapa que comentamos es un caso particular de red feed-forward donde solo hay conexiones a neuronas de la capa siguiente) algunos ejemplos de funciones de este tipo son &lt;a href=&quot;https://i.gyazo.com/24422f154964f9b4f08ecd6ca45181a6.png&quot;&gt;estos&lt;/a&gt;. Hay toda una historia asociada a éstas funciones, pero sólo considerad que éstas funciones se utilizan para que la red neuronal pueda aprender fronteras de decisión más complejas.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Topología: hace referencia a la &lt;a href=&quot;https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png&quot;&gt;estructura de la red&lt;/a&gt;. Definimos una capa como un conjunto de neuronas en un mismo nivel (no hay conexiones entre ellas) y llamaremos a la primera capa (la de las muestras &lt;em&gt;{x1,x2,…,xn}&lt;/em&gt;, capa de salida a la última capa y capas ocultas a todas las capas intermedias.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Dinámica: describe como fluye la información a través de la red neuronal p.e. &lt;a href=&quot;https://i.gyazo.com/3a8b0706c7ce5dfb25cebda4edf6ad11.png&quot;&gt;para el caso de la topología anterior&lt;/a&gt;. Se puede observar como, para cada neurona &lt;em&gt;i&lt;/em&gt; de cada capa (oculta y de salida), se calcula su salida en función de los pesos de las aristas que alcanzan a &lt;em&gt;i&lt;/em&gt; y del valor de las neuronas &lt;em&gt;j&lt;/em&gt; de la capa anterior que alcanzan a &lt;em&gt;i&lt;/em&gt; a través de &lt;em&gt;θij&lt;/em&gt; aplicando una función &lt;em&gt;g&lt;/em&gt; al resultado obtenido (este tipo de redes neuronales se llaman feed-forward, en las solo hay conexiones hacia delante, en concreto, el tipo de perceptron multicapa que comentamos es un caso particular de red feed-forward donde solo hay conexiones a neuronas de la capa siguiente) algunos ejemplos de funciones de este tipo son &lt;a href=&quot;https://i.gyazo.com/24422f154964f9b4f08ecd6ca45181a6.png&quot;&gt;estos&lt;/a&gt;. Hay toda una historia asociada a éstas funciones, pero sólo considerad que éstas funciones se utilizan para que la red neuronal pueda aprender fronteras de decisión más complejas.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Las redes neuronales pueden aplicarse tanto a regresión (para lo que fueron concebidas) como a clasificación, donde cualquier frontera de decisión basada en trozos de hiperplanos se puede aproximar con un perceptron multicapa de este estilo. Además, pueden ser empleadas tanto en &lt;a href=&quot;https://es.wikipedia.org/wiki/Aprendizaje_supervisado&quot;&gt;aprendizaje supervisado&lt;/a&gt;, como en &lt;a href=&quot;https://es.wikipedia.org/wiki/Aprendizaje_no_supervisado&quot;&gt;aprendizaje no supervisado&lt;/a&gt; (e.g. autoencoders que veremos en el próximo apartado)&lt;/p&gt;
@@ -123,10 +127,18 @@
 &lt;p&gt;En el ejemplo se puede ver como se carga el fichero que tiene las muestras &lt;em&gt;X&lt;/em&gt; y el que tiene las salidas de dichas muestras &lt;em&gt;Y&lt;/em&gt; (la salida de cada muestra, ahora es un conjunto de valores que representan el valor esperado en cada una de las neuronas de salida). Después se define una red neuronal especificando el número de neuronas por capa, en este caso, una red con 4 capas (las de entrada y salida y 2 capas ocultas), donde:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;La capa 0, de entrada tiene tantas neuronas como dimensiones tienen las muestras.&lt;/li&gt;
-  &lt;li&gt;La capa 1, (1º capa oculta) tiene 4 neuronas (en el código son 5 porque a las capas ocultas hay que sumarle 1, debido a la neurona de bias (&lt;em&gt;+1&lt;/em&gt;) que representa el término independiente en la combinación lineal que define la FLD (en la capa de entrada, la unidad de bias viene representada en las muestras al ponerlas en notación homogénea - poniendo un 1 en la primera posición - y en la capa de salida no hay bias).&lt;/li&gt;
-  &lt;li&gt;La capa 2 (2º capa oculta) tiene 3 neuronas (en el código 4 por la razón comentada antes).&lt;/li&gt;
-  &lt;li&gt;La capa 3, capa de salida tiene tantas neuronas como dimensiones tiene el conjunto de salida esperado (clases en clasificación o nº dimensiones en regresión).&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;La capa 0, de entrada tiene tantas neuronas como dimensiones tienen las muestras.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;La capa 1, (1º capa oculta) tiene 4 neuronas (en el código son 5 porque a las capas ocultas hay que sumarle 1, debido a la neurona de bias (&lt;em&gt;+1&lt;/em&gt;) que representa el término independiente en la combinación lineal que define la FLD (en la capa de entrada, la unidad de bias viene representada en las muestras al ponerlas en notación homogénea - poniendo un 1 en la primera posición - y en la capa de salida no hay bias).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;La capa 2 (2º capa oculta) tiene 3 neuronas (en el código 4 por la razón comentada antes).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;La capa 3, capa de salida tiene tantas neuronas como dimensiones tiene el conjunto de salida esperado (clases en clasificación o nº dimensiones en regresión).&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;La salida del script con &lt;a href=&quot;https://i.gyazo.com/12a7773066427859ab109f9c0b2b9e2b.png&quot;&gt;X&lt;/a&gt;, &lt;a href=&quot;https://i.gyazo.com/f01eb26b0965ea40a8eda8a3250a2b29.png&quot;&gt;Y&lt;/a&gt; (muestras y salidas dispuestas por columnas) es la siguiente:&lt;/p&gt;
@@ -188,8 +200,12 @@ Regresion con la muestra [1,-4,-4]:  [[-0.50000098]
 &lt;p&gt;Si nos fijamos, cuando se entrene la red neuronal de la &lt;a href=&quot;https://rubenlopezg.files.wordpress.com/2014/04/sparse-autoencoder2.png&quot;&gt;figura del autoencoder anterior&lt;/a&gt; se calcularán los pesos de todas las conexiones de la red y con ello, podemos separar la red en 2 subredes:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Subred 1: formada por la capa de entrada y la capa oculta, el resultado obtenido de esta subred es el valor de las neuronas que forman la capa oculta, donde se habrá obtenido una transformación de las muestras reales a un espacio alternativo. Por esta razón, a esta subred se le llama &lt;em&gt;encoder&lt;/em&gt;.&lt;/li&gt;
-  &lt;li&gt;Subred 2: formada por la capa oculta y la capa de salida, en este caso, partiendo del resultado obtenido en las neuronas de la capa de salida (resultado del encoder) se obtiene el valor de las neuronas de la capa de salida, que recordemos, sus pesos habían sido entrenados (junto con los demás de la red) para reconstruir la entrada de salida. Con ello, podemos obtener a partir del resultado del &lt;em&gt;encoder&lt;/em&gt; el resultado original. Por esta razón, a esta subred se le llama &lt;em&gt;decoder&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Subred 1: formada por la capa de entrada y la capa oculta, el resultado obtenido de esta subred es el valor de las neuronas que forman la capa oculta, donde se habrá obtenido una transformación de las muestras reales a un espacio alternativo. Por esta razón, a esta subred se le llama &lt;em&gt;encoder&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Subred 2: formada por la capa oculta y la capa de salida, en este caso, partiendo del resultado obtenido en las neuronas de la capa oculta en el paso anterior (resultado del encoder) se obtiene el valor de las neuronas de la capa de salida, que recordemos, sus pesos habían sido entrenados (junto con los demás de la red) para reconstruir la entrada de salida. Con ello, podemos obtener a partir del resultado del &lt;em&gt;encoder&lt;/em&gt; el resultado original. Por esta razón, a esta subred se le llama &lt;em&gt;decoder&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Por tanto, como se ha visto, al ser el &lt;em&gt;autoencoder&lt;/em&gt; simple un caso particular de red neuronal, podemos hacer uso del script implementado en el apartado anterior, que nos permite diseñar redes neuronales y aprender los pesos que minimicen el error cuadrático medio. Consideraré 2 ejemplos de uso de estos &lt;em&gt;autoencoder&lt;/em&gt;, el cifrado de bloques de texto y la compresión.&lt;/p&gt;
@@ -234,7 +250,7 @@ Regresion con la muestra [1,-4,-4]:  [[-0.50000098]
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;En el script se ha entrenado primero el &lt;em&gt;autoencoder&lt;/em&gt; con el conjunto de muestras que he mencionado antes y después se ha procedido a cifrar el bloque de 2B “ho” (&lt;code class=&quot;highlighter-rouge&quot;&gt;0110100001101111&lt;/code&gt;, y en notación homogénea &lt;code class=&quot;highlighter-rouge&quot;&gt;10110100001101111&lt;/code&gt;), los resultados que se obtienen en tras la ejecución del script son:&lt;/p&gt;
+&lt;p&gt;En el script se ha entrenado primero el &lt;em&gt;autoencoder&lt;/em&gt; con el conjunto de muestras que he mencionado antes y después se ha procedido a cifrar el bloque de 2B “ho” (&lt;code class=&quot;highlighter-rouge&quot;&gt;0110100001101111&lt;/code&gt;, y en notación homogénea &lt;code class=&quot;highlighter-rouge&quot;&gt;10110100001101111&lt;/code&gt;), los resultados que se obtienen tras la ejecución del script son:&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
 Optimization terminated successfully.
@@ -306,7 +322,7 @@ Optimization terminated successfully.
 
 &lt;p&gt;Si son valores absolutos p.e. 0 y 1, posiblemente no se lleguen a alcanzar nunca debido a que la máxima precisión en coma flotante son 16 dígitos correctos, sin embargo se obtienen valores que prácticamente se corresponden con los valores extremos. En este caso: &lt;code class=&quot;highlighter-rouge&quot;&gt;[0,1,1,0,1,0,0,0,0,1,1,0,1,1,1,1]&lt;/code&gt; que se corresponde con el bloque de 2B original: &lt;code class=&quot;highlighter-rouge&quot;&gt;0110100001101111&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;De éste modo, podríamos cifrar mensajes completos segmentándolos en bloques de 2B consecutivos e ir cifrando bloque a bloque mediante modos de operación encadenados o no). Pero si nos fijamos, no solo hemos cifrado, si no que también hemos reducido la información a transmitir (aunque no del todo porque en este ejemplo, al ser la representación discreta y binaria se podría enviar como bloques de bits concatenados y al cifrar de esta manera obtenemos un conjunto de reales que ocupan un mayor número de bytes) pasando de 16 elementos (2B por bloque) a 9 elementos. ¿por qué ha pasado ésto?-&lt;/p&gt;
+&lt;p&gt;De éste modo, podríamos cifrar mensajes completos segmentándolos en bloques de 2B consecutivos e ir cifrando bloque a bloque mediante modos de operación (encadenados o no). Pero si nos fijamos, no solo hemos cifrado, si no que también hemos reducido la información a transmitir (aunque no del todo porque en este ejemplo, al ser la representación discreta y binaria se podría enviar como bloques de bits concatenados y al cifrar de esta manera obtenemos un conjunto de reales que ocupan un mayor número de bytes) pasando de 16 elementos (2B por bloque) a 9 elementos. ¿por qué ha pasado ésto?-&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -318,6 +334,8 @@ Optimization terminated successfully.
 &lt;p&gt;Con esto ha quedado una entrada que recoge una pequeña parte de la teoría de redes neuronales y propone una implementación resolviendo el problema de optimización que caracteriza el aprendizaje en este tipo de redes con métodos diferentes a los convencionales (todos los implementados en el módulo &lt;em&gt;optimize&lt;/em&gt; de &lt;em&gt;Scipy&lt;/em&gt; de ámbito local e.g. gradiente conjugado, L-BFGS, L-BFGS-B, Nelder-Mead etc).&lt;/p&gt;
 
 &lt;p&gt;En la siguiente entrada continuaré las entregas de implementaciones alternativas explicando SVM y funciones kernel.&lt;/p&gt;
+
+&lt;p&gt;He dejado todo el código nuevo en el &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_2&quot;&gt;repositorio&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cualquier comentario:&lt;/p&gt;
 

@@ -13,6 +13,7 @@ También llamadas redes neuronales artificiales o procesado distribuido y parale
 Podemos distinguir 2 aspectos de dichas redes:
 
 * Topología: hace referencia a la [estructura de la red](https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png). Definimos una capa como un conjunto de neuronas en un mismo nivel (no hay conexiones entre ellas) y llamaremos a la primera capa (la de las muestras *{x1,x2,...,xn}*, capa de salida a la última capa y capas ocultas a todas las capas intermedias.
+
 * Dinámica: describe como fluye la información a través de la red neuronal p.e. [para el caso de la topología anterior](https://i.gyazo.com/3a8b0706c7ce5dfb25cebda4edf6ad11.png). Se puede observar como, para cada neurona *i* de cada capa (oculta y de salida), se calcula su salida en función de los pesos de las aristas que alcanzan a *i* y del valor de las neuronas *j* de la capa anterior que alcanzan a *i* a través de *θij* aplicando una función *g* al resultado obtenido (este tipo de redes neuronales se llaman feed-forward, en las solo hay conexiones hacia delante, en concreto, el tipo de perceptron multicapa que comentamos es un caso particular de red feed-forward donde solo hay conexiones a neuronas de la capa siguiente) algunos ejemplos de funciones de este tipo son [estos](https://i.gyazo.com/24422f154964f9b4f08ecd6ca45181a6.png). Hay toda una historia asociada a éstas funciones, pero sólo considerad que éstas funciones se utilizan para que la red neuronal pueda aprender fronteras de decisión más complejas.
 
 Las redes neuronales pueden aplicarse tanto a regresión (para lo que fueron concebidas) como a clasificación, donde cualquier frontera de decisión basada en trozos de hiperplanos se puede aproximar con un perceptron multicapa de este estilo. Además, pueden ser empleadas tanto en [aprendizaje supervisado](https://es.wikipedia.org/wiki/Aprendizaje_supervisado), como en [aprendizaje no supervisado](https://es.wikipedia.org/wiki/Aprendizaje_no_supervisado) (e.g. autoencoders que veremos en el próximo apartado)
@@ -108,8 +109,11 @@ if __name__ == "__main__":
 En el ejemplo se puede ver como se carga el fichero que tiene las muestras *X* y el que tiene las salidas de dichas muestras *Y* (la salida de cada muestra, ahora es un conjunto de valores que representan el valor esperado en cada una de las neuronas de salida). Después se define una red neuronal especificando el número de neuronas por capa, en este caso, una red con 4 capas (las de entrada y salida y 2 capas ocultas), donde:
 
 * La capa 0, de entrada tiene tantas neuronas como dimensiones tienen las muestras.
+
 * La capa 1, (1º capa oculta) tiene 4 neuronas (en el código son 5 porque a las capas ocultas hay que sumarle 1, debido a la neurona de bias (*+1*) que representa el término independiente en la combinación lineal que define la FLD (en la capa de entrada, la unidad de bias viene representada en las muestras al ponerlas en notación homogénea - poniendo un 1 en la primera posición - y en la capa de salida no hay bias).
+
 * La capa 2 (2º capa oculta) tiene 3 neuronas (en el código 4 por la razón comentada antes).
+
 * La capa 3, capa de salida tiene tantas neuronas como dimensiones tiene el conjunto de salida esperado (clases en clasificación o nº dimensiones en regresión).
 
 La salida del script con [X](https://i.gyazo.com/12a7773066427859ab109f9c0b2b9e2b.png), [Y](https://i.gyazo.com/f01eb26b0965ea40a8eda8a3250a2b29.png) (muestras y salidas dispuestas por columnas) es la siguiente:
@@ -172,7 +176,8 @@ La estructura general de un autoencoder es [ésta](https://upload.wikimedia.org/
 Si nos fijamos, cuando se entrene la red neuronal de la [figura del autoencoder anterior](https://rubenlopezg.files.wordpress.com/2014/04/sparse-autoencoder2.png) se calcularán los pesos de todas las conexiones de la red y con ello, podemos separar la red en 2 subredes:
 
 * Subred 1: formada por la capa de entrada y la capa oculta, el resultado obtenido de esta subred es el valor de las neuronas que forman la capa oculta, donde se habrá obtenido una transformación de las muestras reales a un espacio alternativo. Por esta razón, a esta subred se le llama *encoder*.
-* Subred 2: formada por la capa oculta y la capa de salida, en este caso, partiendo del resultado obtenido en las neuronas de la capa de salida (resultado del encoder) se obtiene el valor de las neuronas de la capa de salida, que recordemos, sus pesos habían sido entrenados (junto con los demás de la red) para reconstruir la entrada de salida. Con ello, podemos obtener a partir del resultado del *encoder* el resultado original. Por esta razón, a esta subred se le llama *decoder*
+
+* Subred 2: formada por la capa oculta y la capa de salida, en este caso, partiendo del resultado obtenido en las neuronas de la capa oculta en el paso anterior (resultado del encoder) se obtiene el valor de las neuronas de la capa de salida, que recordemos, sus pesos habían sido entrenados (junto con los demás de la red) para reconstruir la entrada de salida. Con ello, podemos obtener a partir del resultado del *encoder* el resultado original. Por esta razón, a esta subred se le llama *decoder*
 
 Por tanto, como se ha visto, al ser el *autoencoder* simple un caso particular de red neuronal, podemos hacer uso del script implementado en el apartado anterior, que nos permite diseñar redes neuronales y aprender los pesos que minimicen el error cuadrático medio. Consideraré 2 ejemplos de uso de estos *autoencoder*, el cifrado de bloques de texto y la compresión.
 
