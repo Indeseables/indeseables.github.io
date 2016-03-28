@@ -27,3 +27,8 @@ author:
 
 # Custom vars
 version:             
+
+pages_list:
+    About: '/about'
+    Entradas: '/archive'
+    RSS: '/atom.xml'

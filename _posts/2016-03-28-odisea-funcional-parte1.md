@@ -1,7 +1,9 @@
 ---
 layout: post
 title: Odisea Funcional (Parte 1)
+comments: True
 ---
+
 
 Un título muy acertado pues estudiar el paradigma funcional es cuanto menos una odisea, **preciosa o no dependiendo de a quíen preguntes.**  
 
@@ -247,3 +249,7 @@ Apuntes de Tecnología y Paradigmas de la programación escritos por: **Esteban 
 * Perfil de Github: [Click para ir al sitio](http://github.com/sankosk)
 * Twitter: @SankoSK
 * Perfil de Linkedin: [Click para ir al sitio](https://www.linkedin.com/in/esteban-montes-morales-59257366)
+
+___
+
+{% include twitter_plug.html %}

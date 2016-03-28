@@ -1,8 +1,10 @@
 ---
 layout: post
 title: Implementación alternativa de algoritmos de aprendizaje (parte I).
+comments: True
 ---
 
+{% include twitter_plug.html %}
 Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería *Scipy* y más concretamente, su módulo *optimize* (tenía pensado usar [Petsc](https://www.mcs.anl.gov/petsc/), pero no he conseguido convertir matrices a su formato y me ha complicado las cosas). 
 
 Dicho módulo nos permite realizar varios métodos de optimización y búsqueda de raices de funciones (nos centraremos en la parte de optimización de momento y tal vez vea optimizaciones alternativas p.e. usando [métodos iterativos](https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo) de [Krylov](https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo#M.C3.A9todos_del_subespacio_de_Krylov), que son de mucha utilidad a la hora de resolver sistemas muy grandes de forma eficiente) como pueden ser (no comentaré todos los [métodos](http://docs.scipy.org/doc/scipy/reference/optimize.html) de cada tipo de optimización): 
@@ -196,3 +198,7 @@ Cualquier comentario:
 * Issues: [#Issues](https://github.com/Indeseables/indeseables.github.io/issues)
 
 **Autor:** [*J.G*](https://github.com/overxfl0w)
+
+___
+
+{% include twitter_plug.html %}

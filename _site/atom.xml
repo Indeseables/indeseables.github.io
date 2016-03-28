@@ -4,7 +4,7 @@
  <title>Indeseabλes</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-03-28T04:35:20+02:00</updated>
+ <updated>2016-03-28T05:53:43+02:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
    <name>Indeseables</name>
@@ -288,6 +288,12 @@ factorial n = product [1..n]
 * Perfil de Github: &lt;a href=&quot;http://github.com/sankosk&quot;&gt;Click para ir al sitio&lt;/a&gt;
 * Twitter: @SankoSK
 * Perfil de Linkedin: &lt;a href=&quot;https://www.linkedin.com/in/esteban-montes-morales-59257366&quot;&gt;Click para ir al sitio&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Si tienes alguna duda, comentario o sugerencia, notifícanos a través de &lt;a href=&quot;mailto:indeseables.git@gmail.com&quot;&gt;indeseables.git@gmail.com&lt;/a&gt;
+ y si te ha gustado la entrada puedes &lt;a href=&quot;https://twitter.com/intent/tweet?url=http://indeseables.github.io/2016/03/28/odisea-funcional-parte1/&amp;amp;text=Odisea Funcional (Parte 1)&amp;amp;via=indeseables!&quot; target=&quot;_blank&quot;&gt; compartirla&lt;/a&gt;&lt;/p&gt;
+
 </content>
  </entry>
  
@@ -296,7 +302,10 @@ factorial n = product [1..n]
    <link href="http://indeseables.github.io/2016/03/27/Redes-neuronales-y-Autoencoders/"/>
    <updated>2016-03-27T00:00:00+01:00</updated>
    <id>http://indeseables.github.io/2016/03/27/Redes neuronales y Autoencoders</id>
-   <content type="html">&lt;p&gt;Si se ha visto el &lt;a href=&quot;http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/&quot;&gt;post&lt;/a&gt; anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de &lt;a href=&quot;https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png&quot;&gt;Perceptron dispuestos en cascada&lt;/a&gt;.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Si tienes alguna duda, comentario o sugerencia, notifícanos a través de &lt;a href=&quot;mailto:indeseables.git@gmail.com&quot;&gt;indeseables.git@gmail.com&lt;/a&gt;
+ y si te ha gustado la entrada puedes &lt;a href=&quot;https://twitter.com/intent/tweet?url=http://indeseables.github.io/2016/03/27/Redes-neuronales-y-Autoencoders/&amp;amp;text=Redes neuronales y autoencoders.&amp;amp;via=indeseables!&quot; target=&quot;_blank&quot;&gt; compartirla&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Si se ha visto el &lt;a href=&quot;http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/&quot;&gt;post&lt;/a&gt; anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de &lt;a href=&quot;https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png&quot;&gt;Perceptron dispuestos en cascada&lt;/a&gt;.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -625,6 +634,12 @@ Optimization terminated successfully.
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;em&gt;Autor: &lt;a href=&quot;https://github.com/overxfl0w&quot;&gt;J.G&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Si tienes alguna duda, comentario o sugerencia, notifícanos a través de &lt;a href=&quot;mailto:indeseables.git@gmail.com&quot;&gt;indeseables.git@gmail.com&lt;/a&gt;
+ y si te ha gustado la entrada puedes &lt;a href=&quot;https://twitter.com/intent/tweet?url=http://indeseables.github.io/2016/03/27/Redes-neuronales-y-Autoencoders/&amp;amp;text=Redes neuronales y autoencoders.&amp;amp;via=indeseables!&quot; target=&quot;_blank&quot;&gt; compartirla&lt;/a&gt;&lt;/p&gt;
+
 </content>
  </entry>
  
@@ -633,7 +648,10 @@ Optimization terminated successfully.
    <link href="http://indeseables.github.io/2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/"/>
    <updated>2016-03-25T00:00:00+01:00</updated>
    <id>http://indeseables.github.io/2016/03/25/implementacion-alternativa-algoritmos-aprendizaje</id>
-   <content type="html">&lt;p&gt;Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería &lt;em&gt;Scipy&lt;/em&gt; y más concretamente, su módulo &lt;em&gt;optimize&lt;/em&gt; (tenía pensado usar &lt;a href=&quot;https://www.mcs.anl.gov/petsc/&quot;&gt;Petsc&lt;/a&gt;, pero no he conseguido convertir matrices a su formato y me ha complicado las cosas).&lt;/p&gt;
+   <content type="html">&lt;p&gt;Si tienes alguna duda, comentario o sugerencia, notifícanos a través de &lt;a href=&quot;mailto:indeseables.git@gmail.com&quot;&gt;indeseables.git@gmail.com&lt;/a&gt;
+ y si te ha gustado la entrada puedes &lt;a href=&quot;https://twitter.com/intent/tweet?url=http://indeseables.github.io/2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/&amp;amp;text=Implementación alternativa de algoritmos de aprendizaje (parte I).&amp;amp;via=indeseables!&quot; target=&quot;_blank&quot;&gt; compartirla&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería &lt;em&gt;Scipy&lt;/em&gt; y más concretamente, su módulo &lt;em&gt;optimize&lt;/em&gt; (tenía pensado usar &lt;a href=&quot;https://www.mcs.anl.gov/petsc/&quot;&gt;Petsc&lt;/a&gt;, pero no he conseguido convertir matrices a su formato y me ha complicado las cosas).&lt;/p&gt;
 
 &lt;p&gt;Dicho módulo nos permite realizar varios métodos de optimización y búsqueda de raices de funciones (nos centraremos en la parte de optimización de momento y tal vez vea optimizaciones alternativas p.e. usando &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo&quot;&gt;métodos iterativos&lt;/a&gt; de &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo#M.C3.A9todos_del_subespacio_de_Krylov&quot;&gt;Krylov&lt;/a&gt;, que son de mucha utilidad a la hora de resolver sistemas muy grandes de forma eficiente) como pueden ser (no comentaré todos los &lt;a href=&quot;http://docs.scipy.org/doc/scipy/reference/optimize.html&quot;&gt;métodos&lt;/a&gt; de cada tipo de optimización):&lt;/p&gt;
 
@@ -884,6 +902,12 @@ Clase de [1,0,5]: -1
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;Autor:&lt;/strong&gt; &lt;a href=&quot;https://github.com/overxfl0w&quot;&gt;&lt;em&gt;J.G&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Si tienes alguna duda, comentario o sugerencia, notifícanos a través de &lt;a href=&quot;mailto:indeseables.git@gmail.com&quot;&gt;indeseables.git@gmail.com&lt;/a&gt;
+ y si te ha gustado la entrada puedes &lt;a href=&quot;https://twitter.com/intent/tweet?url=http://indeseables.github.io/2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/&amp;amp;text=Implementación alternativa de algoritmos de aprendizaje (parte I).&amp;amp;via=indeseables!&quot; target=&quot;_blank&quot;&gt; compartirla&lt;/a&gt;&lt;/p&gt;
+
 </content>
  </entry>
  
@@ -892,7 +916,16 @@ Clase de [1,0,5]: -1
    <link href="http://indeseables.github.io/2016/03/24/WhatsIndeseables/"/>
    <updated>2016-03-24T00:00:00+01:00</updated>
    <id>http://indeseables.github.io/2016/03/24/WhatsIndeseables</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://indeseables.github.io/&quot;&gt;Indeseables&lt;/a&gt; es un grupo de …&lt;/p&gt;
+   <content type="html">&lt;p&gt;Si tienes alguna duda, comentario o sugerencia, notifícanos a través de &lt;a href=&quot;mailto:indeseables.git@gmail.com&quot;&gt;indeseables.git@gmail.com&lt;/a&gt;
+ y si te ha gustado la entrada puedes &lt;a href=&quot;https://twitter.com/intent/tweet?url=http://indeseables.github.io/2016/03/24/WhatsIndeseables/&amp;amp;text=What&#39;s Indeseables?&amp;amp;via=indeseables!&quot; target=&quot;_blank&quot;&gt; compartirla&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://indeseables.github.io/&quot;&gt;Indeseables&lt;/a&gt; es un grupo de …&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Si tienes alguna duda, comentario o sugerencia, notifícanos a través de &lt;a href=&quot;mailto:indeseables.git@gmail.com&quot;&gt;indeseables.git@gmail.com&lt;/a&gt;
+ y si te ha gustado la entrada puedes &lt;a href=&quot;https://twitter.com/intent/tweet?url=http://indeseables.github.io/2016/03/24/WhatsIndeseables/&amp;amp;text=What&#39;s Indeseables?&amp;amp;via=indeseables!&quot; target=&quot;_blank&quot;&gt; compartirla&lt;/a&gt;&lt;/p&gt;
+
 </content>
  </entry>
  
