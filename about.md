@@ -4,7 +4,7 @@ title: About
 ---
 
 <p class="message">
-  Descripción del blog
+  olhosdeometrdasqueeocireso,ontohpelobdarWXZYo
 </p>
 
 ## J. González

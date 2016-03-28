@@ -159,15 +159,13 @@ Al evaluarse <code class="highlighter-rouge">(λy.y)</code> se reduce, esto podr
 
 <p>Un poco de código para entender el concepto:</p>
 
-<p><code class="highlighter-rouge">C#
-public delegate int Comparacion(Persona p1, Persona p2);
-</code>
-Comparación es un método que recibe dos <code class="highlighter-rouge">Persona</code> y devuelve un <code class="highlighter-rouge">ìnt</code></p>
+<pre><code class="language-C#">public delegate int Comparacion(Persona p1, Persona p2);
+</code></pre>
+<p>Comparación es un método que recibe dos <code class="highlighter-rouge">Persona</code> y devuelve un <code class="highlighter-rouge">ìnt</code></p>
 
 <p>Ahora por ejemplo, podriamos definir un método <code class="highlighter-rouge">OrdenarPersonas</code> independientemente del criterio de ordenación que se escoja.</p>
 
-<p><code class="highlighter-rouge">C#
-static public void OrdenarPersonas(Persona[] vector, Comparacion comparacion){
+<pre><code class="language-C#">static public void OrdenarPersonas(Persona[] vector, Comparacion comparacion){
     //... Iterando el vector ...
     if(comparacion(vector[i], vector[j]) &gt; 0){
         Persona aux = vector[i];
@@ -176,7 +174,7 @@ static public void OrdenarPersonas(Persona[] vector, Comparacion comparacion){
     }
     //...
 }
-</code></p>
+</code></pre>
 
 <h3 id="tipos-de-delegados-predefinidos">Tipos de delegados predefinidos</h3>
 <blockquote>
@@ -195,12 +193,11 @@ static public void OrdenarPersonas(Persona[] vector, Comparacion comparacion){
   <p>En la programación funcional es común <strong>poder escribir la función en el momento de pasar ésta como parámetro</strong></p>
 </blockquote>
 
-<p><code class="highlighter-rouge">C#
-Persona[] personas = ListadoPersonas.CrearPersonasAleatorias();
+<pre><code class="language-C#">Persona[] personas = ListadoPersonas.CrearPersonasAleatorias();
 Persona[] mayoresEdad = Array.FindAll(personas, 
                             delegate(Persona p) { return p.Edad &gt;= 18; }
                         );
-</code></p>
+</code></pre>
 
 <p>C# lanzó una buena solución al problema pero la sintaxis seguia siendo dificil de tratar, y por eso decidio implementar <strong>expresiones lambda</strong>, que básicamente mejoraban los <strong>delegados anónimos</strong></p>
 
@@ -209,15 +206,14 @@ Persona[] mayoresEdad = Array.FindAll(personas,
   <p>permiten <strong>escribir el cuerpo de funciones completas como expresiones</strong></p>
 </blockquote>
 
-<p>```C#
-//El ejemplo de función de orden superior que veiamos antes
+<pre><code class="language-C#">//El ejemplo de función de orden superior que veiamos antes
 Func&lt;Func&lt;int, int&gt;, int, int&gt; dobleAplicacion = (f, n) =&gt; f(f(n));
-Console.WriteLine(dobleAplicacion(n =&gt; n+n, 3));</p>
+Console.WriteLine(dobleAplicacion(n =&gt; n+n, 3));
 
-<p>//Convertimos el ejemplo de los delegados anónimos
+//Convertimos el ejemplo de los delegados anónimos
 Persona[] personas = ListadoPersonas.CrearPersonasAleatorias();
 Persona[] mayoresEdad = Array.FindAll(personas, persona =&gt; persona.Edad &gt;= 18);
-```</p>
+</code></pre>
 
 <p>En Haskell se utiliza esta sintaxis (Desde el intérprete):
 <code class="highlighter-rouge">Haskell
