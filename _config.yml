@@ -16,7 +16,7 @@ title:               Indeseabλes
 tagline:             ''
 description:         ''
 url:                 http://indeseables.github.io
-baseurl:             ''
+baseurl:             'http://indeseables.github.io'
 paginate:            1
 
 # About/contact
