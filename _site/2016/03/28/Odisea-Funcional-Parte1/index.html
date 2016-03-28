@@ -1,6 +1,111 @@
-<h1 id="odisea-funcional-parte-1">Odisea Funcional (Parte 1)</h1>
+<!DOCTYPE html>
+<html lang="en-us">
 
-<p>Un título muy acertado pues estudiar el paradigma funcional es cuanto menos una odisea, <strong>preciosa o no dependiendo de a quíen preguntes.</strong></p>
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Odisea Funcional (Parte 1) &middot; Indeseabλes
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p></p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <img src="http://www.lambdafaq.org/wp-content/themes/atahualpa/images/lambda-e1349128159649.png"/ width=50 height=50>
+    <a class="sidebar-nav-item" href="/">Entradas</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About</a>
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+    <a class="sidebar-nav-item" href="">GitHub projects</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2016. Indeseables.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Indeseabλes</a>
+            <small></small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Odisea Funcional (Parte 1)</h1>
+  <span class="post-date">28 Mar 2016</span>
+  <p>Un título muy acertado pues estudiar el paradigma funcional es cuanto menos una odisea, <strong>preciosa o no dependiendo de a quíen preguntes.</strong></p>
 
 <p>Me apoyaré en apuntes de la universidad en la que estudio, luego el lenguaje utilizado será el mismo, <strong>C#, funcional no puro</strong>, pero trataré de comentar <strong>diferencias con un funcional puro como Haskell</strong> para que se entiendan mejor los conceptos estudiados.</p>
 
@@ -271,3 +376,64 @@ factorial n = product [1..n]
 * Perfil de Github: <a href="http://github.com/sankosk">Click para ir al sitio</a>
 * Twitter: @SankoSK
 * Perfil de Linkedin: <a href="https://www.linkedin.com/in/esteban-montes-morales-59257366">Click para ir al sitio</a></p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2016/03/27/Redes-neuronales-y-Autoencoders/">
+            Redes neuronales y autoencoders.
+            <small>27 Mar 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">
+            Implementación alternativa de algoritmos de aprendizaje (parte I).
+            <small>25 Mar 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2016/03/24/WhatsIndeseables/">
+            What's Indeseables?
+            <small>24 Mar 2016</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

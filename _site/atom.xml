@@ -4,7 +4,7 @@
  <title>Indeseabλes</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-03-28T03:13:23+02:00</updated>
+ <updated>2016-03-28T03:59:51+02:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
    <name>Indeseables</name>
@@ -13,13 +13,11 @@
 
  
  <entry>
-   <title>Odisea Funcional Parte1</title>
+   <title>Odisea Funcional (Parte 1)</title>
    <link href="http://indeseables.github.io/2016/03/28/odisea-funcional-parte1/"/>
    <updated>2016-03-28T00:00:00+02:00</updated>
    <id>http://indeseables.github.io/2016/03/28/odisea-funcional-parte1</id>
-   <content type="html">&lt;h1 id=&quot;odisea-funcional-parte-1&quot;&gt;Odisea Funcional (Parte 1)&lt;/h1&gt;
-
-&lt;p&gt;Un título muy acertado pues estudiar el paradigma funcional es cuanto menos una odisea, &lt;strong&gt;preciosa o no dependiendo de a quíen preguntes.&lt;/strong&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;Un título muy acertado pues estudiar el paradigma funcional es cuanto menos una odisea, &lt;strong&gt;preciosa o no dependiendo de a quíen preguntes.&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Me apoyaré en apuntes de la universidad en la que estudio, luego el lenguaje utilizado será el mismo, &lt;strong&gt;C#, funcional no puro&lt;/strong&gt;, pero trataré de comentar &lt;strong&gt;diferencias con un funcional puro como Haskell&lt;/strong&gt; para que se entiendan mejor los conceptos estudiados.&lt;/p&gt;
 
