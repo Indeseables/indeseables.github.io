@@ -10,7 +10,7 @@ title: About
 ## J. González
 >Apasionado de la inteligencia artificial y el reconocimiento de formas. Futuro graduado en ing informática por la UPV (2016), esperando máster y doctorado...
 >[#Github](https://github.com/overxfl0w)
->[#PGP](https://github.com/Indeseables/indeseables.github.io/tree/master/_keys/overxfl0w.pgp)
+>[#PGP](https://github.com/Indeseables/indeseables.github.io/tree/master/_keys/overxfl0w.pgp)  (D3297C4F)
 ---
 
 ## E. Montes Morales
