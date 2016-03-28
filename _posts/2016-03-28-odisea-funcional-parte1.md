@@ -1,4 +1,7 @@
-# Odisea Funcional (Parte 1)
+---
+layout: post
+title: Odisea Funcional (Parte 1)
+---
 
 Un título muy acertado pues estudiar el paradigma funcional es cuanto menos una odisea, **preciosa o no dependiendo de a quíen preguntes.**  
 
