@@ -16,14 +16,14 @@
   </title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://indeseables.github.io/public/css/poole.css">
+  <link rel="stylesheet" href="http://indeseables.github.io/public/css/syntax.css">
+  <link rel="stylesheet" href="http://indeseables.github.io/public/css/lanyon.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
-  <link rel="shortcut icon" href="/public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://indeseables.github.io/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="http://indeseables.github.io/public/favicon.ico">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
@@ -44,7 +44,7 @@
 
   <nav class="sidebar-nav">
     <img src="http://www.lambdafaq.org/wp-content/themes/atahualpa/images/lambda-e1349128159649.png"/ width=50 height=50>
-    <a class="sidebar-nav-item" href="/">Entradas</a>
+    <a class="sidebar-nav-item" href="http://indeseables.github.io/">Entradas</a>
 
     
 
@@ -74,6 +74,10 @@
         
       
     
+      
+        
+      
+    
     <a class="sidebar-nav-item" href="">GitHub projects</a>
   </nav>
 
@@ -91,7 +95,7 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="/" title="Home">Indeseabλes</a>
+            <a href="http://indeseables.github.io/" title="Home">Indeseabλes</a>
             <small></small>
           </h3>
         </div>
@@ -102,254 +106,300 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">
-        Implementación alternativa de algoritmos de aprendizaje (parte I).
+      <a href="http://indeseables.github.io//2016/03/27/Redes-neuronales-y-Autoencoders/">
+        Redes neuronales y autoencoders.
       </a>
     </h1>
 
-    <span class="post-date">25 Mar 2016</span>
+    <span class="post-date">27 Mar 2016</span>
 
-    <p>Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería <em>Scipy</em> y más concretamente, su módulo <em>optimize</em> (tenía pensado usar <a href="https://www.mcs.anl.gov/petsc/">Petsc</a>, pero no he conseguido convertir matrices a su formato y me ha complicado las cosas).</p>
-
-<p>Dicho módulo nos permite realizar varios métodos de optimización y búsqueda de raices de funciones (nos centraremos en la parte de optimización de momento y tal vez vea optimizaciones alternativas p.e. usando <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo">métodos iterativos</a> de <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo#M.C3.A9todos_del_subespacio_de_Krylov">Krylov</a>, que son de mucha utilidad a la hora de resolver sistemas muy grandes de forma eficiente) como pueden ser (no comentaré todos los <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">métodos</a> de cada tipo de optimización):</p>
-
-<ul>
-  <li>
-    <p>Optimización local: permite minimizar (y si cambiamos de signo maximizar) <a href="https://es.wikipedia.org/wiki/Optimizaci%C3%B3n_%28matem%C3%A1tica%29">funciones</a>, variando una serie de parámetros del optimizador como el método de optimización local empleado (Gradiente conjugado, BFGS, Método de Powell …). Al ser un <a href="(https://en.wikipedia.org/wiki/Local_search_%28optimization%29)">método local</a> , puede quedar atascado en mínimos locales por lo que, si la solución obtenida no es suficientemente buena, se pueden obtener nuevas soluciones de varias formas p e. reinicialización aleatoria, son computacionalmente baratos.</p>
-  </li>
-  <li>
-    <p>Optimización de ecuaciones: entre los que se puede encontrar el método de <a href="https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados">mínimos cuadrados</a> ampliamente conocidos en <a href="https://es.wikipedia.org/wiki/Regresi%C3%B3n_%28estad%C3%ADstica%29">regresión</a> y optimización</p>
-  </li>
-  <li>
-    <p>Optimizaciones globales: al contrario que los métodos locales, éstos nos proporcionan soluciones óptimas pero son más costosos ya que requieren comprobar el espacio de soluciones completo (a no ser que se disponga de información que lo acote).</p>
-  </li>
-  <li>
-    <p>Ajustes de funciones (<em>fitting</em>): dada una función <em>f</em>, encontrar una función <em>g</em> que la <a href="https://www.google.es/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=6&amp;cad=rja&amp;uact=8&amp;ved=0ahUKEwjL37eA69rLAhVCXBoKHUkFBCkQFghDMAU&amp;url=http%3A%2F%2Fwww.ugr.es%2F~lorente%2FAPUNTESMNM%2Fcapitulo5.pdf&amp;usg=AFQjCNEXrijmpFscjHqL7WAoFqF_IXMoJA">aproxime</a>, solo está disponible el método <a href="https://es.wikipedia.org/wiki/M%C3%ADnimos_cuadrados">mínimos cuadrados</a> para aproximación discreta.</p>
-  </li>
-</ul>
-
-<p>En esta primera entrada comentaré la idea general e implementación de 2 algoritmos de aprendizaje básicos (ambos redes neuronales de una única capa): <a href="https://es.wikipedia.org/wiki/Perceptr%C3%B3n"><em>Perceptron</em></a> y <a href="https://es.wikipedia.org/wiki/Adaline"><em>Adaline</em></a> se verán sus versiones <a href="https://es.wikipedia.org/wiki/Clasificador_lineal">lineales</a> (aunque es fácilmente generalizable a funciones no lineales usando <a href="https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte#Funci.C3.B3n_Kernel"><em>kernels</em></a> en cierta parte del código que comentaré) haciendo uso de técnicas de optimización sin restricciones (en la siguiente entrada se verá como añadir restricciones y cotas). Por ello, para comprobar los resultados del entrenamiento y del test se utilizará un conjunto de muestras que variará dependiendo del algoritmo que esté comentando.</p>
+    <p>Si se ha visto el <a href="http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">post</a> anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">Perceptron dispuestos en cascada</a>.</p>
 
 <hr />
 
-<h2 id="perceptron">Perceptron</h2>
-<p>Es un clasificador (en 2 clases {+1,-1} es el que trataremos) basado en funciones discriminantes lineales, el objetivo es encontrar un vector <em>θ</em> que defina un <a href="https://es.wikipedia.org/wiki/Hiperplano">hiperplano</a> separador p.e. una recta en 2D, que separe <a href="http://photos1.blogger.com/blogger/1013/1515/320/SVMSeparacion.jpg">correctamente</a> el conjunto de muestras en 2 clases. Esto equivale a resolver un sistema de <em>N</em> inecuaciones <strong>c</strong>·<strong>θ</strong>·<strong>x</strong>≥<strong>0</strong> (nótese la notación matricial, si se hace vector a vector, equivaldría a resolver <a href="https://i.gyazo.com/e769171d48212f1ccd7d820184b9684d.png">ésto</a>)</p>
+<h3 id="redes-neuronales">Redes neuronales</h3>
+<p>También llamadas redes neuronales artificiales o procesado distribuido y paralelo, se basan en el mismo principio que Perceptron, funciones discriminantes lineales (<a href="https://i.gyazo.com/f895cd0241ad3206721e1444907b4b02.png">FDL</a>) que se determinan mediante el aprendizaje de un vector de parámetros <em>θ</em> resolviendo un problema de optimización en el que se pretende obtener el vector <em>θ</em> que minimice el error cuadrático entre la salida esperada de las muestras de entrenamiento y la salida obtenida por la red neuronal.Este vector de parámetros <em>θ</em>, hace referencia al peso de las conexiones entre las neuronas de la red neuronal (los pesos asociados a cada una de las aristas de la red de la <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">imagen</a>) y es una medida de la complejidad de la red.</p>
 
-<p>Ese sistema de <em>N</em> inecuaciones con |θ| incógnitas es demasiado costoso de resolver mediante métodos directos (aunque podríamos haber empleado otros <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_iterativo">métodos iterativos</a> como los que iba a utilizar en <a href="https://www.mcs.anl.gov/petsc/">Petsc</a>) y por ello, se opta por minimizar ésta <a href="https://i.gyazo.com/5cccecf3f307437adb63609a97f0ed40.png">función</a> ( suma de las <a href="https://i.gyazo.com/2a4626fe88c672270a4f180f6943aa9b.png">distancias</a> de cada muestra mal clasificada al hiperplano separador) equivalente a resolver el sistema original.
-Este proceso se suele hacer de forma iterativa, calculando cada vez la suma de las distancias mencionada antes, modificando de acuerdo a esas distancias el valor de <em>θ</em> y repitiendo el proceso hasta que <em>θ</em> converge,varía muy poco, se acaban las iteraciones … .Sin embargo, podemos ahorrarnos la implementación del método iterativo haciendo uso del <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">módulo</a> comentado antes, configurando correctamente la función objetivo a optimizar, las cotas, las restricciones (en entradas posteriores se verán, cuando se implementen máquinas de vectores de soporte <a href="https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte">SVM</a>), la tolerancia etc. Otra cosa a tener en cuenta es que Perceptron siempre converge si las muestras son linealmente separables.</p>
-
-<p>El código es el siguiente:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c">#</span>
-<span class="c">#  Perceptron.py</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">Utils</span> <span class="kn">import</span> <span class="n">MatLoad</span>
-
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span> 
-    <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">theta</span><span class="o">*</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">res</span><span class="o">&gt;=+</span><span class="mi">0</span><span class="p">,</span><span class="n">Y</span><span class="o">&gt;=+</span><span class="mi">0</span><span class="p">):</span> <span class="k">return</span> <span class="o">-</span><span class="mi">9999999</span>
-    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="n">res</span><span class="p">[</span><span class="n">res</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-
-<span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span>
-    <span class="n">XROWS</span><span class="p">,</span><span class="n">XCOLS</span><span class="p">,</span><span class="n">YROWS</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">),</span><span class="n">method</span><span class="o">=</span><span class="s">"CG"</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">)</span><span class="o">&gt;=+</span><span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
-<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">MatLoad</span><span class="p">(</span><span class="s">"X.np"</span><span class="p">);</span> 
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">MatLoad</span><span class="p">(</span><span class="s">"Y.np"</span><span class="p">);</span> 
-    <span class="n">XROWS</span><span class="p">,</span><span class="n">XCOLS</span><span class="p">,</span><span class="n">YROWS</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.0003</span><span class="p">,</span><span class="o">-</span><span class="mf">1.54</span><span class="p">,</span><span class="o">-</span><span class="mf">3.78</span><span class="p">])</span>
-    <span class="n">res</span>  <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
-    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s"> Detalles de convergencia </span><span class="se">\n</span><span class="s">"</span>
-    <span class="k">print</span> <span class="n">res</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
-    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s">Clase de [1,0,5]:"</span><span class="p">,</span><span class="n">classify</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span>
-
-</code></pre>
-</div>
-
-<p>Para la implementación, se han desarrollado únicamente 4 funciones:</p>
+<p>Podemos distinguir 2 aspectos de dichas redes:</p>
 
 <ul>
   <li>
-    <p><em>f</em>: es la función objetivo que he mencionado <a href="https://gyazo.com/5cccecf3f307437adb63609a97f0ed40">antes</a>, se pasará como parámetro al solver de scipy para minimizar. Se hace un producto vector-matriz para calcular la parte <strong>c</strong>·<strong>θ</strong>·<strong>x</strong> y se comprueba si todas las muestras están bien clasificadas, si lo están queremos que el proceso finalice luego devolvemos una distancia muy pequeña, si no lo están devolvemos la suma de las distancias de las muestras mal clasificadas al hiperplano separador.</p>
+    <p>Topología: hace referencia a la <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">estructura de la red</a>. Definimos una capa como un conjunto de neuronas en un mismo nivel (no hay conexiones entre ellas) y llamaremos a la primera capa (la de las muestras <em>{x1,x2,…,xn}</em>, capa de salida a la última capa y capas ocultas a todas las capas intermedias.</p>
   </li>
   <li>
-    <p><em>fit</em>: se encarga de llamar al optimizador de <em>Scipy</em> <em>minimize</em>, utilizando el método del <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_del_gradiente_conjugado">gradiente conjugado</a> para entrenar el sistema. Podemos hacer uso de todos los demás <a href="http://docs.scipy.org/doc/scipy/reference/optimize.html">métodos</a> implementados en la librería para el optimizador local <em>minimize</em>.</p>
-  </li>
-  <li>
-    <p><em>classify</em>: una vez entrenado el sistema (obtenido el vector <em>θ</em> adecuado), dada una nueva muestra <em>x</em> permite clasificarla en la clase correcta según <em>θ</em>. Para ello se calcula el producto escalar <em>θ</em>·<em>x</em> y se comprueba si está a un lado del espacio definido por el hiperplano separador o al otro ( <em>θ</em>·<em>x</em>≥0 , <em>θ</em>·<em>x</em>≤0 ).</p>
-  </li>
-  <li>
-    <p><em>predict</em>: dada una muestra <em>x</em> permite hacer regresión una vez el sistema ha sido entrenado. Con ello, se predice el valor de <em>x</em> dado el vector de parámetros <em>θ</em>, en función del resultado del producto escalar <em>θ</em>·<em>x</em>.</p>
+    <p>Dinámica: describe como fluye la información a través de la red neuronal p.e. <a href="https://i.gyazo.com/3a8b0706c7ce5dfb25cebda4edf6ad11.png">para el caso de la topología anterior</a>. Se puede observar como, para cada neurona <em>i</em> de cada capa (oculta y de salida), se calcula su salida en función de los pesos de las aristas que alcanzan a <em>i</em> y del valor de las neuronas <em>j</em> de la capa anterior que alcanzan a <em>i</em> a través de <em>θij</em> aplicando una función <em>g</em> al resultado obtenido (este tipo de redes neuronales se llaman feed-forward, en las solo hay conexiones hacia delante, en concreto, el tipo de perceptron multicapa que comentamos es un caso particular de red feed-forward donde solo hay conexiones a neuronas de la capa siguiente) algunos ejemplos de funciones de este tipo son <a href="https://i.gyazo.com/24422f154964f9b4f08ecd6ca45181a6.png">estos</a>. Hay toda una historia asociada a éstas funciones, pero sólo considerad que éstas funciones se utilizan para que la red neuronal pueda aprender fronteras de decisión más complejas.</p>
   </li>
 </ul>
 
-<p>Una vez se han definido las funciones necesarias, solo queda ver cómo se comporta el sistema entrenándolo y probándolo. Para ello, se ha hecho uso de un conjunto de muestras de juguete (en notación homogénea) junto con sus salidas, diseñado a mano:</p>
+<p>Las redes neuronales pueden aplicarse tanto a regresión (para lo que fueron concebidas) como a clasificación, donde cualquier frontera de decisión basada en trozos de hiperplanos se puede aproximar con un perceptron multicapa de este estilo. Además, pueden ser empleadas tanto en <a href="https://es.wikipedia.org/wiki/Aprendizaje_supervisado">aprendizaje supervisado</a>, como en <a href="https://es.wikipedia.org/wiki/Aprendizaje_no_supervisado">aprendizaje no supervisado</a> (e.g. autoencoders que veremos en el próximo apartado)</p>
 
-<p>Muestras de entrenamiento: 3 muestras de 3 dimensiones dispuestas por columnas.</p>
+<p>Aparte de lo que he comentado, hay muchísimos teoremas relacionados con las redes neuronales, relativos a la convergencia, al factor de aprendizaje, la intratabilidad del aprendizaje (Blum and Rivest, 1992), el tamaño del conjunto de entrenamiento (Ripley, 1993) y muchos otros que no comentaré, además, a los que estén familiarizados con ésto tal vez les resulte raro que no comente el tan conocido algoritmo de aprendizaje <a href="https://es.wikipedia.org/wiki/Propagaci%C3%B3n_hacia_atr%C3%A1s"><em>backpropagation</em></a>, pero me lo ahorraré ya que no deja de ser un método de optimización de descenso por gradiente mediante las funciones de activación <em>g</em>, comentadas antes, que simplifican el cálculo de las derivadas parciales. Si no estáis familiarizados, este proceso vedlo como una caja negra que calcula los pesos óptimos de las conexiones entre las neuronas de la red, para la entrada, lo implementaré con los optimizadores de Scipy (y podemos aplicar métodos no convencionales de optimización para calcular el vector <em>θ</em>, aparte del descenso por gradiente! ). Para implementarlo, basta considerar que el aprendizaje consiste en minimizar el error cuadrático medio de las diferencias entre las salidas esperadas y las obtenidas, e.g. <a href="https://i.gyazo.com/dc04d1204eabedaffd8f62b62fbf1962.png">1 capa oculta</a>, por tanto, podemos considerar dicha función como función objetivo y calcular <em>θ</em> óptimo mediante Scipy, con cualquiera de los algoritmos de optimización implementados.</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>nº</th>
-      <th>x1</th>
-      <th>x2</th>
-      <th>x3</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>d1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>d2</td>
-      <td>0</td>
-      <td>2</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <td>d3</td>
-      <td>5</td>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
+<p>Con ello, ya sé ha visto una pincelada (muy gruesa) de lo básico para comprender mínimamente la implementación de un ejemplo que permite definir una red neuronal y dado un conjunto de muestras supervisadas (o no supervisadas), aprender el vector de parámetros <em>θ</em> para clasificar o hacer regresión.</p>
 
-<p>Salidas: salidas (clases) esperadas para cada una de las 3 muestras (+1 o -1):</p>
+<p>```
+#!/usr/bin/env python
+# -<em>- coding: utf-8 -</em>-
+#
+#  NeuralNetwork.py</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>nº</th>
-      <th>clase</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>x1</td>
-      <td>-1</td>
-    </tr>
-    <tr>
-      <td>x2</td>
-      <td>+1</td>
-    </tr>
-    <tr>
-      <td>x3</td>
-      <td>+1</td>
-    </tr>
-  </tbody>
-</table>
+<p>from scipy.optimize import minimize
+import numpy as np
+from Utils import MatLoad
+from math import e</p>
 
-<p>Dibujad las 2 últimas dimensiones de las muestras -d1 y d3 de la primera tabla- en un eje de coordenadas y veréis como encontráis rápidamente infinitas soluciones que separen las muestras en función de la salida (+1 o -1). Eso mismo hará el sistema, dar una posible solución de todas los hiperplanos (rectas en este caso) que sirven para separar las clases (en entradas posteriores, cuando se traten SVM, se podrá elegir entre el mejor de todos aquellos hiperplanos separadores según un criterio de distancia entre clases e hiperplano).</p>
+<p>def lineal(z): return z
+def step(z): return 1.0 if z&gt;0 else -1.0
+def ramp(z):
+	if z&gt;=1: return 1.0
+	elif -1&lt;z&lt;1: return z
+	elif z&lt;=-1: return -1.0	
+def sigmoid(z): return 1.0/(1.0+(e<strong>(-z)))
+def tanh(z): return ((e</strong>z)-(e<strong>-z))/((e</strong>z)+(e**-z))
+def fast(z): return z/(1+abs(z))</p>
 
-<p>Con ello (en el <em>main</em> del <em>script</em>) partimos de un vector <em>θ</em> aleatorio (se suele inicializar a 0) y lo ajustamos mediante la función <em>fit</em> para que clasifique correctamente las muestras, minimizando la función objetivo mencionada antes. Una vez finalice, obtenemos detalles sobre la finalización del proceso del <em>solver</em> (valor de <em>f</em> final, nº iteraciones realizadas, vector <em>θ</em>, etc) y la salida de una muestra a clasificar [1,0,5], que corresponde al conjunto de muestras de entrenamiento y conocemos su clase (si hemos dibujado las coordenadas como dije) : -1. La salida del script ejemplo es:</p>
+<p>def get_weights_submatrices(theta,units_by_layer): 
+    thetas    = []
+    index     = units_by_layer[0]<em>(units_by_layer[1]-1)
+    thetas.append((theta[0:index]).reshape(units_by_layer[1]-1,units_by_layer[0]))
+    for i in xrange(2,len(units_by_layer)-1):
+	thetas.append((theta[index:index+(units_by_layer[i-1]</em>(units_by_layer[i]-1))]).reshape(units_by_layer[i]-1,units_by_layer[i-1]))
+	index += (units_by_layer[i-1]*(units_by_layer[i]-1))
+    thetas.append((theta[index:]).reshape(units_by_layer[len(units_by_layer)-1],units_by_layer[len(units_by_layer)-2]))
+    return thetas</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>Detalles de convergencia
- fun: 0.0
- jac: array([ 0.,  0.,  0.])
- message: 'Optimization terminated successfully.'
-    nfev: 10
-     nit: 1
-    njev: 2
-  status: 0
- success: True
-       x: array([ 1.9997,  4.46  , -0.78  ])
+<p>def generate_theta(units_by_layer):
+    n_connections = 0
+    for i in xrange(1,len(units_by_layer)-1): n_connections += ((units_by_layer[i]-1)<em>units_by_layer[i-1])
+    n_connections += (units_by_layer[len(units_by_layer)-1]</em>units_by_layer[len(units_by_layer)-2])
+    return np.array([1 for i in xrange(n_connections)])</p>
 
-Clase de [1,0,5]: -1
+<p>def forward_propagation(theta,X,units_by_layer,factivation):
+    theta               = get_weights_submatrices(theta,units_by_layer)
+    vec_factivation     = np.vectorize(factivation)
+    res                 = vec_factivation(theta[0]<em>X)
+    for i in xrange(1,len(units_by_layer)-1):
+	res = np.insert(res,0,[1 for j in xrange(X.shape[1])],axis=0)
+	res = vec_factivation(theta[i]</em>res)
+    return res</p>
+
+<p>def forward_propagation_transform(theta,X,units_by_layer,factivation):
+    vec_factivation     = np.vectorize(factivation)
+    return vec_factivation(theta*X)</p>
+
+<p>def f(theta,X,Y,units_by_layer,factivation): 
+    res_output_layer    = forward_propagation(theta,X,units_by_layer,factivation)
+    mean_squared_error  = (Y-res_output_layer)
+    mean_squared_error  = (1.0/(2.0<em>X.shape[1]))</em>np.multiply(mean_squared_error,mean_squared_error).sum(axis=0).sum(axis=1)
+    return mean_squared_error.item(0,0)</p>
+
+<p>def fit(theta,X,Y,units_by_layer,factivation,max_iter=1000,verbose_convergence=True): return minimize(fun=f,x0=theta,args=(X,Y,units_by_layer,factivation),method=”CG”,options={“maxiter”:max_iter,”disp”:verbose_convergence})</p>
+
+<p>def classify(theta,X,units_by_layer,factivation): return forward_propagation(theta,np.matrix(X),units_by_layer,factivation).argmax(axis=0).item((0,0))</p>
+
+<p>def predict(theta,X,units_by_layer,factivation): return forward_propagation(theta,np.matrix(X),units_by_layer,factivation)</p>
+
+<p>if <strong>name</strong> == “<strong>main</strong>”:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## Testing classifier ##
+X = MatLoad("X.np");  # Vectores por columnas (N=|cols|, M=|rows|) # 
+Y = MatLoad("Y.np");  # Vectores por columnas (N=|cols|, M=|rows|) #
+XROWS,XCOLS = X.shape[0],X.shape[1]
+
+#### Test NN aleatoria ####
+units_by_layer = [XROWS,5,4,2] # Se cuenta la unidad BIAS en la capa oculta (la entrada se asume homogénea) en la de salida NO hay #
+theta =  generate_theta(units_by_layer)
+res  = fit(theta,X,Y,units_by_layer,lineal)
+print "\n Detalles de convergencia \n"
+print res
+theta = res.x
+print "Clase de la muestra [1,-4,-4]: ",classify(theta,np.matrix([[1],[-4],[-4]]),units_by_layer,lineal)
+print "Clase de la muestra [1,4,4]: ",classify(theta,np.matrix([[1],[4],[4]]),units_by_layer,lineal)
+print "Regresion con la muestra [1,-4,-4]: ",predict(theta,np.matrix([[1],[-4],[-4]]),units_by_layer,lineal)
+print "Regresion con la muestra [1,-4,-4]: ",predict(theta,np.matrix([[1],[4],[4]]),units_by_layer,lineal)
 </code></pre>
 </div>
 
-<p>Que coincide con lo que esperábamos, observando que el método ha convergido en 2 iteraciones a la solución <em>θ</em> = [ 1.9997,  4.46  , -0.78  ], además ha clasificado la muestra [1,0,5] que efectivamente pertenece a la clase -1.</p>
+<p>```</p>
+
+<p>En el ejemplo se puede ver como se carga el fichero que tiene las muestras <em>X</em> y el que tiene las salidas de dichas muestras <em>Y</em> (la salida de cada muestra, ahora es un conjunto de valores que representan el valor esperado en cada una de las neuronas de salida). Después se define una red neuronal especificando el número de neuronas por capa, en este caso, una red con 4 capas (las de entrada y salida y 2 capas ocultas), donde:</p>
+
+<ul>
+  <li>
+    <p>La capa 0, de entrada tiene tantas neuronas como dimensiones tienen las muestras.</p>
+  </li>
+  <li>
+    <p>La capa 1, (1º capa oculta) tiene 4 neuronas (en el código son 5 porque a las capas ocultas hay que sumarle 1, debido a la neurona de bias (<em>+1</em>) que representa el término independiente en la combinación lineal que define la FLD (en la capa de entrada, la unidad de bias viene representada en las muestras al ponerlas en notación homogénea - poniendo un 1 en la primera posición - y en la capa de salida no hay bias).</p>
+  </li>
+  <li>
+    <p>La capa 2 (2º capa oculta) tiene 3 neuronas (en el código 4 por la razón comentada antes).</p>
+  </li>
+  <li>
+    <p>La capa 3, capa de salida tiene tantas neuronas como dimensiones tiene el conjunto de salida esperado (clases en clasificación o nº dimensiones en regresión).</p>
+  </li>
+</ul>
+
+<p>La salida del script con <a href="https://i.gyazo.com/12a7773066427859ab109f9c0b2b9e2b.png">X</a>, <a href="https://i.gyazo.com/f01eb26b0965ea40a8eda8a3250a2b29.png">Y</a> (muestras y salidas dispuestas por columnas) es la siguiente:</p>
+
+<p>```</p>
+
+<p>Optimization terminated successfully.
+         Current function value: 0.075000
+         Iterations: 41
+         Function evaluations: 2849
+         Gradient evaluations: 77</p>
+
+<p>Detalles de convergencia</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> fun: 0.07500000000044556
+ jac: array([ -1.40629709e-07,  -2.80328095e-07,  -2.80328095e-07,
+    -1.42492354e-07,  -2.79396772e-07,  -2.79396772e-07,
+    -1.40629709e-07,  -2.80328095e-07,  -2.80328095e-07,
+    -1.41561031e-07,  -2.80328095e-07,  -2.80328095e-07,
+     5.92321157e-07,  -5.71832061e-07,  -5.71832061e-07,
+    -5.71832061e-07,  -5.72763383e-07,   5.92321157e-07,
+    -5.72763383e-07,  -5.72763383e-07,  -5.72763383e-07,
+    -5.71832061e-07,   5.92321157e-07,  -5.71832061e-07,
+    -5.71832061e-07,  -5.71832061e-07,  -5.72763383e-07,
+    -4.53554094e-07,  -3.41795385e-07,  -3.43658030e-07,
+    -3.41795385e-07,   7.41332769e-07,   5.39235771e-07,
+     5.38304448e-07,   5.39235771e-07])  message: 'Optimization terminated successfully.'
+nfev: 2849
+ nit: 41
+njev: 77   status: 0  success: True
+   x: array([ 0.29015638, -0.31882134, -0.31882134,  0.29015639, -0.31882129,
+   -0.31882129,  0.29015638, -0.31882134, -0.31882134,  0.29015634,
+   -0.31882134, -0.31882134,  0.42504066, -0.07970499, -0.07970504,
+   -0.07970499, -0.07970508,  0.42504011, -0.07970658, -0.07970659,
+   -0.07970658, -0.07970657,  0.42504066, -0.07970499, -0.07970504,
+   -0.07970499, -0.07970508,  1.19071489, -0.49189776, -0.49189632,
+   -0.49189776, -0.19071479,  0.49189641,  0.49189929,  0.49189641]) Clase de la muestra [1,-4,-4]:  0 Clase de la muestra [1,4,4]:  1 Regresion con la muestra [1,-4,-4]:  [[ 1.90000067]  [-0.90000071]] Regresion con la muestra [1,-4,-4]:  [[-0.50000098]  [ 1.50000139]]
+</code></pre>
+</div>
+
+<p>```</p>
+
+<p>Se puede ver que para clasificación (índice de la neurona de la capa de salida que maximice su salida) con esas muestras se comporta bien (dibujadlo en un eje cartesiano teniendo en cuenta la salida de cada muestra e intentad separarlas) y mediante regresión podemos conocer el valor de cada una de las neuronas de la capa de salida. En este ejemplo se ha visto como podemos entrenar de forma supervisada una red neuronal, sin embargo pueden ser entrenadas de forma no supervisada de una manera muy peculiar.</p>
 
 <hr />
 
-<h2 id="adaline">Adaline</h2>
+<h3 id="autoencoders">Autoencoders</h3>
+<p>Un <a href="https://en.wikipedia.org/wiki/Autoencoder">autoencoder</a> es una red neuronal utilizada para aprender codificaciones (p.e. <a href="https://es.wikipedia.org/wiki/Reducci%C3%B3n_de_dimensionalidad">reducción de dimensionalidad</a>, compresión, cifrado, etc) eficientes. Comentaré el autoencoder más básico, que es un caso particular de redes feed-forward muy parecido al perceptron multicapa comentado antes, en el que la capa de entrada y la capa de salida tienen el mismo número de neuronas y en lugar de esperar una salida supervisada <em>Y</em>, se espera la misma muestra de entrada <em>X</em>, consiguiendo con ello que la red aprenda a reconstruir la misma entrada que recibe.</p>
 
-<p>Adaline es una red neuronal de una capa utilizada en principalmente en regresión lineal. En este caso, el objetivo del aprendizaje es encontrar un vector <em>θ</em> con el que se <a href="https://i.gyazo.com/1b7efc98d8add5937953e722f18a57af.png">minimice la diferencia entre <em>θ</em>·<em>x</em> y la salida esperada <em>y</em> para toda muestra de entrenamiento</a>. Del mismo modo que en Perceptron, se minimizará esta <a href="https://i.gyazo.com/27cfe2a3959b5475029968f5fcc21b12.png">función</a> equivalente a resolver el sistema planteado (ahora no se tienen en cuenta solo las mal clasificadas, si no que se quiere minimizar las diferencias entre la RHS y la LHS del todo el conjunto de ecuaciones).En este caso no he encontrado ningún teorema sobre la convergencia excepto <a href="https://i.gyazo.com/8abc9636f7f210ee276d53e4c043b794.png">éste</a>.</p>
+<p>La estructura general de un autoencoder es <a href="https://upload.wikimedia.org/wikipedia/commons/2/28/Autoencoder_structure.png">ésta</a>, y el que emplearé en esta entrada es una variación de <a href="https://rubenlopezg.files.wordpress.com/2014/04/sparse-autoencoder2.png">éste</a> en el que se ha modificado el número de neuronas en cada capa (ajustándolo a nuestras muestras de entrenamiento y a lo que se quiera conseguir).</p>
 
-<p>El código es el siguiente:</p>
+<p>Si nos fijamos, cuando se entrene la red neuronal de la <a href="https://rubenlopezg.files.wordpress.com/2014/04/sparse-autoencoder2.png">figura del autoencoder anterior</a> se calcularán los pesos de todas las conexiones de la red y con ello, podemos separar la red en 2 subredes:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-<span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c">#</span>
-<span class="c">#  Adaline.py</span>
+<ul>
+  <li>
+    <p>Subred 1: formada por la capa de entrada y la capa oculta, el resultado obtenido de esta subred es el valor de las neuronas que forman la capa oculta, donde se habrá obtenido una transformación de las muestras reales a un espacio alternativo. Por esta razón, a esta subred se le llama <em>encoder</em>.</p>
+  </li>
+  <li>
+    <p>Subred 2: formada por la capa oculta y la capa de salida, en este caso, partiendo del resultado obtenido en las neuronas de la capa oculta en el paso anterior (resultado del encoder) se obtiene el valor de las neuronas de la capa de salida, que recordemos, sus pesos habían sido entrenados (junto con los demás de la red) para reconstruir la entrada de salida. Con ello, podemos obtener a partir del resultado del <em>encoder</em> el resultado original. Por esta razón, a esta subred se le llama <em>decoder</em></p>
+  </li>
+</ul>
 
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">Utils</span> <span class="kn">import</span> <span class="n">MatLoad</span>
+<p>Por tanto, como se ha visto, al ser el <em>autoencoder</em> simple un caso particular de red neuronal, podemos hacer uso del script implementado en el apartado anterior, que nos permite diseñar redes neuronales y aprender los pesos que minimicen el error cuadrático medio. Consideraré 2 ejemplos de uso de estos <em>autoencoder</em>, el cifrado de bloques de texto y la compresión.</p>
 
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span> 
-    <span class="n">res</span> <span class="o">=</span> <span class="p">((</span><span class="n">theta</span><span class="o">*</span><span class="n">X</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="o">-</span><span class="n">Y</span><span class="p">))</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">res</span><span class="p">)</span><span class="o">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)))</span>
-    
+<hr />
 
-<span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">):</span>
-    <span class="n">XROWS</span><span class="p">,</span><span class="n">XCOLS</span><span class="p">,</span><span class="n">YROWS</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="n">x0</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">))</span>
-    
-<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">)</span>
+<h3 id="aplicaciones-de-autoencoders-sistema-de-cifrado-por-bloques-1">Aplicaciones de Autoencoders: sistema de cifrado por bloques (1)</h3>
 
-<span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">):</span> <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">)</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+<p>En el primer ejemplo de aplicación, vamos a ver como haciendo uso de un <em>autoencoder</em> como los explicados arriba, podemos construir un <a href="https://es.wikipedia.org/wiki/Cifrado_por_bloques">sistema de cifrado por bloques</a> muy simple, en el que el <em>encoder</em> nos permitirá realizar el proceso de cifrado y el <em>decoder</em> el proceso de descifrado. Supongamos que queremos cifrar el mensaje <em>“holablau”</em>, podemos por ejemplo construir 4 muestras de entrenamiento segmentando el mensaje en conjuntos de 2B en secuencia i.e. <em>S={“ho”,”la”,”bl”,”au”}</em> (tendremos que cifrar y descifrar bloques de 2B) , como hay que obtener una representación en un espacio continuo, podemos obtener para cada elemento de <em>S</em> el valor binario de su código <em>ASCII</em> (concatenar los bits de cada uno de los símbolos de cada elemento), con ello, disponemos cada muestra de entrenamiento en columnas (y en notación homogénea con el 1 delante!) y no necesitamos más (recordad que no se requiere información de la salida, solo se pretende reconstruir la muestra original).</p>
 
+<p>Ahora solo queda fijar el número de neuronas en la capa oculta (<em>M1</em> en el script a 10 , 9 neuronas y la de BIAS) y una vez establecido, ejecutar el script (implementado haciendo uso del script para redes neuronales -MLP- del apartado anterior -NeuralNetwork.py-):</p>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">MatLoad</span><span class="p">(</span><span class="s">"X.np"</span><span class="p">);</span> 
-    <span class="n">Y</span> <span class="o">=</span> <span class="n">MatLoad</span><span class="p">(</span><span class="s">"Y.np"</span><span class="p">);</span> 
-    <span class="n">XROWS</span><span class="p">,</span><span class="n">XCOLS</span><span class="p">,</span><span class="n">YROWS</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">XROWS</span><span class="p">)</span>
-    <span class="n">res</span>  <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">)</span>
-    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s"> Detalles de convergencia </span><span class="se">\n</span><span class="s">"</span>
-    <span class="k">print</span> <span class="n">res</span>
-    <span class="n">theta</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
-    <span class="k">print</span> <span class="s">"</span><span class="se">\n</span><span class="s">Clase de [1,0,5]:"</span><span class="p">,</span><span class="n">classify</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span>
-    
-</code></pre>
-</div>
+<p>```</p>
 
-<p>Es idéntico al del Perceptron, cambiando la función objetivo de <a href="https://i.gyazo.com/5cccecf3f307437adb63609a97f0ed40.png"><em>f</em></a> a <a href="https://i.gyazo.com/27cfe2a3959b5475029968f5fcc21b12.png"><em>f’</em></a>. Nótese que la minimización de las diferencias entre la LHS y RHS no garantiza resultados correctos en clasificación donde normalmente el conjunto de salidas posibles <em>Y</em> es discreto.</p>
+<h1 id="usrbinenv-python">!/usr/bin/env python</h1>
+<p># -<em>- coding: utf-8 -</em>-
+#
+#  AutoEncoder.py</p>
 
-<p>La salida del script es muy similar a la del caso anterior:</p>
+<p>import NeuralNetwork as nn
+from Utils import MatLoad
+import numpy as np</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
- Detalles de convergencia
+<p>if <strong>name</strong> == “<strong>main</strong>”:
+    X = MatLoad(“X.np”);  # Vectores por columnas (N=|cols|, M=|rows|) # 
+    XROWS,XCOLS,M1 = X.shape[0],X.shape[1],10 # Se cuenta la unidad BIAS en la capa oculta (la entrada se asume en notación homogénea) #
+    units_by_layer = [XROWS,M1,XROWS-1] 
+    theta = nn.generate_theta(units_by_layer)
+    Y     = X[1:]
+    res   = nn.fit(theta,X,Y,units_by_layer,nn.lineal,max_iter=1000000)
+    print “\n Detalles de convergencia \n”
+    print res
+    theta = res.x
+    theta = nn.get_weights_submatrices(theta,units_by_layer)
+    print “Vector original: “,np.matrix([[1], [0], [1], [1], [0], [1], [0], [0], [0], [0], [1], [1], [0], [1], [1], [1],[1]])
+    encoded = nn.forward_propagation_transform(theta[0],np.matrix([[1], [0], [1], [1], [0], [1], [0], [0], [0], [0], [1], [1], [0], [1], [1], [1],[1]]),units_by_layer,nn.lineal)
+    encoded = np.insert(encoded,0,1,axis=0)
+    print “Vector cifrado: “,encoded
+    decoded = nn.forward_propagation_transform(theta[1],encoded,units_by_layer,nn.lineal)
+    print “Vector descifrado: “,decoded</p>
 
-      fun: 7.76245804938178e-15
- hess_inv: array([[ 4.99999999, -1.        , -1.        ],
-       [-1.        ,  0.26      ,  0.18      ],
-       [-1.        ,  0.18      ,  0.24      ]])
-      jac: array([ -1.30741529e-10,   3.51008111e-11,   1.42319490e-11])
+<p>```</p>
+
+<p>En el script se ha entrenado primero el <em>autoencoder</em> con el conjunto de muestras que he mencionado antes y después se ha procedido a cifrar el bloque de 2B “ho” (<code class="highlighter-rouge">0110100001101111</code>, y en notación homogénea <code class="highlighter-rouge">10110100001101111</code>), los resultados que se obtienen tras la ejecución del script son:</p>
+
+<p>```</p>
+
+<p>Optimization terminated successfully.
+         Current function value: 0.000000
+         Iterations: 134
+         Function evaluations: 105841
+         Gradient evaluations: 336</p>
+
+<p>Detalles de convergencia</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code> fun: 2.399946487631182e-09
+ jac: array([ -1.10356042e-06,   0.00000000e+00,  -1.10356042e-06,
+ ...
   message: 'Optimization terminated successfully.'
-     nfev: 40
-      nit: 5
-     njev: 8
-   status: 0
-  success: True
-        x: array([ 1.00000026,  0.19999994, -0.40000006])
-
-Clase de [1,0,5]: -1
-
+nfev: 105841
+ nit: 134
+njev: 336   status: 0  success: True
+   x: array([ -8.47539898e-01,   1.00000000e+00,  -8.47539898e-01,
+   ...
+   Vector cifrado:   [[ 1.        ] [-5.18020183] [-5.18122276] [-5.54306646] [-4.99780952] [-4.88438915] [-5.32546369] [-4.55401426] [-5.17546803] [-6.14500501]]
+Vector descifrado:   [[  2.73595684e-05]  [  9.99997815e-01]  [  9.99997815e-01]  [  2.73595684e-05]  [  1.00001467e+00]  [  2.51373514e-05]  [  1.14924639e-05]  [  2.63763669e-05]  [  2.73599263e-05]  [  9.99997815e-01]  [  9.99997815e-01]  [  2.63777148e-05]  [  1.00000102e+00]  [  1.00000004e+00]  [  1.00001689e+00]  [  1.00001368e+00]]
 </code></pre>
 </div>
 
-<p>El conjunto de muestras es el mismo que en el caso anterior, sin embargo, se puede observar que el vector <em>θ</em> difiere del obtenido en Perceptron ya que al modificar la función objetivo se resuelve un problema diferente (éste, se podría haber resuelto utilizando la función <a href="http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq"><em>leastsq</em></a> del módulo <em>optimize</em>).</p>
+<p>```</p>
+
+<p>Se puede observar como los 2 bytes <em>“ho”</em>, cifrados mediante el <em>encoder</em>, quedan de la siguiente forma:</p>
+
+<p>```</p>
+
+<p>[1.0, -5.1802018305848385, -5.181222759796455, -5.543066463152387, -4.997809523535919, -4.884389148007498, -5.325463692424654, -4.554014256199364, -5.1754680337452275, -6.145005007361612]</p>
+
+<p>```</p>
+
+<p>Podemos transmitir ese cifrado a través de un canal inseguro, habiendo comunicado previamente la clave, que en este caso son los pesos del <em>decoder</em> y el número de neuronas en la capa de salida, mediante un canal seguro p.e. obtenido con criptografía de clave pública.En el destino se descifra mediante el <em>decoder</em> partiendo del cifrado anterior, y se obtiene:</p>
+
+<p>```</p>
+
+<p>[2.73595684e-05, 0.999997815, 0.999997815, 2.73595684e-05, 1.00001467, 2.51373514e-05, 1.14924639e-05, 2.63763669e-05, 2.73599263e-05, 0.999997815, 0.999997815,2.63777148e-05, 1.00000102, 1.00000004, 1.00001689, 1.00001368]</p>
+
+<p>```</p>
+
+<p>Si son valores absolutos p.e. 0 y 1, posiblemente no se lleguen a alcanzar nunca debido a que la máxima precisión en coma flotante son 16 dígitos correctos, sin embargo se obtienen valores que prácticamente se corresponden con los valores extremos. En este caso: <code class="highlighter-rouge">[0,1,1,0,1,0,0,0,0,1,1,0,1,1,1,1]</code> que se corresponde con el bloque de 2B original: <code class="highlighter-rouge">0110100001101111</code></p>
+
+<p>De éste modo, podríamos cifrar mensajes completos segmentándolos en bloques de 2B consecutivos e ir cifrando bloque a bloque mediante modos de operación (encadenados o no). Pero si nos fijamos, no solo hemos cifrado, si no que también hemos reducido la información a transmitir (aunque no del todo porque en este ejemplo, al ser la representación discreta y binaria se podría enviar como bloques de bits concatenados y al cifrar de esta manera obtenemos un conjunto de reales que ocupan un mayor número de bytes) pasando de 16 elementos (2B por bloque) a 9 elementos. ¿por qué ha pasado ésto?-</p>
 
 <hr />
 
-<p>Hasta aquí lo que quería comentar, hay muchísima documentación sobre todo lo que he ido contando y he intentado enlazarlo y simplificarlo en la medida de lo posible para que sea comprensible. En próximas partes comentaré la implementación de máquinas de vectores de soporte <a href="https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte">SVM</a>, <a href="https://en.wikipedia.org/wiki/Support_vector_machine#Soft-margin">con</a> y sin márgenes blandos (para ver una introducción la clasificación no lineal) y la aplicación de funciones <a href="https://en.wikipedia.org/wiki/Positive-definite_kernel">kernel</a> para que los clasificadores implementados sepan discriminar de formas más complejas.</p>
+<h3 id="aplicaciones-de-autoencoders-compresin-2">Aplicaciones de Autoencoders: compresión (2)</h3>
+<p>En el ejemplo anterior se ha visto como se ha reducido el número de elementos a transmitir, ¿por qué?, la respuesta es sencilla, si partimos de una muestra con 16 dimensiones y la usamos para obtener una salida en la primera capa oculta(la última del <em>encoder</em>) de la red neuronal entrenada para la reconstrucción de las muestras, si esta primera capa oculta tiene un menor número de neuronas que dimensiones tienen las muestras, estaremos consiguiendo una reducción del número de elementos. En el ejemplo del cifrado se puede ver como cada muestra tiene 16 dimensiones (1 por cada bit del bloque de 2B) y la primera capa oculta tiene 9 neuronas, por lo que pasaremos de tener un bloque de 16 bits del texto sin cifrar a obtener 9 elementos reales de texto cifrado (se ha obtenido una reducción del número de elementos en el espacio original).</p>
 
-<p>Dejo el <a href="https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1">código disponible hasta el momento</a> en el <a href="https://github.com/Indeseables/indeseables.github.io">repositorio</a>.</p>
+<hr />
+
+<p>Con esto ha quedado una entrada que recoge una pequeña parte de la teoría de redes neuronales y propone una implementación resolviendo el problema de optimización que caracteriza el aprendizaje en este tipo de redes con métodos diferentes a los convencionales (todos los implementados en el módulo <em>optimize</em> de <em>Scipy</em> de ámbito local e.g. gradiente conjugado, L-BFGS, L-BFGS-B, Nelder-Mead etc).</p>
+
+<p>En la siguiente entrada continuaré las entregas de implementaciones alternativas explicando SVM y funciones kernel.</p>
+
+<p>He dejado todo el código nuevo en el <a href="https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_2">repositorio</a>.</p>
 
 <p>Cualquier comentario:</p>
 
@@ -359,7 +409,7 @@ Clase de [1,0,5]: -1
   <li>Issues: <a href="https://github.com/Indeseables/indeseables.github.io/issues">#Issues</a></li>
 </ul>
 
-<p><strong>Autor:</strong> <a href="https://github.com/overxfl0w"><em>J.G</em></a></p>
+<p><em>Autor: <a href="https://github.com/overxfl0w">J.G</a></em></p>
 
   </div>
   
@@ -367,11 +417,11 @@ Clase de [1,0,5]: -1
 
 <div class="pagination">
   
-    <a class="pagination-item older" href="/page3">Older</a>
+    <a class="pagination-item older" href="http://indeseables.github.io/page3">Older</a>
   
   
     
-      <a class="pagination-item newer" href="/">Newer</a>
+      <a class="pagination-item newer" href="http://indeseables.github.io/">Newer</a>
     
   
 </div>
