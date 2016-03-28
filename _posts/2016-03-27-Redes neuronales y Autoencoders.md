@@ -2,9 +2,9 @@
 layout: post
 title: Redes neuronales y autoencoders.
 comments: True
+author: Overxfl0w13
 ---
 
-{% include twitter_plug.html %}
 Si se ha visto el [post](http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/) anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de [Perceptron dispuestos en cascada](https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png). 
 
 ___
@@ -321,8 +321,8 @@ Cualquier comentario:
 * Twitter: [@indeseables](http://twitter.com/)
 * Issues: [#Issues](https://github.com/Indeseables/indeseables.github.io/issues)
 
-*Autor: [J.G](https://github.com/overxfl0w)*
-
 ___
 
 {% include twitter_plug.html %}
+
+___

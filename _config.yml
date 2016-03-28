@@ -16,7 +16,7 @@ title:               Indeseabλes
 tagline:             ''
 description:         ''
 url:                 http://indeseables.github.io
-baseurl:             'http://indeseables.github.io'
+baseurl:             ''
 paginate:            1
 
 # About/contact
@@ -32,3 +32,40 @@ pages_list:
     About: '/about'
     Entradas: '/archive'
     RSS: '/atom.xml'
+
+authors:
+  Overxfl0w13:
+    display_name: overxfl0w13
+    img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
+    email: overxfl0w13@hotmail.com
+    web: http://indeseables.github.io
+    twitter: overxfl0w13
+    github: http://github.com/overxfl0w
+  Sanko:
+    display_name: Sanko
+    img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
+    email: sanko@domain.com
+    web: http://indeseables.github.io
+    twitter: sankosk
+    github: sankosk
+  Blau:
+    display_name: Blau
+    img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
+    email: blau@domain.com
+    web: http://indeseables.github.io
+    twitter: Blau
+    github: Blau
+  Scorpio:
+    display_name: Scorpio
+    img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
+    email: scorpio@domain.com
+    web: http://indeseables.github.io
+    twitter: Scorpio
+    github: Scorpio
+  Sadfud:
+    display_name: Sadfud
+    img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
+    email: sadfud@domain.com
+    web: http://indeseables.github.io
+    twitter: Scorpio
+    github: Scorpio

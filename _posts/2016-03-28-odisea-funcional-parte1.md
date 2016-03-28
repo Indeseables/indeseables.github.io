@@ -2,6 +2,7 @@
 layout: post
 title: Odisea Funcional (Parte 1)
 comments: True
+author: Sanko
 ---
 
 
@@ -253,3 +254,5 @@ Apuntes de Tecnología y Paradigmas de la programación escritos por: **Esteban 
 ___
 
 {% include twitter_plug.html %}
+
+___
