@@ -44,6 +44,7 @@ title: About
 ---
 
 # Contacto
+
 Contacta con nosotros a través de:
 
 * Email: indeseables [dot] git [at] gmail [dot] com
