@@ -21,8 +21,8 @@ title: About
 
 ## Blau
 
->Descripcion 3
-
+>Interesado en el análisis de malware y amenazas en la red. Persiguiendo a los malos siendo más malo. 
+>[#Github](http://github.com/blau72)
 
 ---
 
