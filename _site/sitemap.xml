@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://indeseables.github.io</loc>
-    <lastmod>2016-03-28T07:05:32+02:00</lastmod>
+    <lastmod>2016-04-02T04:42:28+02:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -47,7 +47,7 @@
   <url>
     <loc>http://indeseables.github.io/404/</loc>
     
-      <lastmod>2016-03-28</lastmod>
+      <lastmod>2016-04-02</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -60,7 +60,7 @@
   <url>
     <loc>http://indeseables.github.io/about/</loc>
     
-      <lastmod>2016-03-28</lastmod>
+      <lastmod>2016-04-02</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -73,7 +73,20 @@
   <url>
     <loc>http://indeseables.github.io/archive/</loc>
     
-      <lastmod>2016-03-28</lastmod>
+      <lastmod>2016-04-02</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://indeseables.github.io/cats/</loc>
+    
+      <lastmod>2016-04-02</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -86,7 +99,20 @@
   <url>
     <loc>http://indeseables.github.io/</loc>
     
-      <lastmod>2016-03-28</lastmod>
+      <lastmod>2016-04-02</lastmod>
+    
+    
+      <changefreq>monthly</changefreq>
+    
+    
+      <priority>0.3</priority>
+    
+  </url>
+  
+  <url>
+    <loc>http://indeseables.github.io/tags/</loc>
+    
+      <lastmod>2016-04-02</lastmod>
     
     
       <changefreq>monthly</changefreq>
@@ -99,33 +125,7 @@
   <url>
     <loc>http://indeseables.github.io/page2/</loc>
     
-      <lastmod>2016-03-28</lastmod>
-    
-    
-      <changefreq>monthly</changefreq>
-    
-    
-      <priority>0.3</priority>
-    
-  </url>
-  
-  <url>
-    <loc>http://indeseables.github.io/page3/</loc>
-    
-      <lastmod>2016-03-28</lastmod>
-    
-    
-      <changefreq>monthly</changefreq>
-    
-    
-      <priority>0.3</priority>
-    
-  </url>
-  
-  <url>
-    <loc>http://indeseables.github.io/page4/</loc>
-    
-      <lastmod>2016-03-28</lastmod>
+      <lastmod>2016-04-02</lastmod>
     
     
       <changefreq>monthly</changefreq>

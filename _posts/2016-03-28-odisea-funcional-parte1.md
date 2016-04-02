@@ -3,6 +3,7 @@ layout: post
 title: Odisea Funcional (Parte 1)
 comments: True
 author: Sanko
+tags: [Funcional,Programacion,Programacion funcional,Lambda,Paradigma funcional,Haskell,C#]
 ---
 
 

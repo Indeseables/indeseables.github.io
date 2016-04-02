@@ -26,12 +26,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Lambda_lc.svg/144px-Lambda_lc.svg.png">
-  <link rel="shortcut icon" href="/public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://i.imgsafe.org/ef6acae.png">
+  <link rel="shortcut icon" href="https://i.imgsafe.org/ef6acae.png">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
 </head>
+
 
 
   <body>
@@ -43,15 +44,23 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
+	    <center><img src="https://i.imgsafe.org/ef6acae.png" width="75" height="75"></img></center>
             <a href="/" title="Home">Indeseabλes</a>
             
 	    &nbsp;&nbsp;&nbsp;
+	    
 	    <small><a href="/about">About</a></small>
 	    
 	    &nbsp;&nbsp;&nbsp;
+	    
 	    <small><a href="/archive">Entradas</a></small>
 	    
 	    &nbsp;&nbsp;&nbsp;
+	    
+	    <small><a href="/tags">Tags</a></small>
+	    
+	    &nbsp;&nbsp;&nbsp;
+	    
 	    <small><a href="/atom.xml">RSS</a></small>
 	    
           </h3>
@@ -63,305 +72,83 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="//2016/03/28/odisea-funcional-parte1/">
+      <a href="/2016/03/28/odisea-funcional-parte1/">
         Odisea Funcional (Parte 1)
       </a>
     </h1>
 
     <span class="post-date">28 Mar 2016</span>
 
-    <p>Un título muy acertado pues estudiar el paradigma funcional es cuanto menos una odisea, <strong>preciosa o no dependiendo de a quíen preguntes.</strong></p>
-
-<p>Me apoyaré en apuntes de la universidad en la que estudio, luego el lenguaje utilizado será el mismo, <strong>C#, funcional no puro</strong>, pero trataré de comentar <strong>diferencias con un funcional puro como Haskell</strong> para que se entiendan mejor los conceptos estudiados.</p>
-
-<p><strong>Se pretende</strong> que en esta odisea naveguemos entre los siguientos puntos:<br />
-* <strong>Cálculo lambda</strong>
-* <strong>Funciones como entidades de primer orden</strong>
-* Cláusulas<br />
-* Currificación<br />
-* Aplicación Parcial<br />
-* Continuaciones<br />
-* Evaluación Perezosa<br />
-* Transparencia Referencial<br />
-* Pattern Matching<br />
-* Funciones de Orden Superior<br />
-* Listas por comprensión</p>
-
-<p>Recalco el <strong><em>“Se pretende”</em></strong> porque no estoy seguro de si podre escribir sobre todo sin que me demoré demasiado, el motivo principal de escribir esta odisea es que me sirva a la vez de estudio.</p>
-
-<p>En esta primera parte se estudiará el contenido <strong><em>más teorico</em></strong> puesto que abarca una introducción a la programación funcional y un breve estudio de la base desde la que empezó todo, el <strong>lambda cálculo</strong></p>
-
-<p><strong>PD</strong>: Intentaré que esta primera parte sea lo menos aburrida posible, pero no hay todo sin nada, y en este caso el contenido que leereis será prácticamente una copia, síntesis o como lo queráis llamar de los apuntes de mi universidad. (Que por cierto, no se si puedo adjuntar en formato PDF al final del post, por lo que por si acaso no se me permite, no lo haré)</p>
-
-<h2 id="qu-es-el-paradigma-funcional">¿Qué es el paradigma funcional?</h2>
-<blockquote>
-  <p>Paradigma declarativo basado en la utilización de funciones que manejan <strong>datos inmutables</strong>
-* Los datos nunca se modifican
-* En lugar de cambiar un dato, se llama a una función que devuelve el dato modificado sin modificar el original</p>
-</blockquote>
-
-<blockquote>
-  <p>Un programa se define mediante un conjunto de funciones invocándose entre sí<br />
-* Las funciones no generan efectos secundarios
-* El valor de una expresión depende únicamente de los valores de los parámetros
-* (Devolviendo siempre el mismo valor en función de éstos -&gt; Paradigma funcional puro)</p>
-</blockquote>
-
-<h2 id="lambda-clculo-o-clculo-lambda">Lambda cálculo o cálculo lambda</h2>
-<blockquote>
-  <p>Es un sistema formal basado en la definición de funciones (abstracción) y su aplicación (invocación), origen de la programación funcional cuando fue definido por <strong>Church y Kleene</strong> alla por los años 30.</p>
-</blockquote>
-
-<ul>
-  <li>Hace uso exhaustivo de la recursión</li>
-  <li>Se considera el lenguaje más pequeño universal de computación</li>
-  <li><strong><em>Frecuentemente utilizado por investigadores y diseñadores de lenguajes</em></strong></li>
-</ul>
-
-<h3 id="expresiones-lambda">Expresiones lambda</h3>
-<p>Se definen como:
-* Una abstracción lambda <strong><em>λx.M (M, N, M1, M2, …)</em></strong>
-donde <strong>x</strong> es una <strong>variable/parámetro</strong>, y <strong>M</strong> es una <strong>λ-expresión/cuerpo de la función</strong>
-* Una aplicación <strong>M N</strong> , donde <strong>M y N son λ-expresiones</strong></p>
-
-<p>Ejemplos de abstracciones:
-* Función identidad <strong>f(x) = x</strong> puede representarse como: <strong>λx.x</strong>
-* Función doble g(x) = x+x puede representarse como: <strong>λx.x+x</strong></p>
-
-<p><em>PD: No tendría que ser necesario decir que el símbolo “+” podría escribirse en código lambda, pero con fines académicos vamos a considerar las operaciones básicas como “disponibles” en nuestro “intérprete de lambda cálculo”</em></p>
-
-<h3 id="reduccin---aplicacin">Reducción-β ó Aplicación</h3>
-<p>La aplicación representa su invocación ( la de la función ) y se define del siguiente modo:
-* <code class="highlighter-rouge">(λx.M)N -&gt; M[x:=N]   (o M[N/x])</code></p>
-
-<p>Donde X es la variable, M y N son las λ-expresiones y <strong>M[x:=N] (o M[N/x]) representa la expresión lambda M, donde todas las x son sustituidas por la expresión lambda N.</strong></p>
-
-<p><strong>A esta sustitución se le denomina reducción-β</strong>, uds. más que nadie deben saber que el mundo de la ciencia esta rodeado por terminología confusa para de alguna manera espantar al que no se atreva a leer un párrafo entero.</p>
-
-<p>Ejemplos:
-* <code class="highlighter-rouge">(λx.x + x)3 -&gt; 3 + 3</code>
-* <code class="highlighter-rouge">(λx.x) λy.y*2 -&gt; λy.y*2</code></p>
-
-<h3 id="teorema-de-church-rosser">Teorema de Church-Rosser</h3>
-<blockquote>
-  <p>Establece que el orden en el que se apliquen estas reducciones no afecta al resultado final
-* <code class="highlighter-rouge">(λx.x)(λy.y*2)3 -&gt; (λy.y*2)3  -&gt; 3*2</code>
-* <code class="highlighter-rouge">(λx.x)(λy.y*2)3 -&gt; (λx.x)(3*2) -&gt; 3*2</code></p>
-</blockquote>
-
-<p>De modo que los paréntesis son usados normalmente para <strong>delimitar términos lambda</strong><br />
-Por ejemplo: <code class="highlighter-rouge">(λx.x)(λy.y)</code><br />
-Al evaluarse <code class="highlighter-rouge">(λy.y)</code> se reduce, esto podría explicarse de manera muy coloquial: el resultado de la función se aplica como parámetro a otra función y realmente queda reducida a una sola.</p>
-
-<p>Sin embargo: <code class="highlighter-rouge">λx.xλy.y</code> es una sola abstracción (función)</p>
-
-<h3 id="variables-libres-y-ligadas">Variables libres y ligadas</h3>
-<p>Sea una abstracción <code class="highlighter-rouge">λx.xy</code> se dice que:
-* &gt; <code class="highlighter-rouge">x</code> esta <strong>ligada</strong>
-* &gt; <code class="highlighter-rouge">y</code> es <strong>libre</strong></p>
-
-<p>En una <strong><em>reducción-β</em></strong> ó <strong><em>sustitución</em></strong> sólo se sustituyen las variables libres<br />
-<code class="highlighter-rouge">(λx.x(λx.2+x)y)M</code> <strong>→</strong>  <code class="highlighter-rouge">x(λx.2+x)y[x:=M] = M(λx.2+x)y</code></p>
-
-<p>El que sea la primera vez que lea sobre lambda cálculo y pueda leer esta línea sin llorar por dentro, bravo, pero normalmente y por experiencia propia, suele pasar que crees entender como lo hiciste y cuando se te da el problema sin la solución no estas tan seguro de lo que estas haciendo.</p>
-
-<p>[Añadir explicación paso a paso de la reducción]</p>
-
-<p>Para evitar estos conflictos en las reducciones se creó la <strong>conversión-α</strong><br />
-* Todas las apariciones de una variable <strong>ligada</strong> en una misma abstracción se pueden renombrar a una <strong>nueva</strong> variable
-* Incapié en <strong>nueva</strong>, <code class="highlighter-rouge">funcional = variables inmutables</code></p>
-
-<p><code class="highlighter-rouge">(λx.x(λx.2+x)y)M == (λx.x(λz.2+z)y)M → x(λz.2+z)y[x:=M] = M(λz.2+z)y </code><br />
- y si deseas, lo puedes volver a renombrar <code class="highlighter-rouge">==  M(λx.2+x)y</code>, ambas son soluciones válidas.</p>
-
-<h3 id="conversin-">conversión-α</h3>
-<ul>
-  <li><code class="highlighter-rouge">λx.xy == λz.zy</code></li>
-  <li><code class="highlighter-rouge">λx.xy != λy.yy</code></li>
-</ul>
-
-<p>Nótese la diferencia, <code class="highlighter-rouge">y</code> es una variable libre, no puede renombrarse:
-&gt; Todas las apariciones de una variable <strong>ligada</strong> en una misma abstracción se pueden renombrar a una <strong>nueva</strong> variable</p>
-
-<ul>
-  <li><code class="highlighter-rouge">λx.2+x == λy.2+y</code></li>
-  <li><code class="highlighter-rouge">xy(λx.2+x) == xy(λz.2+z)</code></li>
-  <li>…</li>
-</ul>
-
-<h2 id="isomorfismo-curry-howard">Isomorfismo Curry-Howard</h2>
-<p>Este apartado lo voy a saltar por alto, lo que si voy a hacer es dejaros el enlace a la Wikipedia y resumir un poco brevemente de lo que trata.</p>
-
-<p>Básicamente debeís saber que al igual que en <strong>Ingeniería civil se fundamentan en el cálculo para hacer sus demostraciones</strong>, en <strong>Ingeniería del Software nos fundamentamos en la lógica</strong> para hacer inferencia y demostraciones.</p>
-
-<p>Por ejemplo:<br />
-&gt; <strong>Verificación de programas</strong>: demostrar que un programa es correcto conforme a una especificación:
-* Un algoritmo de ordenación será correcto cuando se demuestre:<br />
-1. <code class="highlighter-rouge">Tras su invocación, todos los elementos están ordenados.</code>
-2. <code class="highlighter-rouge">Para cualquier entrada pasada al algoritmo (Infinitas).</code>
-&gt; El isomorfismo o correspondencia de Curry-Howard establece una <strong>relación directa entre programas software y demostraciones matemáticas</strong></p>
-
-<p>Para más información: <a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence">Wikipedia- Isomorfismo - Curry-Howard</a></p>
-
-<h2 id="funciones-entidades-primer-orden">Funciones, Entidades Primer Orden</h2>
-<blockquote>
-  <p>En <strong>paradigma funcional</strong>, las funciones son entidades de primer orden, esto significa que las <strong>funciones son un tipo más</strong>, pudiendose por ejemplo, instanciar variables de tipo función en estructuras de datos, pasarlas como parámetros o retornarlas.</p>
-</blockquote>
-
-<h3 id="funciones-de-orden-superior">Funciones de orden superior</h3>
-<p>Se dice que una función es de orden superior si:
-* recibe alguna función como parámetro
-* retorna alguna función como resultado
-* Y por conclusión, si recibe y retorna, ¿lógico no?</p>
-
-<p>Por ejemplo, la función <code class="highlighter-rouge">doble</code>: <code class="highlighter-rouge">λf.(λx.f(fx))</code> sería una función de orden superior.</p>
-
-<p>En lenguajes funcionales puros como haskell, esto es nativo, todo son funciones, esto quiere decir que operadores como <code class="highlighter-rouge">+ - / ...</code> son funciones infijas que curiosamente tambien pueden ser invocadas con <a href="https://es.wikipedia.org/wiki/Notaci%C3%B3n_polaca_inversa">notación polaca inversa</a> <code class="highlighter-rouge">+ 1 2</code> = <code class="highlighter-rouge">3</code>.</p>
-
-<p>El problema viene en lenguajes que siguen muy a raja tabla el paradigma orientado a objetos (Veáse Java…), como instancias funciones?, en Java 8 ya se han implementados cosas de funcional pero sigue siendo un completo desastre.</p>
-
-<h3 id="delegados">Delegados</h3>
-<p>C# usa algo llamado <strong>delegados</strong>, los delegados son funciones que son <strong>entidades de primer orden</strong>. (al igual que las lambda-expresiones).</p>
-
-<blockquote>
-  <p>Un delegado constituye un <strong>tipo que representa un método</strong> ya sea de instancia o de clase (<code class="highlighter-rouge">static</code>)</p>
-</blockquote>
-
-<p>Un poco de código para entender el concepto:</p>
-
-<pre><code class="language-C#">public delegate int Comparacion(Persona p1, Persona p2);
-</code></pre>
-<p>Comparación es un método que recibe dos <code class="highlighter-rouge">Persona</code> y devuelve un <code class="highlighter-rouge">ìnt</code></p>
-
-<p>Ahora por ejemplo, podriamos definir un método <code class="highlighter-rouge">OrdenarPersonas</code> independientemente del criterio de ordenación que se escoja.</p>
-
-<pre><code class="language-C#">static public void OrdenarPersonas(Persona[] vector, Comparacion comparacion){
-    //... Iterando el vector ...
-    if(comparacion(vector[i], vector[j]) &gt; 0){
-        Persona aux = vector[i];
-        vector[i] = vector[j];
-        vector[j] = aux;
-    }
-    //...
-}
-</code></pre>
-
-<h3 id="tipos-de-delegados-predefinidos">Tipos de delegados predefinidos</h3>
-<blockquote>
-  <p>.Net tiene un conjunto de delegados predefinidos que hacen uso de la potencia de la <strong>genericidad</strong></p>
-</blockquote>
-
-<p>Los más utilizados son <code class="highlighter-rouge">Func</code>, <code class="highlighter-rouge">Action</code> y <code class="highlighter-rouge">Predicate</code>.
-* &gt; <code class="highlighter-rouge">Func&lt;T&gt;</code>: Método sin parámetros que retorna un <code class="highlighter-rouge">T</code>
-* &gt; <code class="highlighter-rouge">Func&lt;T1, T2&gt;</code>: Método que recibe un parámetro <code class="highlighter-rouge">T1</code> y retorna un <code class="highlighter-rouge">T2</code>
-* &gt; <code class="highlighter-rouge">Action</code>: Método sin parámetros ni retorno
-* &gt; <code class="highlighter-rouge">Action&lt;T&gt;</code>: Método con un parámetro <code class="highlighter-rouge">T</code> sin retorno
-* &gt; <code class="highlighter-rouge">Predicate&lt;T&gt;</code>: Método que retorna un <code class="highlighter-rouge">bool</code> y recibe un <code class="highlighter-rouge">T</code></p>
-
-<h3 id="delegados-annimos">Delegados Anónimos</h3>
-<blockquote>
-  <p>En la programación funcional es común <strong>poder escribir la función en el momento de pasar ésta como parámetro</strong></p>
-</blockquote>
-
-<pre><code class="language-C#">Persona[] personas = ListadoPersonas.CrearPersonasAleatorias();
-Persona[] mayoresEdad = Array.FindAll(personas, 
-                            delegate(Persona p) { return p.Edad &gt;= 18; }
-                        );
-</code></pre>
-
-<p>C# lanzó una buena solución al problema pero la sintaxis seguia siendo dificil de tratar, y por eso decidio implementar <strong>expresiones lambda</strong>, que básicamente mejoraban los <strong>delegados anónimos</strong></p>
-
-<h3 id="expresiones-lambda-1">Expresiones lambda</h3>
-<blockquote>
-  <p>permiten <strong>escribir el cuerpo de funciones completas como expresiones</strong></p>
-</blockquote>
-
-<pre><code class="language-C#">//El ejemplo de función de orden superior que veiamos antes
-Func&lt;Func&lt;int, int&gt;, int, int&gt; dobleAplicacion = (f, n) =&gt; f(f(n));
-Console.WriteLine(dobleAplicacion(n =&gt; n+n, 3));
-
-//Convertimos el ejemplo de los delegados anónimos
-Persona[] personas = ListadoPersonas.CrearPersonasAleatorias();
-Persona[] mayoresEdad = Array.FindAll(personas, persona =&gt; persona.Edad &gt;= 18);
-</code></pre>
-
-<p>En Haskell se utiliza esta sintaxis (Desde el intérprete):
-<code class="highlighter-rouge">Haskell
--- DobleAplication de 3 -&gt; 12
-Prelude&gt; (\f n -&gt; f (f n)) (\x -&gt; x+x) 3
-12
-</code>
-Haskell tiene inferencia de tipos, pero tiene la característica de poder definir una cabecera con los tipos
-<code class="highlighter-rouge">Haskell
-factorial :: Integer -&gt; Integer
-factorial n = product [1..n]
-</code></p>
-
-<h3 id="bucles-y-recursividad">Bucles y Recursividad</h3>
-<p>Me imagino que ya os habreís pegado con el concepto de recursividad más veces, y en parte, como <strong>C# es un lenguaje funcional no puro, puede usar estructuras de control de flujo iterativas cuando sea oportuno</strong>, pero los <strong>lenguajes puros como Haskell hacen uso exhaustivo de la recursión</strong></p>
-
-<p>Por ejemplo, imaginate que los operadores: <code class="highlighter-rouge">if</code>-<code class="highlighter-rouge">then</code>-<code class="highlighter-rouge">else</code>, <code class="highlighter-rouge">=</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">*</code>los tenemos codificados en lambda cálculo y podemos usarlos.</p>
-
-<blockquote>
-  <p>Función factorial en lambda cálculo:
-<code class="highlighter-rouge">λf.λx. if x=0 or x=1 then 1 else x*f(x-1)</code></p>
-</blockquote>
-
-<p>Hay una función de orden superior muy conocida en haskell: <code class="highlighter-rouge">fix</code> ó <strong>combinador de punto fijo</strong> que suele ser muy utilizada y que podremos aplicar tambien en lambda cálculo si estuviera definida previamente.<br />
-&gt; <code class="highlighter-rouge">fix f -&gt; f (fix f)</code>
-* al aplicar <code class="highlighter-rouge">fix</code> a <code class="highlighter-rouge">f (fix f)</code>
-    1. Se retorna f<br />
-    2. Pasando una nueva invocación a <code class="highlighter-rouge">fix f</code> como primer parámetro</p>
-
-<h2 id="ejercicios-para-prcticar-lo-aprendido">Ejercicios para prácticar lo aprendido</h2>
-<ul>
-  <li>Aplica reducción y conversión a: <code class="highlighter-rouge">(λf.λx.f(fx))(λx.x+x)n</code></li>
-  <li>Usando funciones de orden superior, preferiblemente, usando lambda expresiones, construye tu propia “Calculadora funcional” con las operaciones básicas de : <code class="highlighter-rouge">suma</code>, <code class="highlighter-rouge">resta</code>, <code class="highlighter-rouge">multiplicación</code> y <code class="highlighter-rouge">divisiòn</code></li>
-</ul>
-
-<h2 id="soluciones">Soluciones</h2>
-<ul>
-  <li>Lambda cálculo - solución: <a href="https://github.com/Indeseables/indeseables.github.io/blob/master/_codigos/entrada_funcional1/555df00550955abc13e4cec1400672c7.png">Github: Imágen</a></li>
-  <li>Calculadora funcional: <a href="https://github.com/Indeseables/indeseables.github.io/blob/master/_codigos/entrada_funcional1/calculator.hs">Github: Haskell</a> <a href="https://github.com/Indeseables/indeseables.github.io/blob/master/_codigos/entrada_funcional1/calculator.cs">Github: C#</a></li>
-</ul>
-
-<h2 id="siguiente-post">Siguiente post</h2>
-<ul>
-  <li><strong>Cláusulas, Currificación y Aplicación Parcial</strong></li>
-</ul>
-
-<h2 id="referencias">Referencias</h2>
-<ul>
-  <li><strong>Códigos de ejemplo y Teoria casi en su totalidad extraidos de las diapositivas de la Escuela de Ingeneria Informática de Uniovi</strong>, <strong>autor</strong> según indícan las diapositivas: <strong>Francisco Ortín Soler</strong></li>
-  <li>Famoso libro de haskell : <a href="http://aprendehaskell.es">Aprende Haskell</a></li>
-</ul>
-
-<h2 id="autora">Autoría</h2>
-<p>Apuntes de Tecnología y Paradigmas de la programación escritos por: <strong>Esteban Montes Morales</strong>
-* Perfil de Github: <a href="http://github.com/sankosk">Click para ir al sitio</a>
-* Twitter: @SankoSK
-* Perfil de Linkedin: <a href="https://www.linkedin.com/in/esteban-montes-morales-59257366">Click para ir al sitio</a></p>
-
-<hr />
-
-<p>Si tienes alguna duda, comentario o sugerencia, notifícanos a través de <a href="mailto:indeseables.git@gmail.com">indeseables.git@gmail.com</a>
- y si te ha gustado la entrada puedes <a href="https://twitter.com/intent/tweet?url=http://indeseables.github.io/2016/03/28/odisea-funcional-parte1/&amp;text=Odisea Funcional (Parte 1)&amp;via=indeseables!" target="_blank"> compartirla!.</a></p>
-
-<hr />
-
+    <div>
+      
+      
+      <p>Un título muy acertado pues estudiar el paradigma funcional es cuanto menos una odisea, <strong>preciosa o no dependiendo de a quíen preguntes.</strong></p>
+
+
+      
+      
+      <a href="/2016/03/28/odisea-funcional-parte1/">Seguir leyendo</a>
+    </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2016/03/27/Redes-neuronales-y-Autoencoders/">
+        Redes neuronales y autoencoders.
+      </a>
+    </h1>
+
+    <span class="post-date">27 Mar 2016</span>
+
+    <div>
+      
+      
+      <p>Si se ha visto el <a href="http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">post</a> anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de <a href="https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png">Perceptron dispuestos en cascada</a>.</p>
+
+
+      
+      
+      <a href="/2016/03/27/Redes-neuronales-y-Autoencoders/">Seguir leyendo</a>
+    </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">
+        Implementación alternativa de algoritmos de aprendizaje (parte I).
+      </a>
+    </h1>
+
+    <span class="post-date">25 Mar 2016</span>
+
+    <div>
+      
+      
+      <p>Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería <em>Scipy</em> y más concretamente, su módulo <em>optimize</em> (tenía pensado usar <a href="https://www.mcs.anl.gov/petsc/">Petsc</a>, pero no he conseguido convertir matrices a su formato y me ha complicado las cosas).</p>
+
+
+      
+      
+      <a href="/2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/">Seguir leyendo</a>
+    </div>
   </div>
   
 </div>
 
 <div class="pagination">
   
-    <a class="pagination-item older" href="/page2">Older</a>
+    <a class="pagination-item older" href="/page2">Entradas antiguas</a>
   
   
-    <span class="pagination-item newer">Newer</span>
+    <span class="pagination-item newer">Entradas recientes</span>
   
 </div>
 
+<div class="sidebar-item" align="center">
+    <p>
+	Blog de Indeseabλes. &copy; 2016.
+    </p>
+</div>
 
       </div>
     </div>

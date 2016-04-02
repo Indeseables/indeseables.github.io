@@ -16,7 +16,7 @@ title:               Indeseabλes
 tagline:             ''
 description:         ''
 url:                 http://indeseables.github.io
-baseurl:             'http://indeseables.github.io'
+baseurl:             ''
 paginate:            3
 
 # About/contact
@@ -26,12 +26,14 @@ author:
   email:             indeseables@gmail.com
 
 # Custom vars
-version:             
+version:   1.1    
 
 pages_list:
     About: '/about'
     Entradas: '/archive'
+    Tags: '/tags'
     RSS: '/atom.xml'
+    
 
 authors:
   Overxfl0w13:

@@ -52,3 +52,9 @@ Contacta con nosotros a través de:
 * Issues: [#Issues](https://github.com/Indeseables/indeseables.github.io/issues)
 
 ---
+
+<div class="sidebar-item" align="center">
+    <p>
+	Blog de Indeseabλes. &copy; {{ site.time | date: '%Y' }}.
+    </p>
+</div>

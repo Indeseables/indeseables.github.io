@@ -7,14 +7,27 @@ title: Home
   {% for post in paginator.posts %}
   <div class="post">
     <h1 class="post-title">
-      <a href="{{ site.baseurl }}/{{ post.url }}">
+      <a href="{{ post.url }}">
         {{ post.title }}
       </a>
     </h1>
 
     <span class="post-date">{{ post.date | date_to_string }}</span>
 
-    {{ post.content }}
+    <div>
+      {% if post.fullview %}
+      {{ post.content }}
+      {% else %}
+      {% if post.shortinfo %}
+      {{ post.shortinfo }}
+      {% elsif post.description %}
+      {{ post.description }}
+      {% else %}
+      {{ post.excerpt }}
+      {% endif %}
+      {% endif %}
+      <a href="{{ post.url }}">Seguir leyendo</a>
+    </div>
   </div>
   {% endfor %}
 </div>
@@ -36,3 +49,8 @@ title: Home
   {% endif %}
 </div>
 
+<div class="sidebar-item" align="center">
+    <p>
+	Blog de Indeseabλes. &copy; {{ site.time | date: '%Y' }}.
+    </p>
+</div>
