@@ -17,7 +17,7 @@ tagline:             ''
 description:         ''
 url:                 http://indeseables.github.io
 baseurl:             'http://indeseables.github.io'
-paginate:            1
+paginate:            5
 
 # About/contact
 author:
