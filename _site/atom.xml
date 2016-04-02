@@ -4,13 +4,123 @@
  <title>Indeseabλes</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-04-02T04:42:28+02:00</updated>
+ <updated>2016-04-02T04:47:40+02:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
    <name>Indeseables</name>
    <email>indeseables@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Análisis de malware sirio</title>
+   <link href="http://indeseables.github.io/2016/03/29/analisis-de-malware-sirio/"/>
+   <updated>2016-03-29T00:00:00+02:00</updated>
+   <id>http://indeseables.github.io/2016/03/29/analisis-de-malware-sirio</id>
+   <content type="html">&lt;p&gt;Ayer estuve varias horas recolectando samples para hacer mi primera entrada en el blog sobre el análisis de malware pero sólo vi keyloggers y servidores de DarkComet cifrados con crypters en .NET, así que buscando en google encontré &lt;a href=&quot;http://syrianmalware.com/&quot;&gt;esta página&lt;/a&gt; y aunque el último sample es de 2014 me pareció curiosa.&lt;/p&gt;
+
+&lt;p&gt;El primer análisis es del primer sample de la web (a8ef5ccebd2e3babdd243a2861673c26). Quiero aclarar que no soy un experto en análisis así que mis procedimientos quizá no sean los más correctos.&lt;/p&gt;
+
+&lt;h2 id=&quot;a8ef5ccebd2e3babdd243a2861673c26&quot;&gt;a8ef5ccebd2e3babdd243a2861673c26&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Filename: news.exe&lt;/li&gt;
+  &lt;li&gt;MD5 Hash: a8ef5ccebd2e3babdd243a2861673c26&lt;/li&gt;
+  &lt;li&gt;Filesize: 114K&lt;/li&gt;
+  &lt;li&gt;Analysis or Media:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://docs.google.com/document/d/1LCfzNKtDwBn2BqKo_rvgCxMug8Ow-lZMBT89UFayAhI/edit?usp=sharing&quot;&gt;Quick Analysis&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.virustotal.com/en/file/039058cd0f349c8987a4a61a3de12660b78007235126ee75228933fda2343e4f/analysis/1412724921/&quot;&gt;VirusTotal Results&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://malwr.com/analysis/YTE3YWRlNjZmMjlhNGNjZmI1YmRjNDQ3YmI1MjAyZjQ/&quot;&gt;Malwr Analysis&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Un primer vistazo rápido con CFF Explorer nos muestra que es un ejecutable .NET así que veremos si se puede decompilar. Para ello usaré ILSpy ya que es el que mejor me ha funcionado en la máquina virtual. Al decompilar el ejecutable y abrimos cualquier clase vemos que parece ser que está ofuscado.
+&lt;img src=&quot;https://i.gyazo.com/f4848a908ff3b9c0e8d80aa21a055a82.png&quot; alt=&quot;FIG1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Suerte que tenemos &lt;a href=&quot;https://github.com/0xd4d/de4dot&quot;&gt;de4dot&lt;/a&gt;. Normalmente uso un par de veces de4dot por el ejecutable por si las moscas y en este caso parece ser que acerté.
+&lt;img src=&quot;https://i.gyazo.com/5d56ba4ffb3bcc74e430d09e881b84ae.png&quot; alt=&quot;FIG2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;En una de las clases vemos una variable bastante larga cifrada con Base64, seguramente un ejecutable, pero me entra la curiosidad que empiece por &amp;lt;COMPRESSED&amp;gt; y acabe en &amp;lt;/COMPRESSED&amp;gt; así que hay que buscar en el resto de clases alguna referencia a una función de compresión.
+&lt;img src=&quot;https://i.gyazo.com/8f663ac394688c72cea81f92a0c918a7.png&quot; alt=&quot;FIG3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Encuentro a la primera la clase encargada de la compresión al ver que hay una llamada ClsCompressedString (¿seré un genio?) y una rápida búsqueda en Google me lleva a &lt;a href=&quot;http://www.codeproject.com/Articles/27396/Easy-String-Compression-and-Encryption&quot;&gt;esta página&lt;/a&gt; donde seguramente el súper hacker habrá sacado el código. Creo un nuevo proyecto en VB.NET y uso la clase para descomprimir y descifrar la string usando la misma función que usa el crypter en una de sus clases. El archivo cifrado se puede descifrar con la clase clsCompressedString comentada antes, luego convirtiendo el resultado (string hexadecimal) a una array de bytes y por último descomprimiendo con GZip. El resultado es (otro) ejecutable .NET, el cual, al decompilarlo (con &lt;a href=&quot;https://github.com/0xd4d/dnSpy&quot;&gt;dnSpy&lt;/a&gt;) parece ser un servidor de NjRAT 0.6.4 que conecta al DNS aliahmahhmod.zapto.org, offline en el momento de escribir el post.&lt;/p&gt;
+
+&lt;h2 id=&quot;e1d84b350c1465bb4c4c77b1bcec&quot;&gt;7263e1d84b350c1465bb4c4c77b1bcec&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Filename: برنامج الفيش.exe&lt;/li&gt;
+  &lt;li&gt;MD5 Hash: 7263e1d84b350c1465bb4c4c77b1bcec&lt;/li&gt;
+  &lt;li&gt;Filesize: 8.6M
+Analysis or Media:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://docs.google.com/document/d/1DZvHVn1r_EOj53eYKhQ2jO4mHjR5oX1JbLoxqn-8VpM/edit?usp=sharing&quot;&gt;Quick Analysis&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.virustotal.com/en/file/20c52aedfe32d4a71bf5e3353cf3999ea95b3a43c7e40c8820b1b7d24b9e6cb5/analysis/1410845347/&quot;&gt;VirusTotal Results&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;CFF Explorer nos revela que es un ejecutable .NET (qué sorpresa) así que lo pasamos por de4dot, que indicará que no está ofuscado (unknown ofuscator) por eso lo decompilaré directamente. En ILSpy vemos sólo hay dos clases pero buscando en una de ellas (frmMain) vemos que en el método frmMain_Load (que se ejecutará al abrirse el formulario) hay un código para guardar un archivo en AppData con nombre ‘sql’ (niños malos).
+&lt;img src=&quot;https://i.gyazo.com/c2797d41f78a506de6c48c1512ab3048.png&quot; alt=&quot;FIG4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ILSpy no me deja guardar el recurso así que lo abrí desde dnSpy y así lo pude guardar. Al examinar el archivo con CFF Explorer me llevé una enorme sorpresa el ver que era… otro ejecutable .NET. Al decompilar dicho ejecutable veo que sólo tiene una clase llamada Downloader así que tendré que analizarlo durante horas para saber cual es su propósito.
+&lt;img src=&quot;https://i.gyazo.com/1154346a2b7dc2ab49e3460c3d835fa7.png&quot; alt=&quot;FIG5&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ambos archivos no están disponibles. Un punto para ellos.&lt;/p&gt;
+
+&lt;h2 id=&quot;bf01f67db4a5e8e6174b066775eae0&quot;&gt;28bf01f67db4a5e8e6174b066775eae0&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Filename: psiphon.exe&lt;/li&gt;
+  &lt;li&gt;MD5 Hash: 28bf01f67db4a5e8e6174b066775eae0&lt;/li&gt;
+  &lt;li&gt;Filesize: 1.4M&lt;/li&gt;
+  &lt;li&gt;Analysis or Media:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://citizenlab.org/2014/03/maliciously-repackaged-psiphon/&quot;&gt;Maliciously Repackaged Psiphon Found&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.virustotal.com/en/file/1182ffd81b4ee9bed90ca490ca5bb258e19cce68175d1a69f054030db1075df6/analysis/&quot;&gt;VirusTotal Results&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tercer round. CFF Explorer nos muestra que es, increíblemente, un ejecutable .NET. Ya sabéis la historia: de4dot, ILSpy/dnSpy, buscar, etc. Este ejecutable sólo tiene una clase llamada Windows que no es más que un formulario que droppea dos ejecutables desde recursos llamados server.exe (muy original…) y psiphon3.exe.&lt;/p&gt;
+
+&lt;p&gt;El ejecutable psiphon3 me pareció bastante “profesional” así que lo busqué en Google y encontré esta información en la misma &lt;a href=&quot;https://s3.amazonaws.com/f58p-mqce-k1yj/en.html&quot;&gt;página oficial&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;What is Psiphon 3?&lt;/p&gt;
+
+  &lt;p&gt;Psiphon 3 is a circumvention tool from Psiphon Inc. that utilizes VPN, SSH and HTTP Proxy technology to provide you with uncensored access to Internet content. Your Psiphon 3 client will automatically learn about new access points to maximize your chances of bypassing censorship.&lt;/p&gt;
+
+  &lt;p&gt;Psiphon 3 is designed to provide you with open access to online content. Psiphon does not increase your online privacy, and should not be considered or used as an online security tool.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Así que supongo que será una herramienta auxiliar para el otro ejecutable (server.exe) que analizaré ahora.&lt;/p&gt;
+
+&lt;p&gt;Este ejecutable (.NET como no) está ofuscado con Crypto Ofuscator. Una vez decompilado… sigue estando ofuscado. de4dot no puede limpiar el ejecutable así que al mirar el código fuente no entiendo nada de nada. Tendré que tirar de análisis dinámico. Para ello usaré &lt;a href=&quot;https://technet.microsoft.com/en-us/sysinternals/tcpview.aspx&quot;&gt;TcpView&lt;/a&gt; y &lt;a href=&quot;http://www.sandboxie.com/&quot;&gt;Sandboxie&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Sandboxie nos revela que el ejecutable se autocopia en AppData con el nombre Explorer.exe y en la carpeta de Autoinicio con nombre chrome.exe. TcpView nos muestra que intenta conectarse a 31.9.48.141:1960.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
+&lt;p&gt;Durante estos pequeños análisis he sacado tres conclusiones:
+* Los sirios aman .NET.
+* Los sirios realmente aman .NET.
+* Sus técnicas son bastante simples. Se sirven de crypters .NET para RATs públicos (NjRAT).&lt;/p&gt;
+
+&lt;h2 id=&quot;contacto&quot;&gt;Contacto&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Email: indeseables [at] gmail [dot] com&lt;/li&gt;
+  &lt;li&gt;Twitter: &lt;a href=&quot;http://twitter.com/&quot;&gt;@indeseables&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Issues: &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/issues&quot;&gt;#Issues&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Autor:&lt;/strong&gt; &lt;a href=&quot;https://github.com/blau72&quot;&gt;&lt;em&gt;Blau&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Si tienes alguna duda, comentario o sugerencia, notifícanos a través de &lt;a href=&quot;mailto:indeseables.git@gmail.com&quot;&gt;indeseables.git@gmail.com&lt;/a&gt;
+ y si te ha gustado la entrada puedes &lt;a href=&quot;https://twitter.com/intent/tweet?url=http://indeseables.github.io/2016/03/29/analisis-de-malware-sirio/&amp;amp;text=Análisis de malware sirio&amp;amp;via=indeseables!&quot; target=&quot;_blank&quot;&gt; compartirla!.&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Odisea Funcional (Parte 1)</title>
