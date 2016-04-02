@@ -43,20 +43,21 @@ authors:
     web: http://indeseables.github.io
     twitter: overxfl0w13
     github: http://github.com/overxfl0w
-  Sanko:
-    display_name: Sanko
-    img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
-    email: sanko@domain.com
-    web: http://indeseables.github.io
-    twitter: sankosk
-    github: sankosk
   Blau:
     display_name: Blau
     img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
     email: blau@domain.com
     web: http://indeseables.github.io
     twitter: Blau
-    github: Blau
+    github: http://github.com/Blau
+  Sanko:
+    display_name: Sanko
+    img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
+    email: sanko@domain.com
+    web: http://indeseables.github.io
+    twitter: sankosk
+    github: http://github.com/Sankosk
+
   Scorpio:
     display_name: Scorpio
     img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
