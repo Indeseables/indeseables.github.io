@@ -4,7 +4,7 @@
  <title>Indeseabλes</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-04-02T05:06:00+02:00</updated>
+ <updated>2016-04-02T05:11:27+02:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
    <name>Indeseables</name>
@@ -89,7 +89,7 @@ Analysis or Media:
 
   &lt;p&gt;Psiphon 3 is a circumvention tool from Psiphon Inc. that utilizes VPN, SSH and HTTP Proxy technology to provide you with uncensored access to Internet content. Your Psiphon 3 client will automatically learn about new access points to maximize your chances of bypassing censorship.&lt;/p&gt;
 
-  &lt;p&gt;Psiphon 3 is designed to provide you with open access to online content. Psiphon does not increase your online privacy, and should not be considered or used as an online security tool.&lt;/p&gt;
+  &lt;p&gt;Psiphon 3 is designed to provide you with open access to online content. Psiphon does not increase your online privacy, and &amp;gt;should not be considered or used as an online security tool.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Así que supongo que será una herramienta auxiliar para el otro ejecutable (server.exe) que analizaré ahora.&lt;/p&gt;
