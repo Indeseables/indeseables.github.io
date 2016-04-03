@@ -19,7 +19,7 @@ La diferencia entre los [conjuntos clásicos](https://es.wikipedia.org/wiki/Conj
 
 * Conjuntos clásicos: un elemento pertenece, o no pertenece a un conjunto.
     * Predicado de pertenencia  ![](https://latex.codecogs.com/gif.latex?P%28x%29%3AU%5Crightarrow%20%5Cleft%20%5C%7B%200%2C1%20%5Cright%20%5C%7D)
-* Conjuntos difusos: un elemento pertenece en mayor o menor medida a un conjunto.
+* Conjuntos difusos: un elemento pertenece en mayor o menor medida a un conjunto (la frontera de los cojuntos es [difusa](https://gyazo.com/4c1133e4a1fd294ac558ac13efa37e22).
    * Función de pertenencia  ![](https://latex.codecogs.com/gif.latex?%5Cmu%20_%7BA%7D%3AU%5Crightarrow%20%5B0%2C1%5D)
 
 Para ver un caso más claro, tomaremos el ejemplo de la estatura mencionado al principio de la entrada. Si lo dividimos de la forma trivial usando rangos bien delimitados, podríamos considerar algo así:
