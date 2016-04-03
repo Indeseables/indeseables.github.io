@@ -48,7 +48,8 @@ title: About
 Contacta con nosotros a través de:
 
 * Email: indeseables [dot] git [at] gmail [dot] com
-* Twitter: [@indeseables](http://twitter.com/)
+* Twitter: [@IndeseablesBlog](https://twitter.com/IndeseablesBlog)
+* Youtube: [Indeseables Blog](https://www.youtube.com/channel/UC_cz6KVWiM8qiZxOetCErXQ)
 * Issues: [#Issues](https://github.com/Indeseables/indeseables.github.io/issues)
 
 ---

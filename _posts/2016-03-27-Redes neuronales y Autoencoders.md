@@ -3,7 +3,7 @@ layout: post
 title: Redes neuronales y autoencoders.
 comments: True
 author: Overxfl0w13
-tags: [Aprendizaje automático,Inteligencia artificial,Redes neuronales,Optimización,Autoencoder,Cifrado bloques,Compresion,Scipy]
+tags: [Aprendizaje automático,Inteligencia artificial]
 ---
 
 Si se ha visto el [post](http://indeseables.github.io//2016/03/25/implementacion-alternativa-algoritmos-aprendizaje/) anterior, en el que se comentó la idea general del funcionamiento del Perceptron y se propuso una implementación usando Scipy, la definición de red neuronal como un conjunto de procesadores elementales (neuronas) densamente interconectados no nos resultará difícil de entender, ya que no son más que un conjunto de [Perceptron dispuestos en cascada](https://i.gyazo.com/66efec53d6c5232254e070ba0256c949.png). 

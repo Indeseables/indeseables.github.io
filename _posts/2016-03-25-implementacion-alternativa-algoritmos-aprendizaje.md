@@ -3,7 +3,7 @@ layout: post
 title: Implementación alternativa de algoritmos de aprendizaje (parte I).
 comments: True
 author: Overxfl0w13
-tags: [Aprendizaje automático,Inteligencia artificial,Perceptron,Adaline,Redes neuronales,Computación,Scipy,Optimización]
+tags: [Aprendizaje automático,Inteligencia artificial]
 ---
 
 Estrenaré el blog con el inicio de una serie de entradas que dedicaré a implementar algoritmos de aprendizaje usando la librería *Scipy* y más concretamente, su módulo *optimize* (tenía pensado usar [Petsc](https://www.mcs.anl.gov/petsc/), pero no he conseguido convertir matrices a su formato y me ha complicado las cosas). 
