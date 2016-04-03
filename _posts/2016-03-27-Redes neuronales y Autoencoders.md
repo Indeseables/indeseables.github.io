@@ -316,12 +316,6 @@ En la siguiente entrada continuaré las entregas de implementaciones alternativa
 
 He dejado todo el código nuevo en el [repositorio](https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_2).
 
-Cualquier comentario:
-
-* Email: indeseables [at] gmail [dot] com
-* Twitter: [@indeseables](http://twitter.com/)
-* Issues: [#Issues](https://github.com/Indeseables/indeseables.github.io/issues)
-
 ___
 
 {% include twitter_plug.html %}

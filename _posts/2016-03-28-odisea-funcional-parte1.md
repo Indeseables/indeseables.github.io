@@ -245,13 +245,6 @@ Hay una función de orden superior muy conocida en haskell: `fix` ó **combinado
 * **Códigos de ejemplo y Teoria casi en su totalidad extraidos de las diapositivas de la Escuela de Ingeneria Informática de Uniovi**, **autor** según indícan las diapositivas: **Francisco Ortín Soler**
 * Famoso libro de haskell : [Aprende Haskell](http://aprendehaskell.es)
 
-
-## Autoría
-Apuntes de Tecnología y Paradigmas de la programación escritos por: **Esteban Montes Morales**
-* Perfil de Github: [Click para ir al sitio](http://github.com/sankosk)
-* Twitter: @SankoSK
-* Perfil de Linkedin: [Click para ir al sitio](https://www.linkedin.com/in/esteban-montes-morales-59257366)
-
 ___
 
 {% include twitter_plug.html %}

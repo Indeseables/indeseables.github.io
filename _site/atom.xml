@@ -4,7 +4,7 @@
  <title>Indeseabλes</title>
  <link href="http://indeseables.github.io/atom.xml" rel="self"/>
  <link href="http://indeseables.github.io/"/>
- <updated>2016-04-03T05:53:05+02:00</updated>
+ <updated>2016-04-03T06:06:03+02:00</updated>
  <id>http://indeseables.github.io</id>
  <author>
    <name>Indeseables</name>
@@ -17,7 +17,7 @@
    <link href="http://indeseables.github.io/2016/04/03/logica-difusa-clustering/"/>
    <updated>2016-04-03T00:00:00+02:00</updated>
    <id>http://indeseables.github.io/2016/04/03/logica-difusa-clustering</id>
-   <content type="html">&lt;p&gt;¿Cómo determinamos si una persona es alta o baja? ¿y si la temperatura resulta fria,agradable o caliente? ¿y si algo es barato o caro?. Lo normal en estos casos, cuando no se conoce la lógica difusa que trataremos en esta entrada, es pensar en separarlo mediante rangos perfectamente delimitados. Pero esto no es lo más adecuado y de hecho, no es lo que más se ajusta al mundo real como veremos.&lt;/p&gt;
+   <content type="html">&lt;p&gt;¿Cómo determinamos si una persona es alta o baja? ¿y si la temperatura resulta fria, agradable o caliente? ¿y si algo es barato o caro?. Lo normal en estos casos, cuando no se conoce la lógica difusa que trataremos en esta entrada, es pensar en separarlo mediante rangos perfectamente delimitados. Pero esto no es lo más adecuado y de hecho, no es lo que más se ajusta al mundo real como veremos.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -102,14 +102,6 @@ Deben cumplir 2 propiedades:&lt;/p&gt;
 &lt;h3 id=&quot;fuzzy-clustering&quot;&gt;Fuzzy clustering&lt;/h3&gt;
 
 &lt;p&gt;[TODO]&lt;/p&gt;
-
-&lt;p&gt;Cualquier comentario:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Email: indeseables [at] gmail [dot] com&lt;/li&gt;
-  &lt;li&gt;Twitter: &lt;a href=&quot;http://twitter.com/&quot;&gt;@indeseables&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Issues: &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/issues&quot;&gt;#Issues&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 
 &lt;hr /&gt;
 
@@ -197,7 +189,8 @@ Analysis or Media:
 
   &lt;p&gt;Psiphon 3 is a circumvention tool from Psiphon Inc. that utilizes VPN, SSH and HTTP Proxy technology to provide you with uncensored access to Internet content. Your Psiphon 3 client will automatically learn about new access points to maximize your chances of bypassing censorship.&lt;/p&gt;
 
-  &lt;p&gt;Psiphon 3 is designed to provide you with open access to online content. Psiphon does not increase your online privacy, and &amp;gt;should not be considered or used as an online security tool.&lt;/p&gt;
+  &lt;p&gt;Psiphon 3 is designed to provide you with open access to online content. Psiphon does not increase your online privacy, and 
+should not be considered or used as an online security tool.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Así que supongo que será una herramienta auxiliar para el otro ejecutable (server.exe) que analizaré ahora.&lt;/p&gt;
@@ -207,19 +200,14 @@ Analysis or Media:
 &lt;p&gt;Sandboxie nos revela que el ejecutable se autocopia en AppData con el nombre Explorer.exe y en la carpeta de Autoinicio con nombre chrome.exe. TcpView nos muestra que intenta conectarse a 31.9.48.141:1960.&lt;/p&gt;
 
 &lt;h2 id=&quot;conclusin&quot;&gt;Conclusión&lt;/h2&gt;
-&lt;p&gt;Durante estos pequeños análisis he sacado tres conclusiones:
-* Los sirios aman .NET.
-* Los sirios realmente aman .NET.
-* Sus técnicas son bastante simples. Se sirven de crypters .NET para RATs públicos (NjRAT).&lt;/p&gt;
 
-&lt;h2 id=&quot;contacto&quot;&gt;Contacto&lt;/h2&gt;
+&lt;p&gt;Durante estos pequeños análisis he sacado tres conclusiones:&lt;/p&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;Email: indeseables [at] gmail [dot] com&lt;/li&gt;
-  &lt;li&gt;Twitter: &lt;a href=&quot;http://twitter.com/&quot;&gt;@indeseables&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Issues: &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/issues&quot;&gt;#Issues&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Los sirios aman .NET.&lt;/li&gt;
+  &lt;li&gt;Los sirios realmente aman .NET.&lt;/li&gt;
+  &lt;li&gt;Sus técnicas son bastante simples. Se sirven de crypters .NET para RATs públicos (NjRAT).&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Autor:&lt;/strong&gt; &lt;a href=&quot;https://github.com/blau72&quot;&gt;&lt;em&gt;Blau&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -500,12 +488,6 @@ factorial n = product [1..n]
   &lt;li&gt;&lt;strong&gt;Códigos de ejemplo y Teoria casi en su totalidad extraidos de las diapositivas de la Escuela de Ingeneria Informática de Uniovi&lt;/strong&gt;, &lt;strong&gt;autor&lt;/strong&gt; según indícan las diapositivas: &lt;strong&gt;Francisco Ortín Soler&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Famoso libro de haskell : &lt;a href=&quot;http://aprendehaskell.es&quot;&gt;Aprende Haskell&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h2 id=&quot;autora&quot;&gt;Autoría&lt;/h2&gt;
-&lt;p&gt;Apuntes de Tecnología y Paradigmas de la programación escritos por: &lt;strong&gt;Esteban Montes Morales&lt;/strong&gt;
-* Perfil de Github: &lt;a href=&quot;http://github.com/sankosk&quot;&gt;Click para ir al sitio&lt;/a&gt;
-* Twitter: @SankoSK
-* Perfil de Linkedin: &lt;a href=&quot;https://www.linkedin.com/in/esteban-montes-morales-59257366&quot;&gt;Click para ir al sitio&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -841,14 +823,6 @@ Optimization terminated successfully.
 
 &lt;p&gt;He dejado todo el código nuevo en el &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_2&quot;&gt;repositorio&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Cualquier comentario:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Email: indeseables [at] gmail [dot] com&lt;/li&gt;
-  &lt;li&gt;Twitter: &lt;a href=&quot;http://twitter.com/&quot;&gt;@indeseables&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Issues: &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/issues&quot;&gt;#Issues&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
 &lt;hr /&gt;
 
 &lt;p&gt;Si tienes alguna duda, comentario o sugerencia, notifícanos a través de &lt;a href=&quot;mailto:indeseables.git@gmail.com&quot;&gt;indeseables.git@gmail.com&lt;/a&gt;
@@ -1104,16 +1078,6 @@ Clase de [1,0,5]: -1
 &lt;p&gt;Hasta aquí lo que quería comentar, hay muchísima documentación sobre todo lo que he ido contando y he intentado enlazarlo y simplificarlo en la medida de lo posible para que sea comprensible. En próximas partes comentaré la implementación de máquinas de vectores de soporte &lt;a href=&quot;https://es.wikipedia.org/wiki/M%C3%A1quinas_de_vectores_de_soporte&quot;&gt;SVM&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Support_vector_machine#Soft-margin&quot;&gt;con&lt;/a&gt; y sin márgenes blandos (para ver una introducción la clasificación no lineal) y la aplicación de funciones &lt;a href=&quot;https://en.wikipedia.org/wiki/Positive-definite_kernel&quot;&gt;kernel&lt;/a&gt; para que los clasificadores implementados sepan discriminar de formas más complejas.&lt;/p&gt;
 
 &lt;p&gt;Dejo el &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1&quot;&gt;código disponible hasta el momento&lt;/a&gt; en el &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io&quot;&gt;repositorio&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cualquier comentario:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Email: indeseables [at] gmail [dot] com&lt;/li&gt;
-  &lt;li&gt;Twitter: &lt;a href=&quot;http://twitter.com/&quot;&gt;@indeseables&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Issues: &lt;a href=&quot;https://github.com/Indeseables/indeseables.github.io/issues&quot;&gt;#Issues&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Autor:&lt;/strong&gt; &lt;a href=&quot;https://github.com/overxfl0w&quot;&gt;&lt;em&gt;J.G&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 

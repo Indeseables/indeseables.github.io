@@ -6,7 +6,7 @@ author: Overxfl0w13
 tags: [Aprendizaje automático,Inteligencia artificial]
 ---
 
-¿Cómo determinamos si una persona es alta o baja? ¿y si la temperatura resulta fria,agradable o caliente? ¿y si algo es barato o caro?. Lo normal en estos casos, cuando no se conoce la lógica difusa que trataremos en esta entrada, es pensar en separarlo mediante rangos perfectamente delimitados. Pero esto no es lo más adecuado y de hecho, no es lo que más se ajusta al mundo real como veremos.
+¿Cómo determinamos si una persona es alta o baja? ¿y si la temperatura resulta fria, agradable o caliente? ¿y si algo es barato o caro?. Lo normal en estos casos, cuando no se conoce la lógica difusa que trataremos en esta entrada, es pensar en separarlo mediante rangos perfectamente delimitados. Pero esto no es lo más adecuado y de hecho, no es lo que más se ajusta al mundo real como veremos.
 
 ___
 
@@ -66,12 +66,6 @@ ___
 ### Fuzzy clustering
 
 [TODO]
-
-Cualquier comentario:
-
-* Email: indeseables [at] gmail [dot] com
-* Twitter: [@indeseables](http://twitter.com/)
-* Issues: [#Issues](https://github.com/Indeseables/indeseables.github.io/issues)
 
 ___
 

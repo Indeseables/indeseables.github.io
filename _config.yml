@@ -43,26 +43,29 @@ authors:
     web: http://indeseables.github.io
     twitter: NOP
     github: http://github.com/overxfl0w
+    linkedin: https://es.linkedin.com/in/josé-ángel-gonzález-barba-51b582105
     pgp: https://github.com/Indeseables/indeseables.github.io/tree/master/_keys/overxfl0w.pgp
     pgpid: D3297C4F
     
   Blau:
     display_name: Blau
-    img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
+    img: https://i.gyazo.com/d52791306e855eeb306cc30ef5c4a106.png
     email: NOP
     web: http://indeseables.github.io
     twitter: NOP
     github: https://github.com/blau72
+    linkedin: NOP
     pgp: NOP
     pgpid: NOP
     
   Sanko:
     display_name: Sanko
-    img: https://upload.wikimedia.org/wikipedia/commons/e/e8/Game_of_life_boat.png
+    img: https://i.gyazo.com/c494ed07ae54bc711ef95d6e56182e82.png
     email: NOP
     web: http://indeseables.github.io
     twitter: https://twitter.com/sankosk
     github: http://github.com/sankosk
+    linkedin: https://www.linkedin.com/in/esteban-montes-morales-59257366
     pgp: NOP
     pgpid: NOP
     
@@ -73,6 +76,7 @@ authors:
     web: http://indeseables.github.io
     twitter: NOP
     github: https://github.com/ScorpioTM
+    linkedin: NOP
     pgp: NOP
     pgpid: NOP
     
@@ -83,5 +87,6 @@ authors:
     web: http://indeseables.github.io
     twitter: NOP
     github: NOP
+    linkedin: NOP
     pgp: NOP
     pgpid: NOP

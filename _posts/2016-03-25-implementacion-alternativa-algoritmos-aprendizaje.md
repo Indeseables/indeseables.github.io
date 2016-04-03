@@ -192,14 +192,6 @@ Hasta aquí lo que quería comentar, hay muchísima documentación sobre todo lo
 
 Dejo el [código disponible hasta el momento](https://github.com/Indeseables/indeseables.github.io/tree/master/_codigos/Entrada_1) en el [repositorio](https://github.com/Indeseables/indeseables.github.io).
 
-Cualquier comentario:
-
-* Email: indeseables [at] gmail [dot] com
-* Twitter: [@indeseables](http://twitter.com/)
-* Issues: [#Issues](https://github.com/Indeseables/indeseables.github.io/issues)
-
-**Autor:** [*J.G*](https://github.com/overxfl0w)
-
 ___
 
 {% include twitter_plug.html %}
